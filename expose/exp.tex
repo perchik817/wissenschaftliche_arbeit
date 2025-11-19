@@ -1,0 +1,146 @@
+\documentclass[a4paper,12pt]{scrreprt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{mathptmx} % Times für alles
+\usepackage[left=2.5cm,right=2.5cm,top=3cm,bottom=3cm]{geometry}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tocloft}
+
+
+\renewcommand{\cftchapfont}{\normalfont}
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsubsecfont}{\normalfont}
+\renewcommand{\cfttoctitlefont}{\bfseries\LARGE}
+\renewcommand{\cftchappagefont}{\normalfont}   % Номера страниц глав обычным шрифтом
+\renewcommand{\cftsecpagefont}{\normalfont}    % Номера страниц секций обычным шрифтом
+\renewcommand{\cftsubsecpagefont}{\normalfont} % Номера страниц подсекций обычным шрифтом
+\renewcommand{\cftaftertoctitleskip}{1em}  % отступ после заголовка
+
+
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	urlcolor=black,
+	citecolor=black,
+	pdftitle={Exposé - Nutzung von Sprachmodellen zur Verbesserung von Bezeichnern in Java-Programmen},
+	pdfauthor={},
+}
+
+\onehalfspacing
+
+\addtokomafont{chapter}{\rmfamily\LARGE\bfseries}
+\addtokomafont{section}{\rmfamily\Large\bfseries}
+\addtokomafont{subsection}{\rmfamily\large\bfseries}
+\addto\captionsngerman{\renewcommand{\bibname}{Literatur}}
+
+
+\begin{document}
+	
+	\begin{titlepage}
+		\centering
+		\vspace*{6cm}
+		{\LARGE\textbf{Expos\'e}}\\[1em]
+		{\large Nutzung von Sprachmodellen zur Verbesserung von Bezeichnern in Java-Programmen}\\[22pt]
+		\vspace*{\fill}
+	\end{titlepage}
+	
+	\tableofcontents
+	\newpage
+	
+	% ========================
+	\chapter{Einleitung}
+	
+	In dieser Arbeit wird untersucht, wie große Sprachmodelle (LLMs) automatisch die Namen von Variablen, Methoden und Klassen in Java verbessern können. Gute Namen machen den Code \cite{oracle} leichter verständlich und einfacher zu pflegen. In der Praxis gibt es aber oft kurze, unklare oder falsche Namen.
+	
+	Das Ziel ist, eine komplett automatische Lösung zu entwickeln:  
+	\begin{enumerate}
+		\item Java-Beispiele mit schlechten Namen werden erstellt.
+		\item Die Beispiele werden an ein Sprachmodell geschickt.
+		\item Die Vorschläge werden automatisch ausgewertet.
+	\end{enumerate}
+	
+	Dazu wird geprüft, welche Art von Prompts \cite{startup2023} am besten funktioniert, um verständliche und passende Namen zu bekommen, die Java-Konventionen einhalten und sprachliche Fehler vermeiden \cite{arnaoudova2014}.
+	
+	\begin{quote}
+		\textbf{Forschungsfrage:} Wie gut können Sprachmodelle automatisch bessere Bezeichner in Java vorschlagen, ohne dass ein Mensch eingreifen muss?
+	\end{quote}
+	
+	Die Arbeit ist relevant, weil Sprachmodelle zunehmend in der Softwareentwicklung eingesetzt werden – zum Beispiel für Code-Vervollständigung, Dokumentation oder Refactoring. Dadurch wird untersucht, wie LLMs die Codequalität langfristig verbessern können.
+	
+	% ========================
+	\chapter{Gliederung der Arbeit}
+	
+	\begin{enumerate}
+		\item \textbf{Einleitung.} Vorstellung des Themas, Ziel und Forschungsfrage.
+		\item \textbf{Theoretischer Hintergrund.} Grundlagen zu Sprachmodellen (z.\,B. GPT, CodeBERT), sprachliche Fehler in Bezeichnern und Regeln für gute Namen.
+		\item \textbf{Analyse vorhandener Arbeiten.} Überblick über Forschung zu KI und Code-Verbesserung.
+		\item \textbf{Methodik und Durchführung.} Automatische Pipeline: Code generieren, an LLM senden, Ergebnisse automatisch auswerten. Prompts und Bewertung festlegen.
+		\item \textbf{Evaluation.} Ergebnisse prüfen: Verständlichkeit, Bedeutung, Einhaltung von Regeln, Vermeidung von sprachlichen Fehlern.
+		\item \textbf{Diskussion und Schluss.} Grenzen der Methode, Verbesserungsideen, Ausblick auf weitere Forschung.
+	\end{enumerate}
+	
+	% ========================
+	\chapter{Vorgehensplan}
+	\begin{enumerate}
+		\item \textbf{Woche 1–2: Literatur.} Recherche zu LLMs, sprachlichen Fehlern in Bezeichnern und Regeln für gute Namen.  
+		\item \textbf{Woche 3–4: Entwicklungsumgebung.} Einrichten von Java und Python. Analyse von APIs (z.\,B. OpenAI, HAWKI).  
+		\item \textbf{Woche 5–6: Codegenerierung und Prompts.} Skript erstellt Java-Klassen mit schlechten Namen. Prompts für Variablen, Methoden und Klassen entwerfen.  
+		\item \textbf{Woche 7–8: Experimente.} Code automatisch an LLM schicken, Vorschläge speichern und auswerten.  
+		\item \textbf{Woche 9: Analyse.} Vergleich verschiedener Prompts, Bewertung der Vorschläge nach Verständlichkeit, Bedeutung und Regeln.  
+		\item \textbf{Woche 10: Abschluss.} Dokument fertigstellen, Ergebnisse zusammenfassen und Abgabe vorbereiten.
+
+	\end{enumerate}
+	
+	% ========================
+	\chapter{Definitionen und Quellen}
+	\begin{Large}
+		Wichtige Quellen
+	\end{Large}
+	\begin{itemize}
+		\item \textbf{LLM (Large Language Model):} ein KI-Modell, das große Mengen an Text analysiert und auf dieser Basis neuen Text generiert, z.\,B. GPT-4 oder CodeBERT.
+		\item \textbf{Pipeline:} eine Abfolge automatischer Verarbeitungsschritte – hier: Code generieren, an LLM senden und Ergebnisse auswerten.
+		\item \textbf{Bezeichner (Identifier):} Namen von Variablen, Methoden oder Klassen in Java. Sie sollen kurz, eindeutig und verständlich sein.\cite{wikibooks}
+		\item \textbf{Sprachlicher Fehler (Linguistic Anti-Pattern):} unpassende, unklare oder doppeldeutige Bezeichner, die den Code schwerer verständlich machen.
+		\item \textbf{Prompt:} eine textbasierte Eingabe, die bestimmt, wie das Sprachmodell reagiert und welche Vorschläge es generiert.
+		\item \textbf{HAWKI-System:} eine Plattform der WHZ, die den Zugriff auf Sprachmodelle (LLMs) ermöglicht.
+	\end{itemize}
+	
+	% ========================
+	\chapter{Schwierigkeiten und Risiken}
+	
+	\begin{enumerate}
+		\item \textbf{Qualität der Modelle.} Ergebnisse sind manchmal unterschiedlich, besonders bei komplexem oder unklarem Code.
+		\item \textbf{Zugriff.} API-Limits oder fehlende Internetverbindung können Experimente verzögern.
+		\item \textbf{Bewertung.} Eine automatische Auswertung kann semantische Qualität nur eingeschränkt erfassen.
+		\item \textbf{Zeit.} Prompts zu testen und zu optimieren, benötigt mehrere Versuche.
+	\end{enumerate}
+	
+	% ========================
+	\begin{thebibliography}{99}
+		
+		\bibitem{arnaoudova2014}
+		Arnaoudova, V.; Di Penta, M.; Antoniol, G. (2014): 
+		\textit{Linguistic Anti-Patterns: What They Are and How Developers Perceive Them.} 
+		Empirical Software Engineering.  
+		Verfügbar unter: \href{https://www.veneraarnaoudova.ca/wp-content/uploads/2014/10/2014-EMSE-Arnaodova-et-al-Perception-LAs.pdf}{veneraarnaoudova.ca}.
+		
+		\bibitem{startup2023}
+		Startup Creator (2023): 
+		\textit{Die besten ChatGPT Prompts.}  
+		Verfügbar unter: \href{https://startup-creator.com/blog/die-besten-chatgpt-prompts/}{startup-creator.com}.
+		
+		\bibitem{oracle}
+		Oracle: 
+		\textit{Naming Conventions.}  
+		Verfügbar unter: \href{https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html}{Java Naming Conventions}.
+		
+	\end{thebibliography}
+	
+	
+\end{document}

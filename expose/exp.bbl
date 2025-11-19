@@ -1,0 +1,90 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{Arnaoudova2016}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=ee483025a7049b8e85cc45c73959defb}{%
+           family={Arnaoudova},
+           familyi={A\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=3916d61ed7851a38b08746a7a16ae99c}{%
+           family={Penta},
+           familyi={P\bibinitperiod},
+           given={M.\bibnamedelimi Di},
+           giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=320217e3097ea920e7fc5a6abf6e3672}{%
+           family={Antoniol},
+           familyi={A\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{c3cac8161fac167040ac68fa6f666103}
+      \strng{fullhash}{c3cac8161fac167040ac68fa6f666103}
+      \strng{fullhashraw}{c3cac8161fac167040ac68fa6f666103}
+      \strng{bibnamehash}{c3cac8161fac167040ac68fa6f666103}
+      \strng{authorbibnamehash}{c3cac8161fac167040ac68fa6f666103}
+      \strng{authornamehash}{c3cac8161fac167040ac68fa6f666103}
+      \strng{authorfullhash}{c3cac8161fac167040ac68fa6f666103}
+      \strng{authorfullhashraw}{c3cac8161fac167040ac68fa6f666103}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Empirical Software Engineering}
+      \field{number}{1}
+      \field{title}{Linguistic Anti-Patterns: What They Are and How Developers Perceive Them}
+      \field{volume}{21}
+      \field{year}{2016}
+      \field{pages}{104}
+      \range{pages}{1}
+    \endentry
+    \entry{OpenAI2023}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=0523b13262b12c215d8009938f5c14f1}{%
+           family={{OpenAI}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{fullhash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{fullhashraw}{0523b13262b12c215d8009938f5c14f1}
+      \strng{bibnamehash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{authorbibnamehash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{authornamehash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{authorfullhash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{authorfullhashraw}{0523b13262b12c215d8009938f5c14f1}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{GPT-4 Technical Report}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb https://openai.com/research/gpt-4
+      \endverb
+      \verb{url}
+      \verb https://openai.com/research/gpt-4
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
