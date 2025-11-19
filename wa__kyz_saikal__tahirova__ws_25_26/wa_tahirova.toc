@@ -1,0 +1,21 @@
+\babel@toc {ngerman}{}\relax 
+\contentsline {section}{\numberline {1}Einleitung}{3}{section.1}%
+\contentsline {section}{\numberline {2}Theoretische Hintergrund}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Java-Bezeichner}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Namenskonventionen in Java}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Linguistische Anti-Patterns}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Große Sprachmodelle (LLMs)}{6}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Methodik und Durchführung}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Auswahl der Sprachmodelle}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Erstellung der Test-Beispiele}{7}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Kategorien nach Arnaoudova}{7}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Beispiel-Code}{8}{subsubsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.3}Prompt-Strategien}{9}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Zero-Shot Prompt (ohne Beispiele)}{9}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Few-Shot Prompt (mit Beispielen)}{10}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Detaillierter Kontext-Prompt (mit ausführlichen Anweisungen)}{10}{subsubsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.4}Durchführung der Tests}{10}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Ablauf}{10}{subsubsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.5}Bewertungskriterien}{10}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}Spezielle Bewertung nach Kategorien}{11}{subsubsection.3.5.1}%
+\contentsline {section}{Literatur}{12}{section*.5}%

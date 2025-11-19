@@ -1,0 +1,443 @@
+\documentclass[a4paper,12pt]{article}
+
+% --- Sprach- und Kodierungseinstellungen ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+% --- Typografie ---
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{csquotes} % Korrekte deutsche Anführungszeichen
+\usepackage{setspace}
+\onehalfspacing
+
+% --- Seitenlayout ---
+\usepackage[left=2.5cm,right=2.5cm,top=3cm,bottom=3cm]{geometry}
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25em} % Отступ первой строки
+\setlength{\parskip}{0pt}      % Без дополнительного вертикального расстояния
+
+% --- Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{./img/}} 
+
+% --- Farben, Links, URLs ---
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{url}
+\urlstyle{same}
+\hypersetup{
+    pdftitle={Nutzung von Sprachmodellen zur Verbesserung von Bezeichnern in Java-Programmen},
+    pdfauthor={Kyz Saikal Tahirova},
+    pdfsubject={Wissenschaftliche Arbeit},
+    pdfkeywords={Sprachmodelle, Java, Bezeichner, Programmierung},
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=blue,
+    pdfpagemode=UseOutlines
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=3pt, topsep=3pt, parsep=0pt, partopsep=0pt}
+
+% --- Mathe und Tabellen ---
+\usepackage{amsmath,amssymb,booktabs}
+
+% --- Quellcode ---
+\usepackage{listings}
+\lstdefinestyle{javaStyle}{
+    language=Java,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue!70!black}\bfseries,
+    stringstyle=\color{red!60!black},
+    commentstyle=\color{gray},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=4,
+    breaklines=true,
+    frame=single,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {ß}{{\ss}}1
+}
+\lstset{style=javaStyle}
+
+% --- Verzeichnisse ---
+\usepackage[nottoc,notlof,notlot]{tocbibind}
+
+% ===============================
+%           Dokument
+% ===============================
+\begin{document}
+
+% --- Titelseite ---
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.7\textwidth]{WHZ-Logo.jpg}\\[1cm]
+
+    {\Large\textbf{Westsächsische Hochschule Zwickau}}\\[1ex]
+    {\large Fakultät für Physikalische Technik und Informatik}\\[4cm]
+
+    {\LARGE\textbf{Wissenschaftliche Arbeit}}\\[1cm]
+
+    {\Large\textbf{Thema:}}\\[0.5cm]
+    {\Large Nutzung von Sprachmodellen zur Verbesserung von Bezeichnern in Java-Programmen}\\[3cm]
+
+    \begin{tabular}{rl}
+        Vorgelegt von: & Kyz Saikal Tahirova \\
+        Matrikel-Nr.:  & 66110                 \\
+        Studiengang:   & Informatik            \\
+        Betreuer:      & Prof.\ Dr.\ Laue      \\
+        Abgabetermin:  & xx.xx.2025            \\
+    \end{tabular}
+\end{titlepage}
+
+\setcounter{page}{2}
+
+\clearpage
+
+% --- Inhaltsverzeichnis ---
+\tableofcontents
+\clearpage
+
+% --- Hauptteil ---
+\section*{Kapitel 1}
+\section{Einleitung}
+
+In dieser Arbeit wird untersucht, wie große Sprachmodelle (LLMs) automatisch die Namen von Variablen, Methoden und Klassen in Java verbessern können. Verständliche Bezeichner erleichtern das Lesen und Warten von Code und sind entscheidend für die Softwarequalität \cite{oracle}. In der Praxis treten jedoch häufig kurze, unklare oder konventionswidrige Namen auf, die die Lesbarkeit und Wartbarkeit einschränken.
+
+Ein zentrales Problem sind sogenannte \textit{linguistic anti-patterns} \cite{arnaoudova2014}: wiederkehrende sprachliche Muster in Bezeichnern, die zu Missverständnissen führen oder Java-Konventionen verletzen. Dazu gehören etwa generische Namen wie \texttt{data} oder \texttt{temp}, Abkürzungen, die schwer zu interpretieren sind, oder inkonsistente Schreibweisen. Die Arbeit untersucht, ob LLMs in der Lage sind, solche Fehler automatisch zu erkennen und bessere, verständliche Namen vorzuschlagen.
+
+Ziel ist es, eine weitgehend automatische Lösung zu entwickeln:
+\begin{enumerate}
+    \item Erstellung von Java-Beispielen mit schlechten Bezeichnern.
+    \item Übermittlung dieser Beispiele an ein Sprachmodell.
+    \item Automatische oder manuelle Auswertung der Vorschläge nach Verständlichkeit, Bedeutungsnähe und Einhaltung von Java-Konventionen.
+\end{enumerate}
+
+Dabei wird insbesondere geprüft, welche Art von \textit{Prompts} \cite{startup2023} am effektivsten ist, um konventionsgerechte und verständliche Bezeichner zu erzeugen und sprachliche Anti-Patterns zu vermeiden.
+
+\begin{quote}
+\textbf{Forschungsfrage:} Wie gut können Sprachmodelle automatisch bessere Bezeichner in Java vorschlagen, ohne dass ein Mensch eingreifen muss?
+\end{quote}
+
+Die Arbeit ist in mehrere Kapitel gegliedert:
+
+\begin{enumerate}
+    \item \textbf{Kapitel 1 (Einleitung).} Vorstellung des Themas, Zielsetzung, Relevanz von Sprachmodellen in der Softwareentwicklung sowie die Forschungsfrage.
+    \item \textbf{Kapitel 2 (Theoretische Hintergrund).} Einführung in Java-Bezeichner, Namenskonventionen und linguistische Anti-Patterns.
+    \item \textbf{Kapitel 3 (Methodik und Durchführung).} Beschreibung der Vorgehensweise zur Untersuchung von Sprachmodellen, Erstellung von Java-Beispielen mit schlechten Bezeichnern und Auswertung der Ergebnisse. Eine automatische Pipeline wird nur theoretisch erwähnt.  
+    \item \textbf{Kapitel 4 (Evaluation).} Die Ergebnisse zeigen, wie gut Sprachmodelle Vorschläge hinsichtlich Verständlichkeit, Bedeutung, Konventionen und Vermeidung von Anti-Patterns liefern.  
+    \item \textbf{Kapitel 5 (Diskussion und Schluss).} Grenzen der Methode, Verbesserungsideen, Ausblick auf weitere Forschung.
+    
+\end{enumerate}
+
+Hinweis: In dieser ersten Version der Arbeit wird der automatische Pipeline-Ansatz nur theoretisch erläutert, da die Umsetzung zum jetzigen Zeitpunkt noch nicht erfolgt ist. In einer späteren Version könnte diese Funktion ergänzt werden, um den gesamten Prozess der Bezeichnerverbesserung automatisch abzubilden.
+
+
+\newpage
+\section*{Kapitel 2}
+\section{Theoretische Hintergrund}
+\subsection{Java-Bezeichner}
+
+Java-Bezeichner sind die Namen von Variablen, Methoden, Klassen, Schnittstellen, Konstanten und Paketen. Sie sollen die Funktion und den Zweck des Codes verständlich machen. Gute Bezeichner sind selbsterklärend, konsistent und folgen klaren Regeln \cite{oracle}. Dies erleichtert das Lesen, Verstehen und Warten von Software.
+
+\subsection{Namenskonventionen in Java}
+
+Java verwendet für Bezeichner verschiedene Schreibweisen, die hauptsächlich auf CamelCase basieren. Dabei gilt:
+
+\begin{itemize}
+    \item {Klassen und Schnittstellen.} Namen sind Substantive, jede Wortanfangsbuchstabe wird großgeschrieben, z.B. \texttt{Student}, \texttt{Scanner}, \texttt{Runnable}. Abkürzungen und Akronyme sollten vermieden werden.
+    \item {Methoden.} Namen sind Verben, beginnen mit einem Kleinbuchstaben, innere Wortanfänge werden großgeschrieben, z.B. \texttt{calculateSum()}, \texttt{main()}. 
+    \item {Variablen.} Namen sollten kurz, aber aussagekräftig sein. Keine Unterstriche oder Dollarzeichen am Anfang. Ein-Zeichen-Variablen nur temporär (z.B. \texttt{i, j, k}). Beispiel: \texttt{totalScore}, \texttt{marks}.
+    \item {Konstanten.} Alle Buchstaben groß, Wörter durch Unterstriche getrennt, z.B. \texttt{MAX\_SIZE}, \texttt{PI\_VALUE}.
+    \item {Pakete.} Alles klein, oft in Anlehnung an Top-Level-Domains wie \texttt{com}, \texttt{org}. Beispiel: \texttt{java.util.Scanner}.
+\end{itemize}
+
+Die konsequente Anwendung dieser Regeln erhöht die Verständlichkeit und Wartbarkeit von Code, insbesondere in größeren Projekten.
+
+\subsection{Linguistische Anti-Patterns}
+
+\textit{Linguistic Anti-Patterns (LAs)} beschreiben wiederkehrende schlechte Praktiken in der Benennung, Dokumentation und Implementierung von Softwareelementen. Sie stellen also sprachliche Widersprüche oder Inkonsistenzen zwischen Namen, Kommentaren und tatsächlichem Verhalten einer Methode oder eines Attributs dar \cite{arnaoudova2014}.
+
+Im Gegensatz zu klassischen Design-Anti-Patterns, die strukturelle Probleme betreffen, beziehen sich LAs auf die sprachliche Ebene des Codes. Sie zeigen sich zum Beispiel, wenn eine Methode \texttt{get()} heißt, aber keinen Wert zurückgibt, oder eine Methode \texttt{isValid()} keinen booleschen Wert liefert. Ebenso gehören widersprüchliche Kommentare oder unklare Attributnamen zu häufigen Fällen solcher sprachlichen Inkonsistenzen.
+
+Arnaoudova et al. (2013) \cite{newfamlas} analysierten mehrere Open-Source-Projekte wie ArgoUML, Cocoon und Eclipse, um diese Muster systematisch zu erfassen. Dabei wurden typische Kategorien von LAs identifiziert:
+\begin{itemize}
+    \item Inkonsistenz zwischen Name und Rückgabewert.
+    \item Widersprüche zwischen Kommentar und Implementierung
+    \item Mehrdeutige oder irreführende Bezeichner.
+    \item Verwendung generischer Namen ohne semantischen Bezug.
+\end{itemize}
+
+Das Bewusstsein für linguistische Anti-Patterns hilft, Missverständnisse zu vermeiden und die Lesbarkeit, Verständlichkeit und Wartbarkeit von Software nachhaltig zu verbessern.
+
+\subsection{Große Sprachmodelle (LLMs)}
+
+Große Sprachmodelle (LLM), wie GPT oder CodeBERT, haben den Bereich der automatischen Programmierung grundlegend verändert. Sie ermöglichen nicht nur die Code-Erstellung in natürlicher Sprache, sondern führen auch zunehmend Aufgaben wie die Code-Erklärung, die Testgenerierung oder die Fehlerbehebung durch. Daher verlagert sich der Schwerpunkt der Softwareentwicklung von der manuellen Implementierung auf die Zusammenarbeit zwischen Mensch und Modell.
+
+Wie in \textit{Automatic Programming: Large Language Models
+and Beyond} \cite{aitomaticprogramming} beschrieben, besteht jedoch weiterhin ein zentrales Problem in der Vertrauenswürdigkeit automatisch generierten Codes. Obwohl LLMs beeindruckende Ergebnisse liefern, bleibt die Frage offen, wann und unter welchen Bedingungen dieser Code als zuverlässig genug gilt, um in reale Projekte integriert zu werden. Neben der Korrektheit spielen auch Aspekte wie Sicherheit, Nachvollziehbarkeit und rechtliche Verantwortung eine Rolle.
+
+In dieser Arbeit wird untersucht, inwiefern Sprachmodelle diese Aufgaben zuverlässig ausführen und in welchen Fällen menschliches Eingreifen weiterhin notwendig bleibt.
+
+\newpage
+\section*{Kapitel 3}
+\section{Methodik und Durchführung}
+
+Dieses Kapitel erklärt die Auswahl der Sprachmodelle, die Erstellung von Test-Beispielen nach den Kategorien von Arnaoudova et al. \cite{arnaoudova2014} und die Bewertungskriterien. Das Ziel ist, systematisch zu prüfen, wie gut LLMs linguistische Anti-Patterns in Java-Code erkennen und verbessern können.
+
+\subsection{Auswahl der Sprachmodelle}
+
+Für die Untersuchung wurden drei verschiedene Modelle gewählt:
+
+\begin{itemize}
+    \item \textbf{ChatGPT-4 (OpenAI).} Ein sehr leistungsstarkes kommerzielles Modell mit ausgezeichneten Programmierfähigkeiten. Es versteht natürliche Sprache sehr gut und kann komplexen Code analysieren.
+    \item \textbf{Hawki (WHZ).} Das KI-System der Westsächsischen Hochschule Zwickau. Eine lokale Lösung, die für akademische Zwecke entwickelt wurde.
+    \item \textbf{Claude 3.5 OPUS (Anthropic).} Bekannt für präzise Antworten und gute Befolgung von Anweisungen. Liefert strukturierte und durchdachte Ausgaben.
+\end{itemize}
+
+Die Auswahl ermöglicht den Vergleich zwischen verschiedenen kommerziellen Lösungen und einem akademischen System.
+
+\subsection{Erstellung der Test-Beispiele}
+
+\subsubsection{Kategorien nach Arnaoudova}
+
+Die Kategorien wurden in zwei Hauptgruppen unterteilt:
+
+\textbf{Methoden-bezogene Anti-Patterns (A, B, C):}
+
+\begin{enumerate}
+    \item \textbf{Kategorie A} (\textit{does more than it says}) -- die Methode macht mehr, als der Name verspricht.
+    
+    \begin{itemize}
+        \item \textbf{A1:} Methode mit \texttt{get}, die mehr macht als nur zurückgeben
+        \item \textbf{A2:} Methodenname ist Prädikat, aber Rückgabetyp ist nicht Boolean
+        \item \textbf{A3:} Methode mit \texttt{set}, die einen Wert zurückgibt
+        \item \textbf{A4:} Methodentyp deutet auf mehrere Objekte, Name auf einzelnes
+    \end{itemize}
+    
+    \item \textbf{Kategorie B} (\textit{says more than it does}) -- der Name verspricht mehr, als die Methode tut. 
+    
+    \begin{itemize}
+        \item \textbf{B1:} Kommentar dokumentiert nicht implementierte Bedingung
+        \item \textbf{B2:} Validierungsmethode gibt nichts zurück
+        \item \textbf{B3:} Name deutet Rückgabe an, aber Rückgabetyp ist \texttt{void}
+        \item \textbf{B4:} Name ist Prädikat, aber nichts wird zurückgegeben
+    \end{itemize}
+    
+    \item \textbf{Kategorie C} (\textit{does the opposite}) -- die Methode macht das Gegenteil vom Namen.
+    
+    \begin{itemize}
+        \item \textbf{C1:} Name und Rückgabetyp verwenden Antonyme (Gegensätze)
+        \item \textbf{C2:} Kommentar und Signatur verwenden Antonyme
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Attribut-bezogene Anti-Patterns (D, E, F):}
+
+\begin{enumerate}
+    \setcounter{enumi}{3}
+    \item \textbf{Kategorie D} (\textit{contains more than it says}) -- das Attribut enthält mehr, als der Name aussagt. 
+    
+    \begin{itemize}
+        \item \textbf{D1:} Attributname deutet Boolean an, aber Typ ist anders
+        \item \textbf{D2:} Attributname ist Prädikat, aber Typ ist nicht Boolean
+    \end{itemize}
+    
+    \item \textbf{Kategorie E} (\textit{says more than it contains}) -- der Name sagt mehr, als das Attribut enthält. 
+    
+    \begin{itemize}
+        \item \textbf{E1:} Attributtyp deutet auf einzelnes Objekt, Name auf mehrere
+    \end{itemize}
+    
+    \item \textbf{Kategorie F} (\textit{says the opposite}) -- Name und Inhalt sind gegensätzlich. 
+    
+    \begin{itemize}
+        \item \textbf{F1:} Attributname und Typ verwenden Antonyme
+        \item \textbf{F2:} Attributkommentar und Signatur verwenden Antonyme
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Beispiel-Code}
+
+\textbf{Kategorie A1.} Methode mit \texttt{get} macht mehr als zurückgeben
+
+\begin{lstlisting}
+public class UserManager {
+    private User currentUser;
+    
+    // Problem: getUser() macht mehr als nur zuruckgeben
+    public User getUser() {
+        validateSession();      // Extra Aktion!
+        logAccess();            // Extra Aktion!
+        return currentUser;
+    }
+}
+\end{lstlisting}
+
+Problem: Eine \texttt{get}-Methode soll nur einen Wert zurückgeben, aber hier passiert mehr. Erwartete Verbesserung:
+\begin{itemize}
+    \item Entweder umbenennen zu \texttt{fetchAndValidateUser()}
+    \item Oder die Extra-Funktionen entfernen
+\end{itemize}
+
+
+\textbf{Kategorie B3.} Name deutet Rückgabe an, aber \texttt{void}:
+
+\begin{lstlisting}
+public class Calculator {
+    private int result;
+    
+    // Problem: getName() gibt nichts zuruck (void)
+    public void getName() {
+        System.out.println("Calculator");
+    }
+}
+\end{lstlisting}
+
+Problem: \texttt{getName()} suggeriert einen Rückgabewert, aber der Typ ist \texttt{void}. Erwartete Verbesserung:
+\begin{itemize}
+    \item Entweder \texttt{String getName()} mit \texttt{return "Calculator";}
+    \item Oder umbenennen zu \texttt{printName()}
+\end{itemize}
+
+
+\textbf{Kategorie C1.} Name und Typ sind Gegensätze:
+
+\begin{lstlisting}
+public class Config {
+    // Problem: disable() gibt ControlEnableState zuruck
+    public ControlEnableState disable() {
+        return new ControlEnableState(true);
+    }
+}
+\end{lstlisting}
+
+Problem: \texttt{disable()} gibt einen "Enable"-Status zurück – Widerspruch! Erwartete Verbesserung:
+\begin{itemize}
+    \item Entweder \texttt{ControlDisableState} zurückgeben
+    \item Oder Methode zu \texttt{enable()} umbenennen
+\end{itemize}
+
+
+Insgesamt wurden 30 solcher Beispiele erstellt, je 5 für jede Kategorie A bis F.
+
+
+\subsection{Prompt-Strategien}
+Verschiedene Arten von Prompts wurden getestet, um herauszufinden, welche am besten funktionieren.
+
+\subsubsection{Zero-Shot Prompt (ohne Beispiele)}
+
+\begin{verbatim}
+Verbessern Sie die Bezeichner im folgenden Java-Code:
+[CODE EINFÜGEN]
+\end{verbatim}
+
+Dieser Prompt gibt dem Modell minimale Informationen. Er testet, ob das Modell schon von sich aus gute Konventionen kennt.
+
+\subsubsection{Few-Shot Prompt (mit Beispielen)}
+
+\begin{verbatim}
+Beispiele für gute Java-Namen:
+1) Klassen: CustomerAccount, PaymentProcessor
+2) Methoden: calculateTotal(), validateInput()
+3) Variablen: userName, itemCount
+Verbessere nun diesen Code:
+[CODE EINFÜGEN]
+\end{verbatim}
+
+\subsubsection{Detaillierter Kontext-Prompt (mit ausführlichen Anweisungen)}
+
+\begin{verbatim}
+Du bist ein erfahrener Java-Entwickler. Verbessere die Bezeichner:
+1) Folge Java-Konventionen (CamelCase)
+2) Vermeide linguistische Anti-Patterns
+3) Wähle selbsterklärende Namen
+4) Achte auf Kontext und Bedeutung
+Code:
+[CODE EINFÜGEN]
+\end{verbatim}
+
+\subsection{Durchführung der Tests}
+
+Das ergibt insgesamt 270 Tests (30 Beispiele × 3 Prompts × 3 Modelle).
+
+\subsubsection{Ablauf}
+
+\begin{enumerate}
+    \item Code-Beispiel mit linguistischem Anti-Pattern vorbereiten.
+    \item Kategorie notieren.
+    \item Prompt wählen (Zero-Shot, Few-Shot oder Detailliert).
+    \item An LLM senden.
+    \item Antwort aufzeichnen.
+    \item Bewerten nach 5 Kriterien.
+\end{enumerate}
+
+\subsection{Bewertungskriterien}
+
+Jedes Kriterium wird mit 1-5 Punkten bewertet.
+
+\begin{enumerate}
+    \item \textbf{Anti-Pattern-Erkennung.} Wurde das Problem erkannt?
+    
+    \item \textbf{Korrekturqualität.} Ist der vorgeschlagene neue Name besser? Löst er das Anti-Pattern?
+    
+    \item \textbf{Konventions-Konformität:} Folgt der neue Code Java-Standards? 
+    
+    \item \textbf{Semantische Klarheit:} Sind die neuen Namen verständlich? 
+    
+    \item \textbf{Konsistenz:} Passt alles zusammen?
+\end{enumerate}
+
+
+\subsubsection{Spezielle Bewertung nach Kategorien}
+
+Für jede Kategorie A-F wurden spezifische Fragen gestellt:
+
+\begin{itemize}
+    \item \textbf{Kategorie A:} Wurde die Extra-Funktionalität dokumentiert oder die Methode umbenannt?
+    \item \textbf{Kategorie B:} Wurde der fehlende Rückgabewert hinzugefügt oder der Name korrigiert?
+    \item \textbf{Kategorie C:} Wurden die widersprüchlichen Begriffe harmonisiert?
+    \item \textbf{Kategorie D-F:} Wurden Attributnamen und Typen in Einklang gebracht?
+\end{itemize}
+
+
+% --- Literaturverzeichnis ---
+\clearpage
+\begin{thebibliography}{99}
+	
+    \bibitem{arnaoudova2014}
+    Arnaoudova, V.; Di Penta, M.; Antoniol, G. (2014): 
+    \textit{Linguistic Anti-Patterns: What They Are and How Developers Perceive Them.} 
+    Empirical Software Engineering.  
+    Verfügbar unter: \href{https://www.veneraarnaoudova.ca/wp-content/uploads/2014/10/2014-EMSE-Arnaodova-et-al-Perception-LAs.pdf}{veneraarnaoudova.ca}.
+
+    \bibitem{newfamlas}
+    Conference: European Conference on Software Maintenance and Reengineering (2013): 
+    \textit{A New Family of Software Anti-Patterns: Linguistic Anti-Patterns.}
+    Verfügbar unter: \href{https://assets.ptidej.net/Publications/Documents/CSMR13d.doc.pdf}{assets.ptidej.net}
+	
+    \bibitem{startup2023}
+    Startup Creator (2023): 
+    \textit{Die besten ChatGPT Prompts.}  
+    Verfügbar unter: \href{https://startup-creator.com/blog/die-besten-chatgpt-prompts/}{startup-creator.com}.
+	
+    \bibitem{oracle}
+    Oracle: 
+    \textit{Naming Conventions.}  
+    Verfügbar unter: \href{https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html}{Java Naming Conventions}.
+
+    \bibitem{aitomaticprogramming}
+MICHAEL R., LYU; BAISHAKHI, R.; ABHIK, R.; SHIN HWEI TAN; PATANAMON, T.:
+    \textit{Automatic Programming: Large Language Models
+and Beyond.}
+Verfügbar unter: \href{https://dl.acm.org/doi/pdf/10.1145/3708519}{dl.acm.org}
+	
+\end{thebibliography}
+
+\end{document}
