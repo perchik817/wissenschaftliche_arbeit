@@ -12,7 +12,7 @@
 \contentsline {subsubsection}{\numberline {3.2.2}Beispiel-Code}{8}{subsubsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.3}Prompt-Strategien}{9}{subsection.3.3}%
 \contentsline {subsubsection}{\numberline {3.3.1}Zero-Shot Prompt (ohne Beispiele)}{9}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Few-Shot Prompt (mit Beispielen)}{10}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.2}Few-Shot Prompt (mit Beispielen)}{9}{subsubsection.3.3.2}%
 \contentsline {subsubsection}{\numberline {3.3.3}Detaillierter Kontext-Prompt (mit ausführlichen Anweisungen)}{10}{subsubsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.4}Durchführung der Tests}{10}{subsection.3.4}%
 \contentsline {subsubsection}{\numberline {3.4.1}Ablauf}{10}{subsubsection.3.4.1}%
