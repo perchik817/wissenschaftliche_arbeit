@@ -108,30 +108,24 @@
 \section*{Kapitel 1}
 \section{Einleitung}
 
-In dieser Arbeit wird untersucht, wie große Sprachmodelle (LLMs) automatisch die Namen von Variablen, Methoden und Klassen in Java verbessern können. Verständliche Bezeichner erleichtern das Lesen und Warten von Code und sind entscheidend für die Softwarequalität \cite{oracle}. In der Praxis treten jedoch häufig kurze, unklare oder konventionswidrige Namen auf, die die Lesbarkeit und Wartbarkeit einschränken.
+Sprachmodelle werden in der Softwareentwicklung immer häufiger eingesetzt, um Entwickler bei Analyse- und Review-Aufgaben zu unterstützen. Ein wichtiger Anwendungsbereich ist die Bewertung von Bezeichnern im Quellcode. Klare und verständliche Namen vereinfachen die Wartung, während verschwommene Bezeichner zu Fehlern und erhöhtem Aufwand führen.
 
-Ein zentrales Problem sind sogenannte \textit{linguistic anti-patterns} \cite{arnaoudova2014}: wiederkehrende sprachliche Muster in Bezeichnern, die zu Missverständnissen führen oder Java-Konventionen verletzen. Dazu gehören etwa generische Namen wie \texttt{data} oder \texttt{temp}, Abkürzungen, die schwer zu interpretieren sind, oder inkonsistente Schreibweisen. Die Arbeit untersucht, ob LLMs in der Lage sind, solche Fehler automatisch zu erkennen und bessere, verständliche Namen vorzuschlagen.
+Diese Arbeit untersucht, wie zuverlässig Sprachmodelle Java-Bezeichner beurteilen können und in welchen Fällen menschliches Eingreifen weiterhin notwendig bleibt. Bewertet werden Verständlichkeit, Bedeutung, Einhaltung von Namenskonventionen und das Erkennen linguistischer Anti-Muster \cite{aitomaticprogramming}. Unter linguistischen Anti-Mustern versteht man systematische sprachliche Probleme in Bezeichnern, die Klarheit und Lesbarkeit beeinträchtigen.
 
-Ziel ist es, eine weitgehend automatische Lösung zu entwickeln:
-\begin{enumerate}
-    \item Erstellung von Java-Beispielen mit schlechten Bezeichnern.
-    \item Übermittlung dieser Beispiele an ein Sprachmodell.
-    \item Automatische oder manuelle Auswertung der Vorschläge nach Verständlichkeit, Bedeutungsnähe und Einhaltung von Java-Konventionen.
-\end{enumerate}
+Das Ziel dieser Arbeit besteht darin, zu überprüfen, ob Sprachmodelle hilfreiche Hinweise zur Verbesserung von Bezeichnern liefern können. Dazu werden mehrere Prompt-Varianten entwickelt, getestet und schrittweise verbessert. Die Untersuchung erfolgt anhand von Java-Beispielen mit fehlerhaften sowie korrekten Bezeichnern, um sowohl korrekte Erkennungen als auch mögliche Fehlalarme („False Positives“) zu beurteilen.
 
-Dabei wird insbesondere geprüft, welche Art von \textit{Prompts} \cite{startup2023} am effektivsten ist, um konventionsgerechte und verständliche Bezeichner zu erzeugen und sprachliche Anti-Patterns zu vermeiden.
-
+Die zentrale Forschungsfrage lautet:
 \begin{quote}
-\textbf{Forschungsfrage:} Wie gut können Sprachmodelle automatisch bessere Bezeichner in Java vorschlagen, ohne dass ein Mensch eingreifen muss?
+Wie zuverlässig können Sprachmodelle Java-Bezeichner hinsichtlich Verständlichkeit, Bedeutung, Konventionen und linguistischer Anti-Muster bewerten?
 \end{quote}
 
 Die Arbeit ist in mehrere Kapitel gegliedert:
 
 \begin{enumerate}
     \item \textbf{Kapitel 1 (Einleitung).} Vorstellung des Themas, Zielsetzung, Relevanz von Sprachmodellen in der Softwareentwicklung sowie die Forschungsfrage.
-    \item \textbf{Kapitel 2 (Theoretische Hintergrund).} Einführung in Java-Bezeichner, Namenskonventionen und linguistische Anti-Patterns.
-    \item \textbf{Kapitel 3 (Methodik und Durchführung).} Beschreibung der Vorgehensweise zur Untersuchung von Sprachmodellen, Erstellung von Java-Beispielen mit schlechten Bezeichnern und Auswertung der Ergebnisse. Eine automatische Pipeline wird nur theoretisch erwähnt.  
-    \item \textbf{Kapitel 4 (Evaluation).} Die Ergebnisse zeigen, wie gut Sprachmodelle Vorschläge hinsichtlich Verständlichkeit, Bedeutung, Konventionen und Vermeidung von Anti-Patterns liefern.  
+    \item \textbf{Kapitel 2 (Theoretische Hintergrund).} Überblick über Java-Bezeichner, Namenskonventionen und linguistische Anti-Muster.
+    \item \textbf{Kapitel 3 (Methodik und Durchführung).} Beschreibung der Methode zur Untersuchung von Sprachmodellen, Erstellung von Java-Beispielen mit schlechten Bezeichnern und Bewertung der Ergebnisse. Eine automatische Pipeline wird nur theoretisch erwähnt.  
+    \item \textbf{Kapitel 4 (Evaluation).} Auswertung der Ergebnisse.  
     \item \textbf{Kapitel 5 (Diskussion und Schluss).} Grenzen der Methode, Verbesserungsideen, Ausblick auf weitere Forschung.
     
 \end{enumerate}
