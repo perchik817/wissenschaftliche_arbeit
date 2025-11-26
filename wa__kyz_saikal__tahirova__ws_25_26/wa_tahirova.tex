@@ -138,25 +138,27 @@ Hinweis: In dieser ersten Version der Arbeit wird der automatische Pipeline-Ansa
 \section{Theoretische Hintergrund}
 \subsection{Java-Bezeichner}
 
-Java-Bezeichner sind die Namen von Variablen, Methoden, Klassen, Schnittstellen, Konstanten und Paketen. Sie sollen die Funktion und den Zweck des Codes verständlich machen. Gute Bezeichner sind selbsterklärend, konsistent und folgen klaren Regeln \cite{oracle}. Dies erleichtert das Lesen, Verstehen und Warten von Software.
+Java-Bezeichner sind die Namen von Variablen, Methoden, Klassen, Schnittstellen, Konstanten und Paketen. Sie sollen die Funktion und den Zweck des Codes verständlich machen. Gute Bezeichner sind selbsterklärend, konsistent und folgen klaren Regeln \cite{oracle}. Sie dürfen nicht mit einer Ziffer beginnen und keine reservierten Wörter wiederholen. In der Praxis orientieren sich gute Namen an ihrer Funktion im Programm und an allgemein anerkannten Konventionen.
 
 \subsection{Namenskonventionen in Java}
 
 Java verwendet für Bezeichner verschiedene Schreibweisen, die hauptsächlich auf CamelCase basieren. Dabei gilt:
 
 \begin{itemize}
-    \item {Klassen und Schnittstellen.} Namen sind Substantive, jede Wortanfangsbuchstabe wird großgeschrieben, z.B. \texttt{Student}, \texttt{Scanner}, \texttt{Runnable}. Abkürzungen und Akronyme sollten vermieden werden.
+    \item {Klassen und Schnittstellen.} Bezeichner für Klassen und Schnittstellen werden als Nominalphrasen formuliert. Jeder Wortanfang steht groß, z.B. \texttt{Student}, \texttt{EnrolledStudents}. Abkürzungen und Akronyme sollten vermieden werden.
     \item {Methoden.} Namen sind Verben, beginnen mit einem Kleinbuchstaben, innere Wortanfänge werden großgeschrieben, z.B. \texttt{calculateSum()}, \texttt{main()}. 
     \item {Variablen.} Namen sollten kurz, aber aussagekräftig sein. Keine Unterstriche oder Dollarzeichen am Anfang. Ein-Zeichen-Variablen nur temporär (z.B. \texttt{i, j, k}). Beispiel: \texttt{totalScore}, \texttt{marks}.
     \item {Konstanten.} Alle Buchstaben groß, Wörter durch Unterstriche getrennt, z.B. \texttt{MAX\_SIZE}, \texttt{PI\_VALUE}.
     \item {Pakete.} Alles klein, oft in Anlehnung an Top-Level-Domains wie \texttt{com}, \texttt{org}. Beispiel: \texttt{java.util.Scanner}.
 \end{itemize}
 
+Ein Name soll beschreiben, was ein Element speichert oder ausführt. Unklare Begriffe wie \texttt{tmp}, \texttt{data} oder \texttt{handle} lassen zu viel Interpretationsspielraum und führen schnell zu Missverständnissen.
+
 Die konsequente Anwendung dieser Regeln erhöht die Verständlichkeit und Wartbarkeit von Code, insbesondere in größeren Projekten.
 
-\subsection{Linguistische Anti-Patterns}
+\subsection{Linguistische Anti-Muster}
 
-\textit{Linguistic Anti-Patterns (LAs)} beschreiben wiederkehrende schlechte Praktiken in der Benennung, Dokumentation und Implementierung von Softwareelementen. Sie stellen also sprachliche Widersprüche oder Inkonsistenzen zwischen Namen, Kommentaren und tatsächlichem Verhalten einer Methode oder eines Attributs dar \cite{arnaoudova2014}.
+\textit{Linguistische Anti-Muster (LA)} beschreiben wiederkehrende schlechte Praktiken in der Benennung, Dokumentation und Implementierung von Softwareelementen. Sie stellen also sprachliche Widersprüche oder Inkonsistenzen zwischen Namen, Kommentaren und tatsächlichem Verhalten einer Methode oder eines Attributs dar \cite{arnaoudova2014}.
 
 Im Gegensatz zu klassischen Design-Anti-Patterns, die strukturelle Probleme betreffen, beziehen sich LAs auf die sprachliche Ebene des Codes. Sie zeigen sich zum Beispiel, wenn eine Methode \texttt{get()} heißt, aber keinen Wert zurückgibt, oder eine Methode \texttt{isValid()} keinen booleschen Wert liefert. Ebenso gehören widersprüchliche Kommentare oder unklare Attributnamen zu häufigen Fällen solcher sprachlichen Inkonsistenzen.
 
@@ -177,7 +179,7 @@ Große Sprachmodelle (LLM), wie GPT oder CodeBERT, haben den Bereich der automat
 Wie in \textit{Automatic Programming: Large Language Models
 and Beyond} \cite{aitomaticprogramming} beschrieben, besteht jedoch weiterhin ein zentrales Problem in der Vertrauenswürdigkeit automatisch generierten Codes. Obwohl LLMs beeindruckende Ergebnisse liefern, bleibt die Frage offen, wann und unter welchen Bedingungen dieser Code als zuverlässig genug gilt, um in reale Projekte integriert zu werden. Neben der Korrektheit spielen auch Aspekte wie Sicherheit, Nachvollziehbarkeit und rechtliche Verantwortung eine Rolle.
 
-In dieser Arbeit wird untersucht, inwiefern Sprachmodelle diese Aufgaben zuverlässig ausführen und in welchen Fällen menschliches Eingreifen weiterhin notwendig bleibt.
+In dieser Arbeit wird untersucht, wie zuverlässig Sprachmodelle Java-Bezeichner bewerten können und in welchen Fällen weiterhin menschliches Eingreifen erforderlich ist.
 
 \newpage
 \section*{Kapitel 3}
