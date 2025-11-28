@@ -189,21 +189,21 @@ Dieses Kapitel erklärt die Auswahl der Sprachmodelle, die Erstellung von Test-B
 
 \subsection{Auswahl der Sprachmodelle}
 
-Für die Untersuchung wurden drei verschiedene Modelle gewählt:
+Für die Untersuchung wurden drei verschiedene Modelle über HAWKI\footnote{HAWKI dient als Schnittstelle zu OpenAI GPT-4o, Meta LLaMA 3.1 70B Instruct, Alibaba Qwen 2.5 72B Instruct Modellen} abgefragt:
 
 \begin{itemize}
-    \item \textbf{ChatGPT-4 (OpenAI).} Kommerzielles Modell mit starken Programmierfähigkeiten. 
-    \item \textbf{Hawki (WHZ).} Das KI-System der Westsächsischen Hochschule Zwickau. Eine lokale Lösung, die für akademische Zwecke entwickelt wurde.
-    \item \textbf{Claude 3.5 OPUS (Anthropic).} Bekannt für präzise Antworten und gute Befolgung von Anweisungen. 
+    \item OpenAI GPT-4o,
+    \item Meta LLaMA 3.1 70B Instruct,
+    \item Alibaba Qwen 2.5 72B Instruct.
 \end{itemize}
 
 \subsection{Erstellung der Test-Beispiele}
 
 \subsubsection{Kategorien nach Arnaoudova}
 
-Die Kategorien wurden in zwei Hauptgruppen unterteilt:
+Die linguistischen Anti-Muster nach Arnaoudova et al. \cite{arnaoudova2014} werden in zwei Gruppen unterteilt: methodenbezogene und attributbezogene Muster. Jede Kategorie markiert ein typisches semantisches Problem zwischen Bezeichner und Implementierung. Jedes Muster wurde kurz erklärt und durch ein Beispiel veranschaulicht. Insgesamt wurden 10–15 fehlerhafte Codebeispiele und 5–7 korrekte Beispiele erstellt.
 
-\textbf{Methoden-bezogene Anti-Patterns (A, B, C):}
+\textbf{Methoden-bezogene Anti-Muster (A, B, C):}
 
 \begin{enumerate}
     \item \textbf{Kategorie A} (\textit{does more than it says}) -- die Methode macht mehr, als der Name verspricht.
@@ -259,46 +259,29 @@ Die Kategorien wurden in zwei Hauptgruppen unterteilt:
 
 \subsubsection{Beispiel-Code}
 
-\textbf{Kategorie A1.} Methode mit \texttt{get} macht mehr als zurückgeben
+\textbf{Kategorie A1.} Methode mit \texttt{get} macht mehr als zurückgeben:
 
 \begin{lstlisting}
 public class UserManager {
     private User currentUser;
-    
-    // Problem: getUser() macht mehr als nur zuruckgeben
+
     public User getUser() {
-        validateSession();      // Extra Aktion!
-        logAccess();            // Extra Aktion!
+        validateSession();   // Nebenwirkung
         return currentUser;
     }
 }
 \end{lstlisting}
-
-Problem: Eine \texttt{get}-Methode soll nur einen Wert zurückgeben, aber hier passiert mehr. Erwartete Verbesserung:
-\begin{itemize}
-    \item Entweder umbenennen zu \texttt{fetchAndValidateUser()}
-    \item Oder die Extra-Funktionen entfernen
-\end{itemize}
 
 
 \textbf{Kategorie B3.} Name deutet Rückgabe an, aber \texttt{void}:
 
 \begin{lstlisting}
 public class Calculator {
-    private int result;
-    
-    // Problem: getName() gibt nichts zuruck (void)
-    public void getName() {
-        System.out.println("Calculator");
+    public void getResult() {
+        System.out.println("42");
     }
 }
 \end{lstlisting}
-
-Problem: \texttt{getName()} suggeriert einen Rückgabewert, aber der Typ ist \texttt{void}. Erwartete Verbesserung:
-\begin{itemize}
-    \item Entweder \texttt{String getName()} mit \texttt{return "Calculator";}
-    \item Oder umbenennen zu \texttt{printName()}
-\end{itemize}
 
 
 \textbf{Kategorie C1.} Name und Typ sind Gegensätze:
@@ -312,65 +295,56 @@ public class Config {
 }
 \end{lstlisting}
 
-Problem: \texttt{disable()} gibt einen "Enable"-Status zurück – Widerspruch! Erwartete Verbesserung:
-\begin{itemize}
-    \item Entweder \texttt{ControlDisableState} zurückgeben
-    \item Oder Methode zu \texttt{enable()} umbenennen
-\end{itemize}
+
+\textbf{Kategorie D2.} Prädikatname, Typ nicht Boolean:
+\begin{lstlisting}
+public class Payment {
+    private int isActive; // Typ passt nicht zum Prädikat
+}
+\end{lstlisting}
+
+\textbf{Kategorie E1.} Pluralname bei singular Typ:
+\begin{lstlisting}
+public class Order {
+    private Product products; // Name suggeriert Mehrzahl
+}
+\end{lstlisting}
+
+\textbf{Kategorie F1.} Name und Typ im Gegensatz:
+\begin{lstlisting}[language=Java]
+public class Metrics {
+    private FailureCounter success; // Erfolg vs. Fehler
+}
+\end{lstlisting}
 
 
-Insgesamt wurden 30 solcher Beispiele erstellt, je 5 für jede Kategorie A bis F.
+\subsection{Prompt-Strategien und Iteration}
+Die Prompts wurden iterativ weiterentwickelt (V1 → V2 → V3 → V4). Ziel jeder Iteration war die Verbesserung der Hinweisqualität (automatisches Review) und die Reduzierung von False Positives. V4 enthält zudem eine knappe Definition der linguistischen Anti-Muster, damit Modelle diese Kategorien gezielt erkennen.
 
+\paragraph{V1 (Zero-Shot)}  
+\enquote{Analysieren Sie den folgenden Java-Code. Identifizieren Sie mögliche Benennungs- oder Struktur-Anti-Muster.}
 
-\subsection{Prompt-Strategien}
-Verschiedene Arten von Prompts wurden getestet, um herauszufinden, welche am besten funktionieren.
+\paragraph{V2 (Few-Shot)}  
+Positive Beispiele für korrekte Bezeichner werden vorangestellt (z.\,B. \enquote{EnrolledStudents}, \enquote{numberOfValidCreditCards}).
 
-\subsubsection{Zero-Shot Prompt (ohne Beispiele)}
+\paragraph{V3 (Regeln)}  
+Kurzregeln zu CamelCase, Verben für Methoden, Nominalphrasen für Klassen.
 
-\begin{verbatim}
-Verbessern Sie die Bezeichner im folgenden Java-Code:
-[CODE EINFÜGEN]
-\end{verbatim}
-
-Dieser Prompt gibt dem Modell minimale Informationen. Er testet, ob das Modell schon von sich aus gute Konventionen kennt.
-
-\subsubsection{Few-Shot Prompt (mit Beispielen)}
-
-\begin{verbatim}
-Beispiele für gute Java-Namen:
-1) Klassen: CustomerAccount, PaymentProcessor
-2) Methoden: calculateTotal(), validateInput()
-3) Variablen: userName, itemCount
-Verbessere nun diesen Code:
-[CODE EINFÜGEN]
-\end{verbatim}
-
-\subsubsection{Detaillierter Kontext-Prompt (mit ausführlichen Anweisungen)}
-
-\begin{verbatim}
-Du bist ein erfahrener Java-Entwickler. Verbessere die Bezeichner:
-1) Folge Java-Konventionen (CamelCase)
-2) Vermeide linguistische Anti-Patterns
-3) Wähle selbsterklärende Namen
-4) Achte auf Kontext und Bedeutung
-Code:
-[CODE EINFÜGEN]
-\end{verbatim}
+\paragraph{V4 (Erklärung)}  
+Kurze Definitionen der Kategorien A–F (linguistische Anti-Muster) werden vorangestellt; die Antwort soll knapp Hinweise für Programmierer liefern, keine automatische Code-Änderung.
 
 \subsection{Durchführung der Tests}
 
-Das ergibt insgesamt 270 Tests (30 Beispiele × 3 Prompts × 3 Modelle).
-
-\subsubsection{Ablauf}
+Für jedes der 10–15 fehlerhaften Beispiele und für jedes der 5–7 korrekten Beispiele wurde jede Prompt-Version an alle drei Modelle über HAWKI gesendet. Jede Modellantwort wurde protokolliert und anonymisiert abgespeichert. Der Ablauf:
 
 \begin{enumerate}
-    \item Code-Beispiel mit linguistischem Anti-Pattern vorbereiten.
-    \item Kategorie notieren.
-    \item Prompt wählen (Zero-Shot, Few-Shot oder Detailliert).
-    \item An LLM senden.
-    \item Antwort aufzeichnen.
-    \item Bewerten nach 5 Kriterien.
+    \item Beispiel auswählen und Kategorie zuordnen.
+    \item Prompt-Version wählen.
+    \item Anfrage an Modell via HAWKI senden.
+    \item Ausgabe speichern.
+    \item Bewertung durchführen.
 \end{enumerate}
+
 
 \subsection{Bewertungskriterien}
 
@@ -381,57 +355,65 @@ Jedes Kriterium wird mit 1-5 Punkten bewertet.
     
     \item \textbf{Korrekturqualität.} Ist der vorgeschlagene neue Name besser? Löst er das Anti-Pattern?
     
-    \item \textbf{Konventions-Konformität:} Folgt der neue Code Java-Standards? 
+    \item \textbf{Konventions-Konformität.} Folgt der neue Code Java-Standards? 
     
-    \item \textbf{Semantische Klarheit:} Sind die neuen Namen verständlich? 
+    \item \textbf{Semantische Klarheit.} Sind die neuen Namen verständlich? 
     
-    \item \textbf{Konsistenz:} Passt alles zusammen?
+    \item \textbf{Konsistenz.} Passt alles zusammen?
 \end{enumerate}
 
 
-\subsubsection{Spezielle Bewertung nach Kategorien}
-
-Für jede Kategorie A-F wurden spezifische Fragen gestellt:
+\textbf{Spezielle Bewertung nach Kategorien.} Für jede Kategorie A-F wurden spezifische Fragen gestellt:
 
 \begin{itemize}
-    \item \textbf{Kategorie A:} Wurde die Extra-Funktionalität dokumentiert oder die Methode umbenannt?
-    \item \textbf{Kategorie B:} Wurde der fehlende Rückgabewert hinzugefügt oder der Name korrigiert?
-    \item \textbf{Kategorie C:} Wurden die widersprüchlichen Begriffe harmonisiert?
-    \item \textbf{Kategorie D-F:} Wurden Attributnamen und Typen in Einklang gebracht?
+    \item Kategorie A: Wurde die Extra-Funktionalität dokumentiert oder die Methode umbenannt?
+    \item Kategorie B: Wurde der fehlende Rückgabewert hinzugefügt oder der Name korrigiert?
+    \item Kategorie C: Wurden die widersprüchlichen Begriffe harmonisiert?
+    \item Kategorie D-F: Wurden Attributnamen und Typen in Einklang gebracht?
 \end{itemize}
 
 
 % --- Literaturverzeichnis ---
 \clearpage
 \begin{thebibliography}{99}
-	
-    \bibitem{arnaoudova2014}
-    Arnaoudova, V.; Di Penta, M.; Antoniol, G. (2014): 
-    \textit{Linguistic Anti-Patterns: What They Are and How Developers Perceive Them.} 
-    Empirical Software Engineering.  
-    Verfügbar unter: \href{https://www.veneraarnaoudova.ca/wp-content/uploads/2014/10/2014-EMSE-Arnaodova-et-al-Perception-LAs.pdf}{veneraarnaoudova.ca}.
 
-    \bibitem{newfamlas}
-    Conference: European Conference on Software Maintenance and Reengineering (2013): 
-    \textit{A New Family of Software Anti-Patterns: Linguistic Anti-Patterns.}
-    Verfügbar unter: \href{https://assets.ptidej.net/Publications/Documents/CSMR13d.doc.pdf}{assets.ptidej.net}
-	
-    \bibitem{startup2023}
-    Startup Creator (2023): 
-    \textit{Die besten ChatGPT Prompts.}  
-    Verfügbar unter: \href{https://startup-creator.com/blog/die-besten-chatgpt-prompts/}{startup-creator.com}.
-	
-    \bibitem{oracle}
-    Oracle: 
-    \textit{Naming Conventions.}  
-    Verfügbar unter: \href{https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html}{Java Naming Conventions}.
+\bibitem{arnaoudova2014}
+Arnaoudova, V.; Di Penta, M.; Antoniol, G. (2014):
+\textit{Linguistic Anti-Patterns: What They Are and How Developers Perceive Them.}
+Empirical Software Engineering.
+Verfügbar unter:
+\href{https://www.veneraarnaoudova.ca/wp-content/uploads/2014/10/2014-EMSE-Arnaodova-et-al-Perception-LAs.pdf}{veneraarnaoudova.ca},
+abgerufen am 25.11.2025.
 
-    \bibitem{aitomaticprogramming}
-MICHAEL R., LYU; BAISHAKHI, R.; ABHIK, R.; SHIN HWEI TAN; PATANAMON, T.:
-    \textit{Automatic Programming: Large Language Models
-and Beyond.}
-Verfügbar unter: \href{https://dl.acm.org/doi/pdf/10.1145/3708519}{dl.acm.org}
-	
+\bibitem{newfamlas}
+European Conference on Software Maintenance and Reengineering (2013):
+\textit{A New Family of Software Anti-Patterns: Linguistic Anti-Patterns.}
+Verfügbar unter:
+\href{https://assets.ptidej.net/Publications/Documents/CSMR13d.doc.pdf}{assets.ptidej.net},
+abgerufen am 25.11.2025.
+
+\bibitem{startup2023}
+Startup Creator (2023):
+\textit{Die besten ChatGPT Prompts.}
+Verfügbar unter:
+\href{https://startup-creator.com/blog/die-besten-chatgpt-prompts/}{startup-creator.com},
+abgerufen am 25.11.2025.
+
+\bibitem{oracle}
+Oracle Corporation:
+\textit{Naming Conventions.}
+Verfügbar unter:
+\href{https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html}{Java Naming Conventions},
+abgerufen am 25.11.2025.
+
+\bibitem{aitomaticprogramming}
+Lyu, M. R.; Rajan, B.; Roychoudhury, A.; Tan, S. H.; Thummalapenta, P.:
+\textit{Automatic Programming: Large Language Models and Beyond.}
+Verfügbar unter:
+\href{https://dl.acm.org/doi/pdf/10.1145/3708519}{dl.acm.org},
+abgerufen am 25.11.2025.
+
 \end{thebibliography}
+
 
 \end{document}

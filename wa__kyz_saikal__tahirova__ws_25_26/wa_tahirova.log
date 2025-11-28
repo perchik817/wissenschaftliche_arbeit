@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.14)  26 NOV 2025 01:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.14)  28 NOV 2025 17:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -547,7 +547,7 @@ Package hyperref Info: Link coloring ON on input line 75.
 \openout3 = `wa_tahirova.out'.
 
 \c@lstlisting=\count319
-<./img/WHZ-Logo.jpg, id=83, 1024.3068pt x 426.8748pt>
+<./img/WHZ-Logo.jpg, id=63, 1024.3068pt x 426.8748pt>
 File: ./img/WHZ-Logo.jpg Graphic file (type jpg)
 <use ./img/WHZ-Logo.jpg>
 Package pdftex.def Info: ./img/WHZ-Logo.jpg  used on input line 80.
@@ -618,10 +618,17 @@ Overfull \hbox (4.09637pt too wide) in paragraph at lines 151--152
 []\T1/lmr/m/n/12 (-20) Konstanten. Al-le Buch-sta-ben groÿ, Wör-ter durch Un-ter-stri-che ge-trennt, z.B. \T1/lmtt/m/n/12 MAX_SIZE\T1/lmr/m/n/12 (-20) ,
  []
 
-[5{C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}] [6] [7] [8]
+[5{C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}] [6] [7]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 192.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 192.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 192.
+ [8]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 265.
- [9] [10] [11] [12] [13
+ [9] [10] [11] [12
 
 ] (wa_tahirova.aux)
  ***********
@@ -629,20 +636,20 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `wa_tahirova.out' has not changed.
-(rerunfilecheck)             Checksum: BA9134FF988927E2E72D18ACB9C84289;3674.
+(rerunfilecheck)             Checksum: 639BF368BCD079F414A00239ED55B2C9;2520.
  ) 
 Here is how much of TeX's memory you used:
- 17244 strings out of 474479
- 273842 string characters out of 5744062
- 1998542 words of memory out of 5000000
- 39058 multiletter control sequences out of 15000+600000
- 612873 words of font info for 131 fonts, out of 8000000 for 9000
+ 17316 strings out of 474479
+ 274739 string characters out of 5744062
+ 2014542 words of memory out of 5000000
+ 39091 multiletter control sequences out of 15000+600000
+ 634673 words of font info for 160 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,79p,1098b,2047s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on wa_tahirova.pdf (13 pages, 1097491 bytes).
+ 75i,8n,79p,1098b,1264s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
+Output written on wa_tahirova.pdf (12 pages, 1157750 bytes).
 PDF statistics:
  298 PDF objects out of 1000 (max. 8388607)
- 92 named destinations out of 1000 (max. 500000)
- 32422 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 97 named destinations out of 1000 (max. 500000)
+ 44670 words of extra memory for PDF output out of 51595 (max. 10000000)
 
