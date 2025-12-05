@@ -110,7 +110,7 @@
 
 Sprachmodelle werden in der Softwareentwicklung immer häufiger eingesetzt, um Entwickler bei Analyse- und Review-Aufgaben zu unterstützen. Ein wichtiger Anwendungsbereich ist die Bewertung von Bezeichnern im Quellcode. Klare und verständliche Namen vereinfachen die Wartung, während verschwommene Bezeichner zu Fehlern und erhöhtem Aufwand führen \cite{identifiernamesinfluencecodequality}.
 
-Diese Arbeit untersucht die Zuverlässigkeit moderner Sprachmodelle bei der Einschätzung von Java-Bezeichnern. Bewertet werden Verständlichkeit, semantische Angemessenheit, Einhaltung etablierter Namenskonventionen \cite{oracle} sowie die Erkennung linguistischer Anti-Muster \cite{arnaoudova2014,newfamlas}. Unter linguistischen Anti-Mustern versteht man systematische sprachliche Probleme in Bezeichnern, die Klarheit und Lesbarkeit beeinträchtigen.
+Diese Arbeit untersucht die Zuverlässigkeit moderner Sprachmodelle bei der Einschätzung von Java-Bezeichnern. Bewertet werden Verständlichkeit, semantische Angemessenheit, Einhaltung etablierter Namenskonventionen \cite{oracle} sowie die Erkennung linguistischer Anti-Muster \cite{arnaoudova2014}. Unter linguistischen Anti-Mustern versteht man systematische sprachliche Probleme in Bezeichnern, die Klarheit und Lesbarkeit beeinträchtigen.
 
 Ziel der Untersuchung ist es zu prüfen, ob Sprachmodelle hilfreiche und konsistente Hinweise zur Verbesserung von Bezeichnern liefern können. Hierfür werden mehrere Prompt-Varianten entwickelt und schrittweise verfeinert. Die Analyse erfolgt anhand von Java-Beispielen mit sowohl problematischen als auch korrekten Bezeichnern, um die Erkennung tatsächlicher Verstöße und das Auftreten unbegründeter Warnungen („False Positives“) zu bewerten. Frühere Arbeiten zeigen bereits, dass LLM-generierter Code zu semantischen Fehlbenennungen und strukturellen Qualitätsproblemen neigt \cite{llmsmells2025,llmmethodnames2025,aitomaticprogramming}.
 
@@ -136,48 +136,62 @@ Hinweis: In dieser ersten Version der Arbeit wird der automatische Pipeline-Ansa
 \newpage
 \section*{Kapitel 2}
 \section{Theoretische Hintergrund}
+Dieser Abschnitt bietet einen Überblick über Java-Bezeichner, etablierte Namenskonventionen sowie linguistische Anti-Muster, die als Grundlage für die spätere Analyse dienen. Die Relevanz dieser Konzepte ergibt sich aus empirischen Studien, die zeigen, dass Bezeichner einen erheblichen Einfluss auf die Verständlichkeit und Qualität von Quellcode haben \cite{identifiernamesinfluencecodequality}.
+
 \subsection{Java-Bezeichner}
 
-Java-Bezeichner sind die Namen von Variablen, Methoden, Klassen, Schnittstellen, Konstanten und Paketen. Sie sollen die Funktion und den Zweck des Codes verständlich machen. Gute Bezeichner sind selbsterklärend, konsistent und folgen klaren Regeln \cite{oracle}. Sie dürfen nicht mit einer Ziffer beginnen und keine reservierten Wörter wiederholen. In der Praxis orientieren sich gute Namen an ihrer Funktion im Programm und an allgemein anerkannten Konventionen.
+Java-Bezeichner sind die Namen von Variablen, Methoden, Klassen, Schnittstellen, Konstanten und Paketen. Sie sollen die Funktion und den Zweck des Codes verständlich machen. Die Studie von Butler et al. \cite{identifiernamesinfluencecodequality} zeigt, dass unklare, inkonsistente oder mehrdeutige Namen mit geringer Wartbarkeit, erhöhter Komplexität und häufigeren Warnungen in statischen Analysewerkzeugen verbunden sind. Im Gegensatz dazu können klare Namen ein einfacher Indikator für eine hohe Qualität des Quellcodes sein.
 
 \subsection{Namenskonventionen in Java}
 
-Java verwendet für Bezeichner verschiedene Schreibweisen, die hauptsächlich auf CamelCase basieren. Dabei gilt:
+Die offiziellen Java-Konventionen \cite{oracle} empfehlen konsistente Schreibweisen und semantisch präzise Nomenphrasen. Dazu gehören:
 
 \begin{itemize}
-    \item {Klassen und Schnittstellen.} Bezeichner für Klassen und Schnittstellen werden als Nominalphrasen formuliert. Jeder Wortanfang steht groß, z.B. \texttt{Student}, \texttt{EnrolledStudents}. Abkürzungen und Akronyme sollten vermieden werden.
-    \item {Methoden.} Namen sind Verben, beginnen mit einem Kleinbuchstaben, innere Wortanfänge werden großgeschrieben, z.B. \texttt{calculateSum()}, \texttt{main()}. 
-    \item {Variablen.} Namen sollten kurz, aber aussagekräftig sein. Keine Unterstriche oder Dollarzeichen am Anfang. Ein-Zeichen-Variablen nur temporär (z.B. \texttt{i, j, k}). Beispiel: \texttt{totalScore}, \texttt{marks}.
-    \item {Konstanten.} Alle Buchstaben groß, Wörter durch Unterstriche getrennt, z.B. \texttt{MAX\_SIZE}, \texttt{PI\_VALUE}.
-    \item {Pakete.} Alles klein, oft in Anlehnung an Top-Level-Domains wie \texttt{com}, \texttt{org}. Beispiel: \texttt{java.util.Scanner}.
+    \item \textbf{Klassen und Schnittstellen.} Großschreibung jedes Wortanfangs (CamelCase), z.\,B. \texttt{CustomerAccount}, \texttt{ PaymentProcessor}. Allgemein sollten aussagekräftige Nomenphrasen verwendet werden, etwa \texttt{EnrolledStudents} oder \texttt{ NumberOfValidCreditCards}.
+    \item \textbf{Methoden.} Verben oder Verbphrasen wie \texttt{ calculateTotal()} oder \texttt{validateInput()}.
+    \item \textbf{Attribute/Variablen.} camelCase und präzise Bedeutung, z.\,B. \texttt{userName}, \texttt{itemCount}.
 \end{itemize}
 
 Ein Name soll beschreiben, was ein Element speichert oder ausführt. Unklare Begriffe wie \texttt{tmp}, \texttt{data} oder \texttt{handle} lassen zu viel Interpretationsspielraum und führen schnell zu Missverständnissen.
 
-Die konsequente Anwendung dieser Regeln erhöht die Verständlichkeit und Wartbarkeit von Code, insbesondere in größeren Projekten.
-
 \subsection{Linguistische Anti-Muster}
 
-\textit{Linguistische Anti-Muster (LA)} beschreiben wiederkehrende schlechte Praktiken in der Benennung, Dokumentation und Implementierung von Softwareelementen. Sie stellen also sprachliche Widersprüche oder Inkonsistenzen zwischen Namen, Kommentaren und tatsächlichem Verhalten einer Methode oder eines Attributs dar \cite{arnaoudova2014}.
+Linguistische Anti-Muster (Linguistic Anti-Patterns) wurden erstmals systematisch von Arnaoudova et al. beschrieben \cite{arnaoudova2014}. Sie bezeichnen wiederkehrende sprachliche Probleme in Bezeichnern, Kommentaren oder Signaturen, bei denen Name und tatsächliches Verhalten nicht übereinstimmen. Dies führt zu kognitiven Brüchen und erschwert das Programmverständnis.
 
-Im Gegensatz zu klassischen Design-Anti-Patterns, die strukturelle Probleme betreffen, beziehen sich LAs auf die sprachliche Ebene des Codes. Sie zeigen sich zum Beispiel, wenn eine Methode \texttt{get()} heißt, aber keinen Wert zurückgibt, oder eine Methode \texttt{isValid()} keinen booleschen Wert liefert. Ebenso gehören widersprüchliche Kommentare oder unklare Attributnamen zu häufigen Fällen solcher sprachlichen Inkonsistenzen.
+Die Anti-Muster lassen sich in zwei Gruppen einteilen.
 
-Arnaoudova et al. (2013) \cite{newfamlas} analysierten mehrere Open-Source-Projekte wie ArgoUML, Cocoon und Eclipse, um diese Muster systematisch zu erfassen. Dabei wurden typische Kategorien von LAs identifiziert:
-\begin{itemize}
-    \item Inkonsistenz zwischen Name und Rückgabewert.
-    \item Widersprüche zwischen Kommentar und Implementierung
-    \item Mehrdeutige oder irreführende Bezeichner.
-    \item Verwendung generischer Namen ohne semantischen Bezug.
-\end{itemize}
+Methodenbezogene Anti-Muster:
 
-Das Bewusstsein für linguistische Anti-Patterns hilft, Missverständnisse zu vermeiden und die Lesbarkeit, Verständlichkeit und Wartbarkeit von Software nachhaltig zu verbessern.
+\begin{enumerate}
+    \item \textbf{Kategorie A: „tut mehr als der Name sagt“}  
+    Die Methode führt zusätzliche Aktionen aus.  
+    Beispiel: \texttt{getUser()} validiert oder speichert Daten.
+
+    \item \textbf{Kategorie B: „sagt mehr als sie tut“}  
+    Der Name verspricht Funktionalität, die nicht implementiert ist.  
+    Beispiel: \texttt{validate()} besitzt den Rückgabetyp \texttt{void}.
+
+    \item \textbf{Kategorie C: „tut das Gegenteil“}  
+    Name und Verhalten widersprechen sich.  
+    Beispiel: \texttt{disable()} erzeugt einen \texttt{EnableState}.
+\end{enumerate}
+
+Attributbezogene Anti-Muster:
+\begin{enumerate}
+    \setcounter{enumi}{3}
+    \item \textbf{Kategorie D: enthält mehr als der Name sagt}  
+    Beispiel: ein als Prädikat benannter Bezeichner, dessen Typ jedoch kein \texttt{boolean} ist.
+
+    \item \textbf{Kategorie E: Name sagt mehr als enthalten ist}  
+    Beispiel: \texttt{users} als Name für ein einzelnes Objekt.
+
+    \item \textbf{Kategorie F: Name und Inhalt widersprechen sich}  
+    Beispiel: Attributname und Typ bilden Antonyme.
+\end{enumerate}
 
 \subsection{Große Sprachmodelle (LLMs)}
 
-Große Sprachmodelle (LLM), wie GPT oder CodeBERT, haben den Bereich der automatischen Programmierung grundlegend verändert. Sie ermöglichen nicht nur die Code-Erstellung in natürlicher Sprache, sondern führen auch zunehmend Aufgaben wie die Code-Erklärung, die Testgenerierung oder die Fehlerbehebung durch. Daher verlagert sich der Schwerpunkt der Softwareentwicklung von der manuellen Implementierung auf die Zusammenarbeit zwischen Mensch und Modell.
-
-Wie in \textit{Automatic Programming: Large Language Models
-and Beyond} \cite{aitomaticprogramming} beschrieben, besteht jedoch weiterhin ein zentrales Problem in der Vertrauenswürdigkeit automatisch generierten Codes. Obwohl LLMs beeindruckende Ergebnisse liefern, bleibt die Frage offen, wann und unter welchen Bedingungen dieser Code als zuverlässig genug gilt, um in reale Projekte integriert zu werden. Neben der Korrektheit spielen auch Aspekte wie Sicherheit, Nachvollziehbarkeit und rechtliche Verantwortung eine Rolle.
+Sprachmodelle werden zunehmend zur Bewertung von Quellcode verwendet \cite{aitomaticprogramming}. Studien zeigen jedoch, dass LLMs zwar Muster erkennen können, aber gleichzeitig zu einer oberflächlichen Analyse neigen, insbesondere wenn nur Identifikatoren geändert oder semantisch irrelevante Änderungen vorgenommen werden \cite{llmmaintainablereliable2025}. Darüber hinaus zeigen mehrere Studien eine hohe Rate an Fehlalarmen („False Positives”) und ungenauen Bewertungen \cite{llmsmells2025, llmdetection2025}.
 
 In dieser Arbeit wird untersucht, wie zuverlässig Sprachmodelle Java-Bezeichner bewerten können und in welchen Fällen weiterhin menschliches Eingreifen erforderlich ist.
 
@@ -373,6 +387,9 @@ Jedes Kriterium wird mit 1-5 Punkten bewertet.
 \end{itemize}
 
 
+
+Das Bewusstsein für linguistische Anti-Patterns hilft, Missverständnisse zu vermeiden und die Lesbarkeit, Verständlichkeit und Wartbarkeit von Software nachhaltig zu verbessern.
+
 % --- Literaturverzeichnis ---
 \clearpage
 \begin{thebibliography}{99}
@@ -383,13 +400,6 @@ Arnaoudova, V.; Di Penta, M.; Antoniol, G. (2014):
 Empirical Software Engineering.
 Verfügbar unter: \url{https://www.veneraarnaoudova.ca/wp-content/uploads/2014/10/2014-EMSE-Arnaodova-et-al-Perception-LAs.pdf},
 abgerufen am 14.10.2025.
-
-\bibitem{newfamlas}
-European Conference on Software Maintenance and Reengineering (2013):
-\textit{A New Family of Software Anti-Patterns: Linguistic Anti-Patterns.}
-Konferenzbeitrag CSMR 2013.
-Verfügbar unter: \url{https://assets.ptidej.net/Publications/Documents/CSMR13d.doc.pdf},
-abgerufen am 15.11.2025.
 
 \bibitem{oracle}
 Oracle Corporation:

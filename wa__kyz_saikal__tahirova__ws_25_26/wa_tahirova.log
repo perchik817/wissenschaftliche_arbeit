@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.14)  5 DEC 2025 23:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.14)  6 DEC 2025 00:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -596,11 +596,11 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ] [3
 
 ] [4]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 148.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 150.
  (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 148.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 150.
  (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -609,88 +609,93 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Overfull \hbox (16.98045pt too wide) in paragraph at lines 148--149
-\T1/lmr/m/n/12 (-20) mi-nal-phra-sen for-mu-liert. Je-der Wort-an-fang steht groÿ, z.B. \T1/lmtt/m/n/12 Student\T1/lmr/m/n/12 (-20) , \T1/lmtt/m/n/12 EnrolledStudents\T1/lmr/m/n/12 (-20) .
+Overfull \hbox (17.76033pt too wide) in paragraph at lines 150--151
+\T1/lmr/m/n/12 (-20) phra-sen ver-wen-det wer-den, et-wa \T1/lmtt/m/n/12 EnrolledStudents \T1/lmr/m/n/12 (-20) oder  \T1/lmtt/m/n/12 NumberOfValidCreditCards\T1/lmr/m/n/12 (-20) . 
  []
 
 
-Overfull \hbox (4.09637pt too wide) in paragraph at lines 151--152
-[]\T1/lmr/m/n/12 (-20) Konstanten. Al-le Buch-sta-ben groÿ, Wör-ter durch Un-ter-stri-che ge-trennt, z.B. \T1/lmtt/m/n/12 MAX_SIZE\T1/lmr/m/n/12 (-20) ,
+Overfull \hbox (12.42459pt too wide) in paragraph at lines 151--152
+[]\T1/lmr/bx/n/12 (-20) Methoden. \T1/lmr/m/n/12 (-20) Ver-ben oder Ver-b-phra-sen wie  \T1/lmtt/m/n/12 calculateTotal() \T1/lmr/m/n/12 (-20) oder \T1/lmtt/m/n/12 validateInput()\T1/lmr/m/n/12 (-20) . 
  []
 
-[5{C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}] [6] [7]
+
+Overfull \hbox (6.73573pt too wide) in paragraph at lines 152--153
+[]\T1/lmr/bx/n/12 (-20) Attribute/Variablen. \T1/lmr/m/n/12 (-20) ca-mel-Ca-se und prä-zi-se Be-deu-tung, z.B. \T1/lmtt/m/n/12 userName\T1/lmr/m/n/12 (-20) , \T1/lmtt/m/n/12 itemCount\T1/lmr/m/n/12 (-20) . 
+ []
+
+[5{C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}] [6]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 192.
+(Font)              <10> on input line 206.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 192.
+(Font)              <7> on input line 206.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 192.
- [8]
+(Font)              <5> on input line 206.
+ [7]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 265.
- [9] [10] [11]
-Underfull \hbox (badness 1675) in paragraph at lines 407--412
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 279.
+ [8] [9] [10]
+Underfull \hbox (badness 1675) in paragraph at lines 417--422
 []\T1/lmr/m/n/12 (+20) Butler, S.; Wer-me-lin-ger, M.; Yu, Y.; Sharp, H. (2010): \T1/lmr/m/it/12 (+20) Ex-plo-ring the In-
  []
 
 
-Underfull \hbox (badness 2469) in paragraph at lines 407--412
+Underfull \hbox (badness 2469) in paragraph at lines 417--422
 \T1/lmr/m/n/12 (+20) cee-dings of the 14th Eu-ro-pean Con-fe-rence on Soft-wa-re Main-te-nance and
  []
 
 
-Underfull \hbox (badness 2662) in paragraph at lines 407--412
+Underfull \hbox (badness 2662) in paragraph at lines 417--422
 \T1/lmr/m/n/12 (+20) Reen-gi-nee-ring (CSMR), 15--18 March 2010, Ma-drid, Spain. Ver-füg-bar un-
  []
 
 
-Underfull \hbox (badness 1728) in paragraph at lines 407--412
+Underfull \hbox (badness 1728) in paragraph at lines 417--422
 \T1/lmr/m/n/12 (+20) of _ Identi^^\er _ Names _ on _ Code _ Quality _ An _ Empirical _ Study$[][], ab-ge-ru-fen am
  []
 
 
-Underfull \hbox (badness 2626) in paragraph at lines 421--426
+Underfull \hbox (badness 2626) in paragraph at lines 431--436
 []\T1/lmr/m/n/12 (+20) Santa Mo-li-son, A.; Mo-raes, M.; Me-lo, G.; San-tos, F.; As-sunção, W. K.
  []
 
 
-Underfull \hbox (badness 4595) in paragraph at lines 421--426
+Underfull \hbox (badness 4595) in paragraph at lines 431--436
 \T1/lmr/m/n/12 (+20) G. (2025): \T1/lmr/m/it/12 (+20) Is LLM-Generated Co-de Mo-re Main-taina-ble & Re-lia-ble than
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 421--426
+Underfull \hbox (badness 10000) in paragraph at lines 431--436
 \T1/lmr/m/it/12 (+20) Human-Written Co-de? \T1/lmr/m/n/12 (+20) To-ron-to Me-tro-po-li-tan Uni-ver-si-ty; Co-lo-ra-do State
  []
 
 
-Underfull \hbox (badness 3895) in paragraph at lines 421--426
+Underfull \hbox (badness 3895) in paragraph at lines 431--436
 \T1/lmr/m/n/12 (+20) Uni-ver-si-ty; North Ca-ro-li-na State Uni-ver-si-ty, Ju-ly 2025. Ver-füg-bar un-ter:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 421--426
+Underfull \hbox (badness 10000) in paragraph at lines 431--436
 [][]$\T1/lmr/m/n/12 (+20) https : / / www . researchgate . net / publication / 393853113 _ Is _ LLM-[]Generated _
  []
 
 
-Underfull \hbox (badness 2486) in paragraph at lines 428--433
+Underfull \hbox (badness 2486) in paragraph at lines 438--443
 []\T1/lmr/m/n/12 (+20) Akram, W.; Ji-ang, Y.; Zhang, Y.; Khan, H. A.; Liu, H. (2025): \T1/lmr/m/it/12 (+20) LLM-
  []
 
 
-Underfull \hbox (badness 1888) in paragraph at lines 428--433
+Underfull \hbox (badness 1888) in paragraph at lines 438--443
 \T1/lmr/m/it/12 (+20) Based Me-thod Na-me Sug-ge-s-ti-on with Au-to-ma-ti-cal-ly Ge-ne-ra-ted Context-Rich
  []
 
 
-Underfull \hbox (badness 1796) in paragraph at lines 428--433
+Underfull \hbox (badness 1796) in paragraph at lines 438--443
 \T1/lmr/m/it/12 (+20) Prompts. \T1/lmr/m/n/12 (+20) Bei-jing In-sti-tu-te of Tech-no-lo-gy; Pe-king Uni-ver-si-ty. Ver-füg-bar un-
  []
 
-[12
+[11
 
-] [13] (wa_tahirova.aux)
+] [12] (wa_tahirova.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
@@ -699,17 +704,17 @@ Package rerunfilecheck Info: File `wa_tahirova.out' has not changed.
 (rerunfilecheck)             Checksum: 639BF368BCD079F414A00239ED55B2C9;2520.
  ) 
 Here is how much of TeX's memory you used:
- 17349 strings out of 474479
- 275232 string characters out of 5744062
+ 17348 strings out of 474479
+ 275198 string characters out of 5744062
  2014542 words of memory out of 5000000
- 39095 multiletter control sequences out of 15000+600000
- 635885 words of font info for 172 fonts, out of 8000000 for 9000
+ 39094 multiletter control sequences out of 15000+600000
+ 635639 words of font info for 170 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,1098b,1264s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on wa_tahirova.pdf (13 pages, 1169844 bytes).
+Output written on wa_tahirova.pdf (12 pages, 1170536 bytes).
 PDF statistics:
- 323 PDF objects out of 1000 (max. 8388607)
- 102 named destinations out of 1000 (max. 500000)
+ 327 PDF objects out of 1000 (max. 8388607)
+ 106 named destinations out of 1000 (max. 500000)
  44670 words of extra memory for PDF output out of 51595 (max. 10000000)
 
