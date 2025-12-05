@@ -108,11 +108,11 @@
 \section*{Kapitel 1}
 \section{Einleitung}
 
-Sprachmodelle werden in der Softwareentwicklung immer häufiger eingesetzt, um Entwickler bei Analyse- und Review-Aufgaben zu unterstützen. Ein wichtiger Anwendungsbereich ist die Bewertung von Bezeichnern im Quellcode. Klare und verständliche Namen vereinfachen die Wartung, während verschwommene Bezeichner zu Fehlern und erhöhtem Aufwand führen.
+Sprachmodelle werden in der Softwareentwicklung immer häufiger eingesetzt, um Entwickler bei Analyse- und Review-Aufgaben zu unterstützen. Ein wichtiger Anwendungsbereich ist die Bewertung von Bezeichnern im Quellcode. Klare und verständliche Namen vereinfachen die Wartung, während verschwommene Bezeichner zu Fehlern und erhöhtem Aufwand führen \cite{identifiernamesinfluencecodequality}.
 
-Diese Arbeit untersucht, wie zuverlässig Sprachmodelle Java-Bezeichner beurteilen können und in welchen Fällen menschliches Eingreifen weiterhin notwendig bleibt. Bewertet werden Verständlichkeit, Bedeutung, Einhaltung von Namenskonventionen und das Erkennen linguistischer Anti-Muster \cite{aitomaticprogramming}. Unter linguistischen Anti-Mustern versteht man systematische sprachliche Probleme in Bezeichnern, die Klarheit und Lesbarkeit beeinträchtigen.
+Diese Arbeit untersucht die Zuverlässigkeit moderner Sprachmodelle bei der Einschätzung von Java-Bezeichnern. Bewertet werden Verständlichkeit, semantische Angemessenheit, Einhaltung etablierter Namenskonventionen \cite{oracle} sowie die Erkennung linguistischer Anti-Muster \cite{arnaoudova2014,newfamlas}. Unter linguistischen Anti-Mustern versteht man systematische sprachliche Probleme in Bezeichnern, die Klarheit und Lesbarkeit beeinträchtigen.
 
-Das Ziel dieser Arbeit besteht darin, zu überprüfen, ob Sprachmodelle hilfreiche Hinweise zur Verbesserung von Bezeichnern liefern können. Dazu werden mehrere Prompt-Varianten entwickelt, getestet und schrittweise verbessert. Die Untersuchung erfolgt anhand von Java-Beispielen mit fehlerhaften sowie korrekten Bezeichnern, um sowohl korrekte Erkennungen als auch mögliche Fehlalarme („False Positives“) zu beurteilen.
+Ziel der Untersuchung ist es zu prüfen, ob Sprachmodelle hilfreiche und konsistente Hinweise zur Verbesserung von Bezeichnern liefern können. Hierfür werden mehrere Prompt-Varianten entwickelt und schrittweise verfeinert. Die Analyse erfolgt anhand von Java-Beispielen mit sowohl problematischen als auch korrekten Bezeichnern, um die Erkennung tatsächlicher Verstöße und das Auftreten unbegründeter Warnungen („False Positives“) zu bewerten. Frühere Arbeiten zeigen bereits, dass LLM-generierter Code zu semantischen Fehlbenennungen und strukturellen Qualitätsproblemen neigt \cite{llmsmells2025,llmmethodnames2025,aitomaticprogramming}.
 
 Die zentrale Forschungsfrage lautet:
 \begin{quote}
@@ -124,8 +124,8 @@ Die Arbeit ist in mehrere Kapitel gegliedert:
 \begin{enumerate}
     \item \textbf{Kapitel 1 (Einleitung).} Vorstellung des Themas, Zielsetzung, Relevanz von Sprachmodellen in der Softwareentwicklung sowie die Forschungsfrage.
     \item \textbf{Kapitel 2 (Theoretische Hintergrund).} Überblick über Java-Bezeichner, Namenskonventionen und linguistische Anti-Muster.
-    \item \textbf{Kapitel 3 (Methodik und Durchführung).} Beschreibung der Methode zur Untersuchung von Sprachmodellen, Erstellung von Java-Beispielen mit schlechten Bezeichnern und Bewertung der Ergebnisse. Eine automatische Pipeline wird nur theoretisch erwähnt.  
-    \item \textbf{Kapitel 4 (Evaluation).} Auswertung der Ergebnisse.  
+    \item \textbf{Kapitel 3 (Methodik und Durchführung).} Aufbau der Untersuchung, Entwicklung der Prompt-Varianten sowie Beschreibung der verwendeten Java-Beispiele. \textit{Eine automatische Pipeline wird nur theoretisch erwähnt.}  
+    \item \textbf{Kapitel 4 (Evaluation).} Auswertung der Ergebnisse und systematische Bewertung der Antworten der Sprachmodelle. 
     \item \textbf{Kapitel 5 (Diskussion und Schluss).} Grenzen der Methode, Verbesserungsideen, Ausblick auf weitere Forschung.
     
 \end{enumerate}

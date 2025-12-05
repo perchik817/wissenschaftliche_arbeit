@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.14)  30 NOV 2025 00:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.14)  5 DEC 2025 23:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -699,17 +699,17 @@ Package rerunfilecheck Info: File `wa_tahirova.out' has not changed.
 (rerunfilecheck)             Checksum: 639BF368BCD079F414A00239ED55B2C9;2520.
  ) 
 Here is how much of TeX's memory you used:
- 17343 strings out of 474479
- 275166 string characters out of 5744062
+ 17349 strings out of 474479
+ 275232 string characters out of 5744062
  2014542 words of memory out of 5000000
  39095 multiletter control sequences out of 15000+600000
- 635606 words of font info for 169 fonts, out of 8000000 for 9000
+ 635885 words of font info for 172 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,1098b,1264s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on wa_tahirova.pdf (13 pages, 1167800 bytes).
+Output written on wa_tahirova.pdf (13 pages, 1169844 bytes).
 PDF statistics:
- 317 PDF objects out of 1000 (max. 8388607)
+ 323 PDF objects out of 1000 (max. 8388607)
  102 named destinations out of 1000 (max. 500000)
  44670 words of extra memory for PDF output out of 51595 (max. 10000000)
 
