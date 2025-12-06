@@ -9,12 +9,14 @@
 \contentsline {subsection}{\numberline {3.1}Auswahl der Sprachmodelle}{7}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Erstellung der Test-Beispiele}{7}{subsection.3.2}%
 \contentsline {subsubsection}{\numberline {3.2.1}Kategorien nach Arnaoudova}{7}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Beispiel-Code}{8}{subsubsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.3}Prompt-Strategien und Iteration}{9}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.2.2}Beispiel-Code}{7}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Korrekte Beispiele für False-Positive-Tests}{8}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}Hinweis-Strategien und Iteration}{8}{subsection.3.3}%
 \contentsline {paragraph}{V1 (Zero-Shot)}{9}{section*.5}%
 \contentsline {paragraph}{V2 (Few-Shot)}{9}{section*.6}%
-\contentsline {paragraph}{V3 (Regeln)}{9}{section*.7}%
-\contentsline {paragraph}{V4 (Erklärung)}{10}{section*.8}%
-\contentsline {subsection}{\numberline {3.4}Durchführung der Tests}{10}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Bewertungskriterien}{10}{subsection.3.5}%
+\contentsline {paragraph}{V3 (Kontextreicher Hinweis)}{9}{section*.7}%
+\contentsline {paragraph}{V4 (Erklärung der linguistischen Anti-Muster)}{9}{section*.8}%
+\contentsline {subsection}{\numberline {3.4}Iteratives Vorgehen}{9}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Durchführung der Tests}{10}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Bewertungskriterien}{10}{subsection.3.6}%
 \contentsline {section}{Literatur}{11}{section*.9}%

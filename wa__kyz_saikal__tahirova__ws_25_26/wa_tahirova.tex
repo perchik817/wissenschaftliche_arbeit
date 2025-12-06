@@ -89,10 +89,10 @@
 
     \begin{tabular}{rl}
         Vorgelegt von: & Kyz Saikal Tahirova \\
-        Matrikel-Nr.:  & 66110                 \\
-        Studiengang:   & Informatik            \\
-        Betreuer:      & Prof.\ Dr.\ Laue      \\
-        Abgabetermin:  & xx.xx.2025            \\
+        Matrikel-Nr.:  & 66110               \\
+        Studiengang:   & Informatik          \\
+        Betreuer:      & Prof.\ Dr.\ Laue    \\
+        Abgabetermin:  & xx.xx.2025          \\
     \end{tabular}
 \end{titlepage}
 
@@ -108,15 +108,34 @@
 \section*{Kapitel 1}
 \section{Einleitung}
 
-Sprachmodelle werden in der Softwareentwicklung immer häufiger eingesetzt, um Entwickler bei Analyse- und Review-Aufgaben zu unterstützen. Ein wichtiger Anwendungsbereich ist die Bewertung von Bezeichnern im Quellcode. Klare und verständliche Namen vereinfachen die Wartung, während verschwommene Bezeichner zu Fehlern und erhöhtem Aufwand führen \cite{identifiernamesinfluencecodequality}.
+Sprachmodelle werden in der Softwareentwicklung immer häufiger eingesetzt, um
+Entwickler bei Analyse- und Review-Aufgaben zu unterstützen. Ein wichtiger
+Anwendungsbereich ist die Bewertung von Bezeichnern im Quellcode. Klare und
+verständliche Namen vereinfachen die Wartung, während verschwommene Bezeichner
+zu Fehlern und erhöhtem Aufwand führen
+\cite{identifiernamesinfluencecodequality}.
 
-Diese Arbeit untersucht die Zuverlässigkeit moderner Sprachmodelle bei der Einschätzung von Java-Bezeichnern. Bewertet werden Verständlichkeit, semantische Angemessenheit, Einhaltung etablierter Namenskonventionen \cite{oracle} sowie die Erkennung linguistischer Anti-Muster \cite{arnaoudova2014}. Unter linguistischen Anti-Mustern versteht man systematische sprachliche Probleme in Bezeichnern, die Klarheit und Lesbarkeit beeinträchtigen.
+Diese Arbeit untersucht die Zuverlässigkeit moderner Sprachmodelle bei der
+Einschätzung von Java-Bezeichnern. Bewertet werden Verständlichkeit,
+semantische Angemessenheit, Einhaltung etablierter Namenskonventionen
+\cite{oracle} sowie die Erkennung linguistischer Anti-Muster
+\cite{arnaoudova2014}. Unter linguistischen Anti-Mustern versteht man
+systematische sprachliche Probleme in Bezeichnern, die Klarheit und Lesbarkeit
+beeinträchtigen.
 
-Ziel der Untersuchung ist es zu prüfen, ob Sprachmodelle hilfreiche und konsistente Hinweise zur Verbesserung von Bezeichnern liefern können. Hierfür werden mehrere Prompt-Varianten entwickelt und schrittweise verfeinert. Die Analyse erfolgt anhand von Java-Beispielen mit sowohl problematischen als auch korrekten Bezeichnern, um die Erkennung tatsächlicher Verstöße und das Auftreten unbegründeter Warnungen („False Positives“) zu bewerten. Frühere Arbeiten zeigen bereits, dass LLM-generierter Code zu semantischen Fehlbenennungen und strukturellen Qualitätsproblemen neigt \cite{llmsmells2025,llmmethodnames2025,aitomaticprogramming}.
+Ziel der Untersuchung ist es zu prüfen, ob Sprachmodelle hilfreiche und
+konsistente Hinweise zur Verbesserung von Bezeichnern liefern können. Hierfür
+werden mehrere Hinweis-Varianten entwickelt und schrittweise verfeinert. Die
+Analyse erfolgt anhand von Java-Beispielen mit sowohl problematischen als auch
+korrekten Bezeichnern, um die Erkennung tatsächlicher Verstöße und das
+Auftreten unbegründeter Warnungen („False Positives“) zu bewerten. Frühere
+Arbeiten zeigen bereits, dass LLM-generierter Code zu semantischen
+Fehlbenennungen und strukturellen Qualitätsproblemen neigt
+\cite{llmsmells2025,llmmethodnames2025,aitomaticprogramming}.
 
 Die zentrale Forschungsfrage lautet:
 \begin{quote}
-Wie zuverlässig können Sprachmodelle Java-Bezeichner hinsichtlich Verständlichkeit, Bedeutung, Konventionen und linguistischer Anti-Muster bewerten?
+    Wie zuverlässig können Sprachmodelle Java-Bezeichner hinsichtlich Verständlichkeit, Bedeutung, Konventionen und linguistischer Anti-Muster bewerten?
 \end{quote}
 
 Die Arbeit ist in mehrere Kapitel gegliedert:
@@ -124,27 +143,43 @@ Die Arbeit ist in mehrere Kapitel gegliedert:
 \begin{enumerate}
     \item \textbf{Kapitel 1 (Einleitung).} Vorstellung des Themas, Zielsetzung, Relevanz von Sprachmodellen in der Softwareentwicklung sowie die Forschungsfrage.
     \item \textbf{Kapitel 2 (Theoretische Hintergrund).} Überblick über Java-Bezeichner, Namenskonventionen und linguistische Anti-Muster.
-    \item \textbf{Kapitel 3 (Methodik und Durchführung).} Aufbau der Untersuchung, Entwicklung der Prompt-Varianten sowie Beschreibung der verwendeten Java-Beispiele. \textit{Eine automatische Pipeline wird nur theoretisch erwähnt.}  
-    \item \textbf{Kapitel 4 (Evaluation).} Auswertung der Ergebnisse und systematische Bewertung der Antworten der Sprachmodelle. 
+    \item \textbf{Kapitel 3 (Methodik und Durchführung).} Aufbau der Untersuchung, Entwicklung der Hinweis-Varianten sowie Beschreibung der verwendeten Java-Beispiele. \textit{Eine automatische Pipeline wird nur theoretisch erwähnt.}
+    \item \textbf{Kapitel 4 (Evaluation).} Auswertung der Ergebnisse und systematische Bewertung der Antworten der Sprachmodelle.
     \item \textbf{Kapitel 5 (Diskussion und Schluss).} Grenzen der Methode, Verbesserungsideen, Ausblick auf weitere Forschung.
-    
+
 \end{enumerate}
 
-Hinweis: In dieser ersten Version der Arbeit wird der automatische Pipeline-Ansatz nur theoretisch erläutert, da die Umsetzung zum jetzigen Zeitpunkt noch nicht erfolgt ist. In einer späteren Version könnte diese Funktion ergänzt werden, um den gesamten Prozess der Bezeichnerverbesserung automatisch abzubilden.
-
+Hinweis: In dieser ersten Version der Arbeit wird der automatische
+Pipeline-Ansatz nur theoretisch erläutert, da die Umsetzung zum jetzigen
+Zeitpunkt noch nicht erfolgt ist. In einer späteren Version könnte diese
+Funktion ergänzt werden, um den gesamten Prozess der Bezeichnerverbesserung
+automatisch abzubilden.
 
 \newpage
 \section*{Kapitel 2}
 \section{Theoretische Hintergrund}
-Dieser Abschnitt bietet einen Überblick über Java-Bezeichner, etablierte Namenskonventionen sowie linguistische Anti-Muster, die als Grundlage für die spätere Analyse dienen. Die Relevanz dieser Konzepte ergibt sich aus empirischen Studien, die zeigen, dass Bezeichner einen erheblichen Einfluss auf die Verständlichkeit und Qualität von Quellcode haben \cite{identifiernamesinfluencecodequality}.
+Dieser Abschnitt bietet einen Überblick über Java-Bezeichner, etablierte
+Namenskonventionen sowie linguistische Anti-Muster, die als Grundlage für die
+spätere Analyse dienen. Die Relevanz dieser Konzepte ergibt sich aus
+empirischen Studien, die zeigen, dass Bezeichner einen erheblichen Einfluss auf
+die Verständlichkeit und Qualität von Quellcode haben
+\cite{identifiernamesinfluencecodequality}.
 
 \subsection{Java-Bezeichner}
 
-Java-Bezeichner sind die Namen von Variablen, Methoden, Klassen, Schnittstellen, Konstanten und Paketen. Sie sollen die Funktion und den Zweck des Codes verständlich machen. Die Studie von Butler et al. \cite{identifiernamesinfluencecodequality} zeigt, dass unklare, inkonsistente oder mehrdeutige Namen mit geringer Wartbarkeit, erhöhter Komplexität und häufigeren Warnungen in statischen Analysewerkzeugen verbunden sind. Im Gegensatz dazu können klare Namen ein einfacher Indikator für eine hohe Qualität des Quellcodes sein.
+Java-Bezeichner sind die Namen von Variablen, Methoden, Klassen,
+Schnittstellen, Konstanten und Paketen. Sie sollen die Funktion und den Zweck
+des Codes verständlich machen. Die Studie von Butler et al.
+\cite{identifiernamesinfluencecodequality} zeigt, dass unklare, inkonsistente
+oder mehrdeutige Namen mit geringer Wartbarkeit, erhöhter Komplexität und
+häufigeren Warnungen in statischen Analysewerkzeugen verbunden sind. Im
+Gegensatz dazu können klare Namen ein einfacher Indikator für eine hohe
+Qualität des Quellcodes sein.
 
 \subsection{Namenskonventionen in Java}
 
-Die offiziellen Java-Konventionen \cite{oracle} empfehlen konsistente Schreibweisen und semantisch präzise Nomenphrasen. Dazu gehören:
+Die offiziellen Java-Konventionen \cite{oracle} empfehlen konsistente
+Schreibweisen und semantisch präzise Nomenphrasen. Dazu gehören:
 
 \begin{itemize}
     \item \textbf{Klassen und Schnittstellen.} Großschreibung jedes Wortanfangs (CamelCase), z.\,B. \texttt{CustomerAccount}, \texttt{ PaymentProcessor}. Allgemein sollten aussagekräftige Nomenphrasen verwendet werden, etwa \texttt{EnrolledStudents} oder \texttt{ NumberOfValidCreditCards}.
@@ -152,46 +187,54 @@ Die offiziellen Java-Konventionen \cite{oracle} empfehlen konsistente Schreibwei
     \item \textbf{Attribute/Variablen.} camelCase und präzise Bedeutung, z.\,B. \texttt{userName}, \texttt{itemCount}.
 \end{itemize}
 
-Ein Name soll beschreiben, was ein Element speichert oder ausführt. Unklare Begriffe wie \texttt{tmp}, \texttt{data} oder \texttt{handle} lassen zu viel Interpretationsspielraum und führen schnell zu Missverständnissen.
+Ein Name soll beschreiben, was ein Element speichert oder ausführt. Unklare
+Begriffe wie \texttt{tmp}, \texttt{data} oder \texttt{handle} lassen zu viel
+Interpretationsspielraum und führen schnell zu Missverständnissen.
 
 \subsection{Linguistische Anti-Muster}
 
-Linguistische Anti-Muster (Linguistic Anti-Patterns) wurden erstmals systematisch von Arnaoudova et al. beschrieben \cite{arnaoudova2014}. Sie bezeichnen wiederkehrende sprachliche Probleme in Bezeichnern, Kommentaren oder Signaturen, bei denen Name und tatsächliches Verhalten nicht übereinstimmen. Dies führt zu kognitiven Brüchen und erschwert das Programmverständnis.
+Linguistische Anti-Muster (Linguistic Anti-Patterns) wurden erstmals
+systematisch von Arnaoudova et al. beschrieben \cite{arnaoudova2014}. Sie
+bezeichnen wiederkehrende sprachliche Probleme in Bezeichnern, Kommentaren oder
+Signaturen, bei denen Name und tatsächliches Verhalten nicht übereinstimmen.
+Dies führt zu kognitiven Brüchen und erschwert das Programmverständnis.
 
 Die Anti-Muster lassen sich in zwei Gruppen einteilen.
 
 Methodenbezogene Anti-Muster:
 
 \begin{enumerate}
-    \item \textbf{Kategorie A: „tut mehr als der Name sagt“}  
-    Die Methode führt zusätzliche Aktionen aus.  
-    Beispiel: \texttt{getUser()} validiert oder speichert Daten.
+    \item \textbf{Kategorie A: „tut mehr als der Name sagt“}
+          Die Methode führt zusätzliche Aktionen aus.
+          Beispiel: \texttt{getUser()} validiert oder speichert Daten.
 
-    \item \textbf{Kategorie B: „sagt mehr als sie tut“}  
-    Der Name verspricht Funktionalität, die nicht implementiert ist.  
-    Beispiel: \texttt{validate()} besitzt den Rückgabetyp \texttt{void}.
+    \item \textbf{Kategorie B: „sagt mehr als sie tut“}
+          Der Name verspricht Funktionalität, die nicht implementiert ist.
+          Beispiel: \texttt{validate()} besitzt den Rückgabetyp \texttt{void}.
 
-    \item \textbf{Kategorie C: „tut das Gegenteil“}  
-    Name und Verhalten widersprechen sich.  
-    Beispiel: \texttt{disable()} erzeugt einen \texttt{EnableState}.
+    \item \textbf{Kategorie C: „tut das Gegenteil“}
+          Name und Verhalten widersprechen sich.
+          Beispiel: \texttt{disable()} erzeugt einen \texttt{EnableState}.
 \end{enumerate}
 
 Attributbezogene Anti-Muster:
 \begin{enumerate}
     \setcounter{enumi}{3}
-    \item \textbf{Kategorie D: enthält mehr als der Name sagt}  
-    Beispiel: ein als Prädikat benannter Bezeichner, dessen Typ jedoch kein \texttt{boolean} ist.
+    \item \textbf{Kategorie D: enthält mehr als der Name sagt}
+          Beispiel: ein als Prädikat benannter Bezeichner, dessen Typ jedoch kein \texttt{boolean} ist.
 
-    \item \textbf{Kategorie E: Name sagt mehr als enthalten ist}  
-    Beispiel: \texttt{users} als Name für ein einzelnes Objekt.
+    \item \textbf{Kategorie E: Name sagt mehr als enthalten ist}
+          Beispiel: \texttt{users} als Name für ein einzelnes Objekt.
 
-    \item \textbf{Kategorie F: Name und Inhalt widersprechen sich}  
-    Beispiel: Attributname und Typ bilden Antonyme.
+    \item \textbf{Kategorie F: Name und Inhalt widersprechen sich}
+          Beispiel: Attributname und Typ bilden Antonyme.
 \end{enumerate}
 
 \subsection{Große Sprachmodelle (LLMs)}
 
-Sprachmodelle werden zunehmend zur Bewertung von Quellcode verwendet \cite{aitomaticprogramming}. Studien zeigen jedoch, dass LLMs zwar Muster erkennen können, aber gleichzeitig zu einer oberflächlichen Analyse neigen, insbesondere wenn nur Identifikatoren geändert oder semantisch irrelevante Änderungen vorgenommen werden \cite{llmmaintainablereliable2025}. Darüber hinaus zeigen mehrere Studien eine hohe Rate an Fehlalarmen („False Positives”) und ungenauen Bewertungen \cite{llmsmells2025, llmdetection2025}.
+Sprachmodelle werden zunehmend zur Bewertung von Quellcode verwendet
+\cite{aitomaticprogramming}. Studien zeigen jedoch, dass LLMs zwar Muster
+erkennen können, aber gleichzeitig zu einer oberflächlichen Analyse neigen, insbesondere wenn nur Identifikatoren geändert oder semantisch irrelevante Änderungen vorgenommen werden \cite{llmmaintainablereliable2025}. Darüber hinaus zeigen mehrere Studien eine hohe Rate an Fehlalarmen („False Positives”) und ungenauen Bewertungen \cite{llmsmells2025, llmdetection2025}.
 
 In dieser Arbeit wird untersucht, wie zuverlässig Sprachmodelle Java-Bezeichner bewerten können und in welchen Fällen weiterhin menschliches Eingreifen erforderlich ist.
 
@@ -199,11 +242,11 @@ In dieser Arbeit wird untersucht, wie zuverlässig Sprachmodelle Java-Bezeichner
 \section*{Kapitel 3}
 \section{Methodik und Durchführung}
 
-Dieses Kapitel erklärt die Auswahl der Sprachmodelle, die Erstellung von Test-Beispielen nach den Kategorien von Arnaoudova et al. \cite{arnaoudova2014} und die Bewertungskriterien. Das Ziel ist, systematisch zu prüfen, wie gut LLMs linguistische Anti-Patterns in Java-Code erkennen und verbessern können.
-
 \subsection{Auswahl der Sprachmodelle}
 
-Für die Untersuchung wurden drei verschiedene Modelle über HAWKI\footnote{HAWKI dient als Schnittstelle zu OpenAI GPT-4o, Meta LLaMA 3.1 70B Instruct, Alibaba Qwen 2.5 72B Instruct Modellen} abgefragt:
+Für die Untersuchung wurden drei verschiedene Modelle über HAWKI\footnote{HAWKI
+    dient als Schnittstelle zu OpenAI GPT-4o, Meta LLaMA 3.1 70B Instruct, Alibaba
+    Qwen 2.5 72B Instruct Modellen} abgefragt:
 
 \begin{itemize}
     \item OpenAI GPT-4o,
@@ -215,65 +258,20 @@ Für die Untersuchung wurden drei verschiedene Modelle über HAWKI\footnote{HAWK
 
 \subsubsection{Kategorien nach Arnaoudova}
 
-Die linguistischen Anti-Muster nach Arnaoudova et al. \cite{arnaoudova2014} werden in zwei Gruppen unterteilt: methodenbezogene und attributbezogene Muster. Jede Kategorie markiert ein typisches semantisches Problem zwischen Bezeichner und Implementierung. Jedes Muster wurde kurz erklärt und durch ein Beispiel veranschaulicht. Insgesamt wurden 10–15 fehlerhafte Codebeispiele und 5–7 korrekte Beispiele erstellt.
+Basierend auf Arnaoudova et al. \cite{arnaoudova2014} wurden zwei Arten von
+Beispielen erstellt:
 
-\textbf{Methoden-bezogene Anti-Muster (A, B, C):}
+\begin{itemize}
+    \item \textbf{10--15 Beispiele mit linguistischen Anti-Mustern} (alle Kategorien A–F),
+    \item \textbf{5--7 korrekt benannte Beispiele} ohne Anti-Muster, um unbegründete Fehlalarme zu erkennen.
+\end{itemize}
 
-\begin{enumerate}
-    \item \textbf{Kategorie A} (\textit{does more than it says}) -- die Methode macht mehr, als der Name verspricht.
-    
-    \begin{itemize}
-        \item \textbf{A1:} Methode mit \texttt{get}, die mehr macht als nur zurückgeben
-        \item \textbf{A2:} Methodenname ist Prädikat, aber Rückgabetyp ist nicht Boolean
-        \item \textbf{A3:} Methode mit \texttt{set}, die einen Wert zurückgibt
-        \item \textbf{A4:} Methodentyp deutet auf mehrere Objekte, Name auf einzelnes
-    \end{itemize}
-    
-    \item \textbf{Kategorie B} (\textit{says more than it does}) -- der Name verspricht mehr, als die Methode tut. 
-    
-    \begin{itemize}
-        \item \textbf{B1:} Kommentar dokumentiert nicht implementierte Bedingung
-        \item \textbf{B2:} Validierungsmethode gibt nichts zurück
-        \item \textbf{B3:} Name deutet Rückgabe an, aber Rückgabetyp ist \texttt{void}
-        \item \textbf{B4:} Name ist Prädikat, aber nichts wird zurückgegeben
-    \end{itemize}
-    
-    \item \textbf{Kategorie C} (\textit{does the opposite}) -- die Methode macht das Gegenteil vom Namen.
-    
-    \begin{itemize}
-        \item \textbf{C1:} Name und Rückgabetyp verwenden Antonyme (Gegensätze)
-        \item \textbf{C2:} Kommentar und Signatur verwenden Antonyme
-    \end{itemize}
-\end{enumerate}
-
-\textbf{Attribut-bezogene Anti-Patterns (D, E, F):}
-
-\begin{enumerate}
-    \setcounter{enumi}{3}
-    \item \textbf{Kategorie D} (\textit{contains more than it says}) -- das Attribut enthält mehr, als der Name aussagt. 
-    
-    \begin{itemize}
-        \item \textbf{D1:} Attributname deutet Boolean an, aber Typ ist anders
-        \item \textbf{D2:} Attributname ist Prädikat, aber Typ ist nicht Boolean
-    \end{itemize}
-    
-    \item \textbf{Kategorie E} (\textit{says more than it contains}) -- der Name sagt mehr, als das Attribut enthält. 
-    
-    \begin{itemize}
-        \item \textbf{E1:} Attributtyp deutet auf einzelnes Objekt, Name auf mehrere
-    \end{itemize}
-    
-    \item \textbf{Kategorie F} (\textit{says the opposite}) -- Name und Inhalt sind gegensätzlich. 
-    
-    \begin{itemize}
-        \item \textbf{F1:} Attributname und Typ verwenden Antonyme
-        \item \textbf{F2:} Attributkommentar und Signatur verwenden Antonyme
-    \end{itemize}
-\end{enumerate}
+Jede Kategorie wurde kurz erklärt und durch ein prägnantes Beispiel
+illustriert.
 
 \subsubsection{Beispiel-Code}
 
-\textbf{Kategorie A1.} Methode mit \texttt{get} macht mehr als zurückgeben:
+\textit{Kategorie A1 – „tut mehr als der Name sagt“.} Methode mit \texttt{get} macht mehr als zurückgeben:
 
 \begin{lstlisting}
 public class UserManager {
@@ -286,8 +284,7 @@ public class UserManager {
 }
 \end{lstlisting}
 
-
-\textbf{Kategorie B3.} Name deutet Rückgabe an, aber \texttt{void}:
+\textit{Kategorie B3.} Name deutet Rückgabe an, aber \texttt{void}:
 
 \begin{lstlisting}
 public class Calculator {
@@ -297,8 +294,7 @@ public class Calculator {
 }
 \end{lstlisting}
 
-
-\textbf{Kategorie C1.} Name und Typ sind Gegensätze:
+\textit{Kategorie C1.} Widerspruch zwischen Name und Rückgabewert:
 
 \begin{lstlisting}
 public class Config {
@@ -309,145 +305,178 @@ public class Config {
 }
 \end{lstlisting}
 
-
-\textbf{Kategorie D2.} Prädikatname, Typ nicht Boolean:
+\textit{Kategorie D2.} Prädikatname, Typ nicht Boolean:
 \begin{lstlisting}
 public class Payment {
     private int isActive; // Typ passt nicht zum Prädikat
 }
 \end{lstlisting}
 
-\textbf{Kategorie E1.} Pluralname bei singular Typ:
+\textit{Kategorie E1.} Pluralname bei singular Typ:
 \begin{lstlisting}
 public class Order {
     private Product products; // Name suggeriert Mehrzahl
 }
 \end{lstlisting}
 
-\textbf{Kategorie F1.} Name und Typ im Gegensatz:
-\begin{lstlisting}[language=Java]
-public class Metrics {
-    private FailureCounter success; // Erfolg vs. Fehler
+\textit{Kategorie F1.} Name und Typ im Gegensatz:
+\begin{lstlisting}
+public class Mode {
+    private boolean disabledState = true;
 }
 \end{lstlisting}
 
+\subsubsection{Korrekte Beispiele für False-Positive-Tests}
 
-\subsection{Prompt-Strategien und Iteration}
-Die Prompts wurden iterativ weiterentwickelt (V1 → V2 → V3 → V4). Ziel jeder Iteration war die Verbesserung der Hinweisqualität (automatisches Review) und die Reduzierung von False Positives. V4 enthält zudem eine knappe Definition der linguistischen Anti-Muster, damit Modelle diese Kategorien gezielt erkennen.
+\begin{lstlisting}
+public class StudentRecord {
+    private int enrolledStudents;
+}
+\end{lstlisting}
 
-\paragraph{V1 (Zero-Shot)}  
-\enquote{Analysieren Sie den folgenden Java-Code. Identifizieren Sie mögliche Benennungs- oder Struktur-Anti-Muster.}
+Diese Beispiele enthalten keine Anti-Muster. Ein korrektes Modell darf hier \emph{keine} Warnung ausgeben \cite{llmdetection2025}.
 
-\paragraph{V2 (Few-Shot)}  
-Positive Beispiele für korrekte Bezeichner werden vorangestellt (z.\,B. \enquote{EnrolledStudents}, \enquote{numberOfValidCreditCards}).
+\subsection{Hinweis-Strategien und Iteration}
+Die Hinweise wurden iterativ nach Versionen überarbeitet: Version 1 (V1) → Version 2 (V2) → Version 3 (V3) → Version 4 (V4). Das Ziel jeder Iteration war die Qualitätssteigerung der Hinweise (automatischer Überblick) und die Reduzierung der Anzahl von Fehlalarmen. V4 enthält auch eine kurze Definition linguistischer Anti-Muster, damit Modelle diese Kategorien zielorientiert erkennen können.
 
-\paragraph{V3 (Regeln)}  
-Kurzregeln zu CamelCase, Verben für Methoden, Nominalphrasen für Klassen.
+\paragraph{V1 (Zero-Shot)}
+\begin{verbatim}
+    Analysieren Sie die Bezeichner im folgenden Java-Code
+    und identifizieren Sie mögliche Benennungs- oder Struktur-Anti-Muster.
+\end{verbatim}
 
-\paragraph{V4 (Erklärung)}  
-Kurze Definitionen der Kategorien A–F (linguistische Anti-Muster) werden vorangestellt; die Antwort soll knapp Hinweise für Programmierer liefern, keine automatische Code-Änderung.
+\paragraph{V2 (Few-Shot)}
+\begin{verbatim}
+    Beispiele für gute Bezeichner:
+    - Klassen: CustomerAccount, PaymentProcessor
+    - Methoden: calculateTotal(), validateInput()
+    - Attribute: userName, itemCount
+    Analysieren Sie nun folgenden Code:
+    [CODE]
+\end{verbatim}
+
+\paragraph{V3 (Kontextreicher Hinweis)}
+\begin{verbatim}
+    Analysieren Sie den Code unter Berücksichtigung von:
+    1) Java-Konventionen (Oracle)
+    2) Konsistenz zwischen Name, Typ und Verhalten
+    3) Verständlichkeit und Bedeutung
+    Geben Sie Hinweise für Entwickler.
+\end{verbatim}
+
+\paragraph{V4 (Erklärung der linguistischen Anti-Muster)}
+\mbox{}\\
+Da unklar ist, ob Modelle linguistische Anti-Muster kennen \cite{arnaoudova2014}, wird in dieser Version eine kurze Erklärung ergänzt.
+
+\begin{verbatim}
+    Linguistische Anti-Muster:
+    A: Methode tut mehr als Name sagt
+    B: Name verspricht mehr als implementiert
+    C: Name und Verhalten sind gegensätzlich
+    D-F: Inkonsistenzen bei Attributnamen
+    Analysieren Sie nun den Code:
+    [CODE]
+\end{verbatim}
+
+\subsection{Iteratives Vorgehen}
+
+Der Hinweis wurde iterativ verbessert:
+
+\begin{enumerate}
+    \item erste Tests mit Version 1,
+    \item Analyse der Fehlbewertungen,
+    \item Erweiterung um Beispiele (Version 2),
+    \item Hinzufügen von Kontextregeln (Version 3),
+    \item Ergänzung der Definitionen von Anti-Mustern (Version 4).
+\end{enumerate}
+
+Dieses Vorgehen folgt aktuellen Forschungsergebnissen, die die Bedeutung von Hinweis-Gestaltung und Iteration bei der Codeanalyse hervorheben \cite{llmmethodnames2025, aitomaticprogramming}.
 
 \subsection{Durchführung der Tests}
 
-Für jedes der 10–15 fehlerhaften Beispiele und für jedes der 5–7 korrekten Beispiele wurde jede Prompt-Version an alle drei Modelle über HAWKI gesendet. Jede Modellantwort wurde protokolliert und anonymisiert abgespeichert. Der Ablauf:
-
-\begin{enumerate}
-    \item Beispiel auswählen und Kategorie zuordnen.
-    \item Prompt-Version wählen.
-    \item Anfrage an Modell via HAWKI senden.
-    \item Ausgabe speichern.
-    \item Bewertung durchführen.
-\end{enumerate}
-
+Für jedes der 10–15 fehlerhaften Beispiele und für jedes der 5–7 korrekten Beispiele wurde jede Hinweis-Version an alle drei Modelle über HAWKI gesendet. Jede Modellantwort wurde protokolliert und anonymisiert abgespeichert.
 
 \subsection{Bewertungskriterien}
 
 Jedes Kriterium wird mit 1-5 Punkten bewertet.
 
 \begin{enumerate}
-    \item \textbf{Anti-Pattern-Erkennung.} Wurde das Problem erkannt?
-    
-    \item \textbf{Korrekturqualität.} Ist der vorgeschlagene neue Name besser? Löst er das Anti-Pattern?
-    
-    \item \textbf{Konventions-Konformität.} Folgt der neue Code Java-Standards? 
-    
-    \item \textbf{Semantische Klarheit.} Sind die neuen Namen verständlich? 
-    
+    \item \textbf{Anti-Muster-Erkennung.} Wurde das Problem erkannt?
+
+    \item \textbf{Korrekturqualität.} Ist der vorgeschlagene neue Name besser? Löst er das Anti-Muster?
+
+    \item \textbf{Konventions-Konformität.} Folgt der neue Code Java-Standards?
+
+    \item \textbf{Semantische Klarheit.} Sind die neuen Namen verständlich?
+
     \item \textbf{Konsistenz.} Passt alles zusammen?
 \end{enumerate}
 
-
-\textbf{Spezielle Bewertung nach Kategorien.} Für jede Kategorie A-F wurden spezifische Fragen gestellt:
-
-\begin{itemize}
-    \item Kategorie A: Wurde die Extra-Funktionalität dokumentiert oder die Methode umbenannt?
-    \item Kategorie B: Wurde der fehlende Rückgabewert hinzugefügt oder der Name korrigiert?
-    \item Kategorie C: Wurden die widersprüchlichen Begriffe harmonisiert?
-    \item Kategorie D-F: Wurden Attributnamen und Typen in Einklang gebracht?
-\end{itemize}
+Zusätzlich wurden Fehlalarme („False Positives“) gesondert untersucht, da aktuelle Forschung zeigt, dass sie bei LLM-basierten Analysen häufig auftreten \cite{llmdetection2025, llmmaintainablereliable2025}.
 
 
 
-Das Bewusstsein für linguistische Anti-Patterns hilft, Missverständnisse zu vermeiden und die Lesbarkeit, Verständlichkeit und Wartbarkeit von Software nachhaltig zu verbessern.
+
+Das Bewusstsein für linguistische Anti-Muster hilft, Missverständnisse zu
+vermeiden und die Lesbarkeit, Verständlichkeit und Wartbarkeit von Software nachhaltig zu verbessern.
 
 % --- Literaturverzeichnis ---
 \clearpage
 \begin{thebibliography}{99}
 
-\bibitem{arnaoudova2014}
-Arnaoudova, V.; Di Penta, M.; Antoniol, G. (2014):
-\textit{Linguistic Anti-Patterns: What They Are and How Developers Perceive Them.}
-Empirical Software Engineering.
-Verfügbar unter: \url{https://www.veneraarnaoudova.ca/wp-content/uploads/2014/10/2014-EMSE-Arnaodova-et-al-Perception-LAs.pdf},
-abgerufen am 14.10.2025.
+    \bibitem{arnaoudova2014}
+    Arnaoudova, V.; Di Penta, M.; Antoniol, G. (2014):
+    \textit{Linguistic Anti-Patterns: What They Are and How Developers Perceive Them.}
+    Empirical Software Engineering.
+    Verfügbar unter: \url{https://www.veneraarnaoudova.ca/wp-content/uploads/2014/10/2014-EMSE-Arnaodova-et-al-Perception-LAs.pdf},
+    abgerufen am 14.10.2025.
 
-\bibitem{oracle}
-Oracle Corporation:
-\textit{Naming Conventions.}
-Verfügbar unter: \url{https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html},
-abgerufen am 14.10.2025.
+    \bibitem{oracle}
+    Oracle Corporation:
+    \textit{Naming Conventions.}
+    Verfügbar unter: \url{https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html},
+    abgerufen am 14.10.2025.
 
-\bibitem{aitomaticprogramming}
-Lyu, M. R.; Rajan, B.; Roychoudhury, A.; Tan, S. H.; Thummalapenta, P.:
-\textit{Automatic Programming: Large Language Models and Beyond.}
-Verfügbar unter: \url{https://dl.acm.org/doi/pdf/10.1145/3708519},
-abgerufen am 15.11.2025.
+    \bibitem{aitomaticprogramming}
+    Lyu, M. R.; Rajan, B.; Roychoudhury, A.; Tan, S. H.; Thummalapenta, P.:
+    \textit{Automatic Programming: Large Language Models and Beyond.}
+    Verfügbar unter: \url{https://dl.acm.org/doi/pdf/10.1145/3708519},
+    abgerufen am 15.11.2025.
 
-\bibitem{identifiernamesinfluencecodequality}
-Butler, S.; Wermelinger, M.; Yu, Y.; Sharp, H. (2010):
-\textit{Exploring the Influence of Identifier Names on Code Quality: An Empirical Study.}
-In: Proceedings of the 14th European Conference on Software Maintenance and Reengineering (CSMR), 15--18 March 2010, Madrid, Spain.
-Verfügbar unter: \url{https://www.researchgate.net/publication/42799923_Exploring_the_Influence_of_Identifier_Names_on_Code_Quality_An_Empirical_Study},
-abgerufen am 26.11.2025.
+    \bibitem{identifiernamesinfluencecodequality}
+    Butler, S.; Wermelinger, M.; Yu, Y.; Sharp, H. (2010):
+    \textit{Exploring the Influence of Identifier Names on Code Quality: An Empirical Study.}
+    In: Proceedings of the 14th European Conference on Software Maintenance and Reengineering (CSMR), 15--18 March 2010, Madrid, Spain.
+    Verfügbar unter: \url{https://www.researchgate.net/publication/42799923_Exploring_the_Influence_of_Identifier_Names_on_Code_Quality_An_Empirical_Study},
+    abgerufen am 26.11.2025.
 
-\bibitem{llmsmells2025}
-Ghosh Paul, D.; Zhu, H.; Bayley, I. (2025):
-\textit{Investigating the Smells of LLM Generated Code.}
-School of Engineering, Computing and Mathematics, Oxford Brookes University, October 2025.
-Verfügbar unter: \url{https://www.researchgate.net/publication/396223444_Investigating_The_Smells_of_LLM_Generated_Code},
-abgerufen am 26.11.2025.
+    \bibitem{llmsmells2025}
+    Ghosh Paul, D.; Zhu, H.; Bayley, I. (2025):
+    \textit{Investigating the Smells of LLM Generated Code.}
+    School of Engineering, Computing and Mathematics, Oxford Brookes University, October 2025.
+    Verfügbar unter: \url{https://www.researchgate.net/publication/396223444_Investigating_The_Smells_of_LLM_Generated_Code},
+    abgerufen am 26.11.2025.
 
-\bibitem{llmmaintainablereliable2025}
-Santa Molison, A.; Moraes, M.; Melo, G.; Santos, F.; Assunção, W. K. G. (2025):
-\textit{Is LLM-Generated Code More Maintainable \& Reliable than Human-Written Code?}
-Toronto Metropolitan University; Colorado State University; North Carolina State University, July 2025.
-Verfügbar unter: \url{https://www.researchgate.net/publication/393853113_Is_LLM-Generated_Code_More_Maintainable_Reliable_than_Human-Written_Code},
-abgerufen am 26.11.2025.
+    \bibitem{llmmaintainablereliable2025}
+    Santa Molison, A.; Moraes, M.; Melo, G.; Santos, F.; Assunção, W. K. G. (2025):
+    \textit{Is LLM-Generated Code More Maintainable \& Reliable than Human-Written Code?}
+    Toronto Metropolitan University; Colorado State University; North Carolina State University, July 2025.
+    Verfügbar unter: \url{https://www.researchgate.net/publication/393853113_Is_LLM-Generated_Code_More_Maintainable_Reliable_than_Human-Written_Code},
+    abgerufen am 26.11.2025.
 
-\bibitem{llmmethodnames2025}
-Akram, W.; Jiang, Y.; Zhang, Y.; Khan, H. A.; Liu, H. (2025):
-\textit{LLM-Based Method Name Suggestion with Automatically Generated Context-Rich Prompts.}
-Beijing Institute of Technology; Peking University.
-Verfügbar unter: \url{https://www.researchgate.net/publication/392855381_LLM-Based_Method_Name_Suggestion_with_Automatically_Generated_Context-Rich_Prompts},
-abgerufen am 27.11.2025.
+    \bibitem{llmmethodnames2025}
+    Akram, W.; Jiang, Y.; Zhang, Y.; Khan, H. A.; Liu, H. (2025):
+    \textit{LLM-Based Method Name Suggestion with Automatically Generated Context-Rich Prompts.}
+    Beijing Institute of Technology; Peking University.
+    Verfügbar unter: \url{https://www.researchgate.net/publication/392855381_LLM-Based_Method_Name_Suggestion_with_Automatically_Generated_Context-Rich_Prompts},
+    abgerufen am 27.11.2025.
 
-\bibitem{llmdetection2025}
-Andrade, R.; Torres, J.; Ortiz-Garcés, I. (2025):
-\textit{Enhancing Security in Software Design Patterns and Antipatterns: A Framework for LLM-Based Detection.}
-In: Electronics, 14(3) (2025), Artikel Nr. 586.
-DOI: \url{https://doi.org/10.3390/electronics14030586}.
-Submission received: 16.11.2024; revised: 21.01.2025; accepted: 28.01.2025; published: 01.02.2025.
-
+    \bibitem{llmdetection2025}
+    Andrade, R.; Torres, J.; Ortiz-Garcés, I. (2025):
+    \textit{Enhancing Security in Software Design Patterns and Antipatterns: A Framework for LLM-Based Detection.}
+    In: Electronics, 14(3) (2025), Artikel Nr. 586.
+    DOI: \url{https://doi.org/10.3390/electronics14030586}.
+    Submission received: 16.11.2024; revised: 21.01.2025; accepted: 28.01.2025; published: 01.02.2025.
 
 \end{thebibliography}
 
