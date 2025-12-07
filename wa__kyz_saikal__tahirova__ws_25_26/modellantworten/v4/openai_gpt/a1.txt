@@ -1,0 +1,15 @@
+Lassen Sie uns den Code im Hinblick auf die definierten linguistischen Anti-Muster analysieren:
+
+A: Methode tut mehr als der Name sagt
+- Die Methode `getUser` führt zusätzliche Aufgaben wie `logAccess()` und `refreshSession()` aus, die nicht im Methodennamen `getUser` widergespiegelt werden. Der Name suggeriert, dass die Methode lediglich einen Benutzer zurückgeben sollte. Dies macht sie zu einem Beispiel dieses Anti-Musters.
+
+B: Name verspricht mehr als implementiert
+- In diesem Fall scheint der Name `getUser` genau das zu versprechen, was implementiert ist, nämlich einen Benutzer zurückzugeben. Das loggen und aktualisieren von Sitzungen sind jedoch Nebeneffekte, die nicht vorausgesagt werden. Dieses Anti-Muster wird hier nicht direkt verletzt da es sich mehr um versteckte Funktionalitäten handelt, die nicht im Namen reflektiert werden.
+
+C: Name und Verhalten sind gegensätzlich
+- Der Name `getUser` steht nicht im Gegensatz zum Verhalten der Methode, da sie tatsächlich einen Benutzer zurückgibt. Es fehlen lediglich Hinweise im Namen auf die zusätzlichen Funktionen. Somit gibt es hier keine Verletzung dieses Anti-Musters.
+
+D-F: Inkonsistenzen bei Attributnamen
+- In Bezug auf `currentUser` gibt es keine Inkonsistenzen bei den Attributnamen. Der Name ist klar und konsistent mit seinem Zweck. Es gibt keine weiteren Attribute, bei denen Inkonsistenzen analysiert werden müssten.
+
+Zusammenfassend verstößt die Methode `getUser` gegen das Anti-Muster A, indem sie Aufgaben ausführt, die im Methodennamen nicht angedeutet werden. Entwickler könnten diesem Problem entgegenwirken, indem sie entweder den Methodennamen ändern, um alle wichtigen Aktionen widerzuspiegeln, oder die zusätzlichen Logikutinen in separate Methoden aufteilen und von außen aufrufen können.
