@@ -1,0 +1,60 @@
+Analyse der Bezeichner
+1. Klassenname: FeatureDebug → FeatureFlag
+
+Der Klassenname FeatureFlag ist grundsätzlich sinnvoll und beschreibend. Er folgt der Java-Konvention für Klassennamen (UpperCamelCase) und drückt klar aus, dass es sich um ein Konstrukt handelt, das einen Feature-Flag (auch Feature Toggle genannt) repräsentiert. Kein Anti-Pattern hier.
+2. Feldname: isEnabled
+
+    Typ: private boolean
+    Namenskonvention: Beginnt mit is, was bei boolean-Werten in Java üblich und empfohlen ist (gemäß JavaBeans-Spezifikation).
+    Semantik: Der Name isEnabled suggeriert, dass es sich um einen Zustand handelt, der abgefragt werden kann.
+
+Potenzielle Probleme / Anti-Patterns:
+
+    Fehlende Geschäftslogik oder Verhalten:
+    Die Klasse enthält nur ein rohes boolean-Feld ohne weitere Methoden (z. B. enable(), disable(), toggle() oder einen Konstruktor zur Initialisierung). Das deutet auf ein "Data Class"-Anti-Pattern (auch "Anemic Domain Model") hin:  
+
+        Eine Klasse, die lediglich Daten hält, aber kein eigenes Verhalten implementiert.
+
+    In objektorientierten Designs sollten Klassen typischerweise sowohl Daten als auch das Verhalten kapseln, das auf diese Daten operiert. Ein reiner Datencontainer ohne Logik ist oft ein Hinweis auf unzureichende Kapselung oder eine verpasste Abstraktion.
+    Fehlende Immutabilität oder Kontrolle über den Zustand:
+    Der Status isEnabled ist initial false, kann aber (wenn entsprechende Setter existieren würden) beliebig geändert werden. Ohne weitere Methoden oder Zugriffskontrolle bleibt unklar, wie der Zustand gesetzt oder verwaltet werden soll.
+    Falls der Wert extern gesetzt wird (z. B. über einen Setter oder direkten Zugriff – was hier wegen private nicht möglich ist), fehlt eine klare Schnittstelle, was zu inkonsistentem oder unklarem Code führen kann.
+    Mögliche Namensverbesserung im Kontext:
+    Obwohl isEnabled syntaktisch korrekt ist, könnte der Name im Kontext einer FeatureFlag-Klasse etwas generisch wirken. Je nach Anwendungsfall wären aussagekräftigere Namen wie isActive, isFeatureEnabled, oder gar domänenspezifische Namen (z. B. isDarkModeEnabled) besser. Allerdings ist isEnabled in einer allgemeinen FeatureFlag-Klasse akzeptabel.
+
+Zusammenfassung der identifizierten Anti-Patterns
+
+    Anemic Domain Model / Data Class:
+    Die Klasse enthält nur ein Datenfeld ohne zugehöriges Verhalten. Dies verstößt gegen das Prinzip der Kapselung in der objektorientierten Programmierung.
+    Fehlende Kontrolle über Zustandsänderungen:
+    Keine Methoden zur sicheren oder kontrollierten Änderung des Zustands vorhanden (z. B. enable(), disable()), was bei Feature-Flags oft erwünscht ist.
+    Potenzielle Unterauslastung der Abstraktion:
+    Eine FeatureFlag-Klasse mit nur einem booleschen Feld bringt kaum Mehrwert gegenüber einer einfachen boolean-Variable, es sei denn, sie wird erweitert (z. B. mit Ablaufdatum, Bedingungen, Logging, etc.).
+
+Empfehlungen
+
+    Vermeiden Sie reine Datenklassen, wenn Verhalten erwartet wird.
+    Fügen Sie Methoden zur Zustandskontrolle hinzu (z. B. enable(), disable(), toggle()).
+    Erwägen Sie, den Konstruktor zu verwenden, um den Anfangszustand festzulegen.
+    Prüfen Sie, ob die Klasse tatsächlich nötig ist oder ob ein simpler boolean ausreicht.
+
+Beispiel für eine verbesserte Version:
+public class FeatureFlag {
+    private boolean enabled;
+
+    public FeatureFlag(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void enable() {
+        this.enabled = true;
+    }
+
+    public void disable() {
+        this.enabled = false;
+    }
+}

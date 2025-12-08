@@ -1,0 +1,76 @@
+1) Einhaltung der Java-Konventionen (Oracle / Java Language Specification & JavaBeans)
+
+Gemäß den offiziellen Java-Beans-Spezifikationen (unterstützt durch Oracle):
+
+    Für boolean-Felder wird empfohlen, den Getter mit is... zu benennen (z. B. isEnabled()), aber das Feld selbst sollte nicht mit is beginnen.
+    Das Attribut sollte einen Substantiv-basierten oder adjektivischen Zustandsnamen tragen, z. B. enabled, visible, active.
+
+Beispiel aus der Praxis:
+private boolean enabled;
+public boolean isEnabled() { return enabled; }
+Im vorliegenden Code heißt das Feld jedoch isEnabled, was gegen die Konvention verstößt, da es wie ein Getter aussieht und nicht wie ein Zustandsattribut.
+
+➡️ Verstoß gegen Java-Beans-Konventionen.
+2) Konsistenz zwischen Name, Typ und Verhalten
+
+    Typ: boolean – korrekt für einen binären Zustand (an/aus).
+    Name: isEnabled – suggeriert eine Abfragefunktion, nicht einen Zustandswert.
+    Verhalten: Keine Methoden vorhanden; das Feld ist private und unveränderbar (ohne Setter oder Konstruktor). Damit ist das Verhalten der Klasse nicht ersichtlich.
+
+Inkonsistenz:
+
+    Der Name impliziert eine „Frage“ („Ist es aktiviert?“), aber das Feld repräsentiert einen Zustand, nicht eine Abfrage.
+    Ohne Getter (isEnabled()) oder Setter fehlt die erwartete Schnittstelle, die den Namen rechtfertigen würde.
+
+➡️ Fehlende Konsistenz zwischen Bezeichner, Zweck und Schnittstelle.
+3) Verständlichkeit und Bedeutung
+
+    Klassenname (FeatureFlag):
+    ✔️ Verständlich, domänennah, gut gewählt.
+    Drückt klar aus, dass es sich um eine Steuerung für optionale Funktionalitäten handelt.
+    Attributname (isEnabled):
+    ✘ Verständlichkeit leidet, weil:
+        Leser könnten fälschlicherweise annehmen, dass es sich um eine Methode handelt.
+        Im Kontext anderer guter Attributnamen (z. B. userName, retryCount, isActiveFeature) wirkt isEnabled unnatürlich als Feldname.
+        Die Bedeutung ist zwar erkennbar, aber der Stil ist inkonsistent mit idiomatischem Java.
+
+➡️ Verständlichkeit ist eingeschränkt durch unidiomatische Namenswahl.
+Hinweise für Entwickler
+
+    Verwenden Sie für boolesche Felder Zustandsnamen ohne is-Präfix.
+    → enabled statt isEnabled.
+    Bieten Sie eine klare öffentliche Schnittstelle an.  
+        Fügen Sie mindestens einen Getter hinzu:  
+
+        public boolean isEnabled() { return enabled; }
+
+        Optional: Konstruktor oder Setter, falls der Zustand zur Laufzeit geändert werden soll.
+    Achten Sie auf Konsistenz mit Java-Idiomen.
+    Namenskonventionen dienen nicht nur der Lesbarkeit, sondern auch der Interoperabilität mit Frameworks (z. B. Serialisierung, Reflection, JSON-Binder), die JavaBeans erwarten.
+    Vermeiden Sie „verkappte Methoden“ als Feldnamen.
+    Felder beschreiben Zustände, Methoden beschreiben Verhalten oder Abfragen.
+
+Verbesserter Beispielcode
+public class FeatureFlag {
+    private boolean enabled = false;
+
+    public FeatureFlag() {}
+
+    public FeatureFlag(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+}
+
+Dieser Code:
+
+    folgt Java-Konventionen,
+    ist konsistent in Name, Typ und Verhalten,
+    und ist für andere Entwickler sofort verständlich und wartbar.

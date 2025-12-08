@@ -1,0 +1,54 @@
+1. Klassenname: FeatureFlag
+
+    Vergleich mit den Beispielen:
+    Die Beispiele für gute Klassennamen (CustomerAccount, PaymentProcessor) folgen dem Prinzip aussagekräftiger, Substantiv-basierter Namen, die klar beschreiben, was die Klasse repräsentiert.
+    Bewertung:
+    FeatureFlag ist ein gutes Beispiel für einen solchen Namen:
+        Es ist ein Substantiv.
+        Es beschreibt eindeutig das Konzept (ein Schalter zur Steuerung von Features).
+        Es folgt der UpperCamelCase-Konvention.
+
+✅ Der Klassenname ist passend und folgt bewährten Namenskonventionen.
+2. Attributname: isEnabled
+
+    Vergleich mit den Beispielen:
+    Gute Attributnamen wie userName oder itemCount sind:
+        selbsterklärend,
+        verwenden LowerCamelCase,
+        beschreiben den Zustand oder die Eigenschaft des Objekts (nicht eine Aktion).
+    Bewertung von isEnabled:
+        Der Name beginnt mit is, was bei boolean-Attributen in Java üblich ist.
+        Allerdings ist isEnabled verbal formuliert wie eine Abfrage-Methode (Getter), nicht wie ein Zustandsattribut.
+        In Java-Beans-Konvention wird der Getter isEnabled() genannt, aber das zugrundeliegende Feld wird oft einfach enabled genannt.
+
+Beispiel:
+private boolean enabled;
+public boolean isEnabled() { return enabled; }
+    → isEnabled als Feldname ist daher ungewöhnlich und weicht von der gängigen Praxis ab.
+    Problem:
+    Der Name suggeriert eine Methode, nicht einen Zustand. Im Kontext der gegebenen Beispiele (userName, itemCount) – die klar Datenzustände beschreiben – wirkt isEnabled weniger konsistent.
+
+isEnabled ist ein suboptimaler Attributname. Besser wäre enabled.
+Zusammenfassung
+
+| Element       | Aktueller Name   | Bewertung | Begründung |
+|---------------|------------------|-----------|-----------|
+| Klasse        | `FeatureFlag`    | ✅ Gut    | Klare, Substantiv-basierte, domänennahe Bezeichnung |
+| Attribut      | `isEnabled`      | ❌ Schwach | Klingt wie eine Methode; Attribut sollte `enabled` heißen |
+Empfohlene Verbesserung
+public class FeatureFlag {
+    private boolean enabled = false;
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+}
+    Attributname: enabled → entspricht den Beispielen wie userName, itemCount.
+    Getter: isEnabled() → folgt Java-Konvention für boolean.
+    Klasse bleibt sinnvoll benannt.
+
+Damit wird der Code konsistenter, wartbarer und entspricht etablierten Java-Idiomen.

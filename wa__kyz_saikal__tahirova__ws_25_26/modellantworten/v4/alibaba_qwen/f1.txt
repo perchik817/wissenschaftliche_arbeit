@@ -1,0 +1,48 @@
+wird nun im Hinblick auf linguistische Anti-Muster analysiert, basierend auf den vorgegebenen Kategorien:
+A: Methode tut mehr als Name sagt
+
+    Nicht anwendbar, da im Code keine Methode definiert ist.  
+    Bewertung: N/A
+
+B: Name verspricht mehr als implementiert
+
+    Der Klassenname FeatureFlag suggeriert ein vollständiges Konstrukt zur Verwaltung eines Feature-Toggles (z. B. Aktivierung, Deaktivierung, Abfrage, möglicherweise mit Bedingungen oder Zeitsteuerung).  
+    Tatsächlich enthält die Klasse jedoch nur ein hartkodiertes, unveränderliches boolesches Feld ohne Zugriffsmethoden.  
+    Es gibt keine Möglichkeit, den Zustand abzufragen (isEnabled() fehlt) oder zu ändern.  
+    Damit verspricht die Klasse mehr, als sie bereitstellt: Der Name impliziert eine nutzbare Abstraktion, aber es existiert keine öffentliche Schnittstelle.
+
+✅ Anti-Muster B liegt vor.
+C: Name und Verhalten sind gegensätzlich
+
+    Der Attributname isEnabled impliziert, dass der Flag aktiviert ist – zumindest suggeriert die Formulierung eine positive Abfrage.  
+    Der tatsächliche Wert ist jedoch false (deaktiviert), und es gibt keine Möglichkeit, diesen Zustand zu ändern oder zu erkennen.  
+    Allerdings ist dies kein echter Widerspruch im Verhalten, da der Name des Attributs den aktuellen Zustand beschreibt, nicht den Standardwert.  
+    Der tiefere Konflikt liegt nicht in einer logischen Gegensätzlichkeit, sondern in der fehlenden Abstraktion (siehe B).
+
+➡️ Anti-Muster C liegt nicht vor.
+D–F: Inkonsistenzen bei Attributnamen
+
+    In Java ist es idiomatisch, boolesche Attribute (Felder) ohne is-Präfix zu benennen (z. B. enabled, active), während der Getter is... heißt (z. B. isEnabled()).  
+    Der Name isEnabled als Feldname verstößt gegen diese Konvention und ist linguistisch inkonsistent mit etablierten Java-Idiomen.  
+    Er wirkt wie ein Methodenname, nicht wie ein Zustandsattribut.  
+    Damit liegt eine Namensinkonsistenz vor, insbesondere im Verhältnis zu üblichen Attributnamen wie userName, retryCount, enabled.
+
+✅ Anti-Muster D–F (Inkonsistenzen bei Attributnamen) liegt vor.
+Zusammenfassung der identifizierten linguistischen Anti-Muster
+| Anti-Muster | Vorhanden? | Begründung |
+|-------------|------------|-----------|
+| A           | Nein       | Keine Methode vorhanden |
+| B           | **Ja**     | `FeatureFlag` suggeriert Funktionalität, die nicht implementiert ist |
+| C           | Nein       | Kein logischer Widerspruch zwischen Name und Verhalten |
+| D–F         | **Ja**     | Attributname `isEnabled` ist inkonsistent mit Java-Namenskonventionen für Felder |
+
+Empfehlungen für Entwickler
+
+    Benennen Sie boolesche Attribute ohne is-Präfix:
+    → Verwenden Sie enabled statt isEnabled für das Feld.
+    Stellen Sie eine konsistente öffentliche Schnittstelle bereit, die dem Klassennamen entspricht:
+    → Fügen Sie mindestens isEnabled() und ggf. setEnabled(...) oder enable()/disable() hinzu.
+    Vermeiden Sie Klassennamen, die eine umfassende Funktionalität suggerieren, wenn nur ein roher Zustand abgebildet wird.
+    → Entweder Klasse erweitern oder ggf. einfachen boolean-Parameter verwenden, falls keine Logik benötigt wird.
+
+Durch diese Maßnahmen wird der Code idiomatischer, wartbarer und frei von linguistischen Irritationen.
