@@ -1,0 +1,52 @@
+Linguistische Anti-Muster – Analyse des Codes
+
+Gegeben ist folgender Java-Code:
+public class ConfigReader {
+     
+      public void getVersion() {
+            System.out.println("v1.0");
+      }
+}
+Die linguistischen Anti-Muster werden wie folgt definiert:
+
+    A: Methode tut mehr als Name sagt
+    B: Name verspricht mehr als implementiert
+    C: Name und Verhalten sind gegensätzlich
+    D–F: Inkonsistenzen bei Attributnamen
+
+Im Folgenden wird jede Kategorie auf den gegebenen Code angewandt.
+A: Methode tut mehr als Name sagt
+
+    Name der Methode: getVersion() → Soll Version abrufen oder zurückgeben.
+    Tatsächliches Verhalten: Die Methode gibt nichts zurück (void) und druckt die Version auf die Konsole.
+    Zusätzliches Verhalten: Neben dem reinen Abrufen wird eine Ausgabe durchgeführt.
+    Ergebnis: Zutreffend – Die Methode tut mehr, als es der Name andeutet.
+
+B: Name verspricht mehr als implementiert
+
+    Name der Klasse: ConfigReader → Deutet an, dass die Klasse Konfigurationsdaten liest.
+    Implementierung: Es wird keine Konfiguration gelesen, sondern lediglich eine feste Zeichenkette ausgegeben.
+    Ergebnis: Zutreffend – Der Name verspricht mehr, als tatsächlich implementiert ist.
+
+C: Name und Verhalten sind gegensätzlich
+
+    Name der Methode: getVersion() → Impliziert eine Rückgabe (Query).
+    Verhalten: Methode ist void, also keine Rückgabe, sondern Seiteneffekt (Ausgabe).
+    Ergebnis: Zutreffend – Name und tatsächliches Verhalten stehen in Widerspruch zueinander.
+
+D–F: Inkonsistenzen bei Attributnamen
+
+    Vorhandenheit von Attributen: Nein – es sind keine Attribute im Code vorhanden.
+    Ergebnis: Nicht zutreffend
+
+Zusammenfassung
+| Kategorie | Zutreffend? | Begründung |
+|-----------|-------------|------------|
+| A: Methode tut mehr als Name sagt | Ja | Methode druckt zusätzlich zur Namensbedeutung |
+| B: Name verspricht mehr als implementiert | Ja | `ConfigReader` liest keine Konfiguration |
+| C: Name und Verhalten sind gegensätzlich | Ja | `getVersion()` gibt nichts zurück |
+| D–F: Inkonsistenzen bei Attributnamen | Nein | Keine Attribute vorhanden |
+
+Fazit
+
+Der gegebene Code weist drei der möglichen linguistischen Anti-Muster (A, B, C) auf. Die Bezeichner vermitteln irreführende oder falsche Informationen über die tatsächliche Funktionalität des Codes. Dies beeinträchtigt die Verständlichkeit, Wartbarkeit und Erweiterbarkeit. Eine Anpassung der Bezeichner an das tatsächliche Verhalten ist empfehlenswert.

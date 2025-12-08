@@ -1,0 +1,76 @@
+Der gegebene Java-Code enthält mehrere Bezeichner, die unter Berücksichtigung von Namenskonventionen, Semantik, Verantwortlichkeit und gängigen Clean-Code-Prinzipien analysiert werden können. Im Folgenden wird eine detaillierte Analyse durchgeführt, gefolgt von der Identifikation möglicher Benennungs- oder Struktur-Anti-Muster.
+1. Analyse der Bezeichner
+a) Klassenname: ConfigReader
+
+    Intention: Der Name suggeriert, dass die Klasse zum Lesen von Konfigurationsdaten dient.
+    Realität im Code: Die Klasse enthält lediglich eine Methode getVersion(), die eine feste Versionsnummer ausgibt.
+    Diskrepanz: Es gibt keine Konfigurationsdatei, kein Lesen von Dateien/Properties, keine Verarbeitung von Konfigurationswerten. Der Name ist irreführend – Namens- vs. Verhaltensdiskrepanz.
+
+b) Methodenname: getVersion()
+
+    Konvention: Der Name folgt der Java-Bean-Konvention (get...) und ist syntaktisch korrekt.
+    Problem: Die Methode gibt keinen Wert zurück (void), obwohl der Name getVersion() einen Rückgabewert erwarten lässt (üblicherweise String oder Version).
+    Erwartetes Verhalten: public String getVersion() { return "v1.0"; }
+    Aktuelles Verhalten: Seiteneffekt durch Konsolenausgabe – Verletzung des Prinzips „Command-Query Separation“ (CQS).
+
+2. Identifizierte Anti-Muster
+a) Irreführender Klassenname (Misleading Name / Semantic Gap)
+
+    Anti-Muster: Die Klasse heißt ConfigReader, tut aber nichts Konfigurationsbezogenes.
+    Konsequenz: Verwirrung beim Leser des Codes; Verletzung des Prinzips der klaren Absichtserklärung.
+
+b) Methode mit get-Präfix, aber ohne Rückgabewert
+
+    Anti-Muster: Verletzung der Java- und Clean-Code-Konventionen.
+        getXYZ() soll Query sein (keine Seiteneffekte, liefert Wert).
+        void getVersion() ist ein Command (hat Seiteneffekt: Druck auf Konsole), was inkonsistent ist.
+    Empfehlung: Entweder:
+        printVersion() (wenn Ausgabe gewünscht), oder
+        getVersion() mit String-Rückgabe.
+
+c) Fehlende Trennung von Concerns / Single Responsibility Principle (SRP)
+
+    Obwohl die Klasse minimal ist, mischt sie Konfigurationslogik (implizit) mit Ausgabelogik.
+    Selbst wenn später Konfiguration hinzukommt, sollte Ausgabe nicht in einem Reader erfolgen.
+    Besser: Reader liefert Daten, Ausgabe erfolgt extern (z. B. in UI oder Logging-Klasse).
+
+d) Hardcoding von Versionsinformation
+
+    Die Versionsnummer "v1.0" ist hartkodiert.
+    In realen Anwendungen sollte die Version aus Build-Metadaten, Manifest, Properties-Datei oder Build-System (z. B. Maven, Gradle) stammen.
+    Anti-Muster: Magic String / Hardcoded Configuration
+
+3. Vorschläge zur Verbesserung
+Option A: Wenn es nur um Versionsausgabe geht
+public class VersionPrinter {
+    public void printVersion() {
+        System.out.println("v1.0");
+    }
+}
+Option B: Wenn es ein echter ConfigReader sein soll
+public class ConfigReader {
+    public String getVersion() {
+        // z. B. aus config.properties lesen
+        return "v1.0"; // oder besser: dynamisch laden
+    }
+}
+
+// Verwendung:
+// System.out.println(new ConfigReader().getVersion());
+Option C: Kombiniert mit externer Ausgabe (Clean Architecture)
+
+    ConfigReader liefert Daten → separates Modul/Service druckt sie.
+	
+Zusammenfassung der Anti-Muster
+
+| Anti-Muster | Beschreibung |
+|-------------|--------------|
+| Irreführender Klassenname | `ConfigReader` liest keine Konfiguration |
+| Missbrauch von `get`-Prefix | `getVersion()` gibt nichts zurück, sondern druckt |
+| Verletzung von CQS | Methode mit `get` hat Seiteneffekt |
+| Hardcoding | Versionsstring ist fest im Code |
+| SRP-Verletzung (potenziell) | Mischung von Datenzugriff und Ausgabe |
+
+Fazit
+
+Der Code mag funktionieren, verletzt aber mehrere grundlegende Prinzipien guter Softwaregestaltung. Insbesondere die Diskrepanz zwischen Namen und Verhalten ist problematisch, da sie die Lesbarkeit, Wartbarkeit und Testbarkeit beeinträchtigt. Eine klare Trennung von Datenzugriff, Logik und Ausgabe sowie konsistente Benennung wären dringend zu empfehlen.

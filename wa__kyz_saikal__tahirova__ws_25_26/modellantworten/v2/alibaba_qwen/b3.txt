@@ -1,0 +1,70 @@
+Anhand der Beispiele für gute Bezeichner:
+
+    Klassen: CustomerAccount, PaymentProcessor – sprechende Namen, beschreiben eine Entität oder Verantwortung.
+    Methoden: calculateTotal(), validateInput() – beschreiben eine Aktion oder einen Zustand.
+    Attribute: userName, itemCount – klar und verständlich.
+
+werden im Folgenden die Bezeichner im gegebenen Java-Code analysiert und auf Übereinstimmung mit diesen Prinzipien geprüft.
+Gegebener Code:
+public class ConfigReader {
+     
+      public void getVersion() {
+            System.out.println("v1.0");
+      }
+}
+1. Analyse der Bezeichner im Code
+a) Klassenname: ConfigReader
+
+    Gutes Beispiel nachgeahmt: CustomerAccount, PaymentProcessor beschreiben eine Verantwortlichkeit oder Domäne.
+    Im Code: ConfigReader impliziert eine Klasse, die Konfigurationsdaten liest.
+    Tatsächliches Verhalten: Es wird keine Konfiguration gelesen, sondern lediglich eine feste Version ausgegeben.
+    Ergebnis: Der Klassenname ist irreführend, da er eine Verantwortlichkeit vorgibt, die nicht eingehalten wird.
+
+b) Methodenname: getVersion()
+
+    Gutes Beispiel nachgeahmt: calculateTotal(), validateInput() beschreiben eine Aktion oder einen Zustand.
+    Im Code: getVersion() suggeriert das Lesen oder Abrufen eines Wertes.
+    Tatsächliches Verhalten: Die Methode gibt nichts zurück (void), sondern druckt die Version auf die Konsole.
+    Ergebnis: Die Methode verletzt die Konvention für get-Methoden (üblicherweise Rückgabewert) und führt in die Irre.
+
+c) Keine Attribute vorhanden
+
+    Es gibt keine Attribute im Code, sodass hier keine Analyse stattfinden kann.
+
+2. Bewertung im Vergleich zu den Beispielen für gute Bezeichner
+
+| Kriterium | Beispiel für guten Bezeichner | Gegebenes Element | Bewertung |
+|-----------|-------------------------------|-------------------|-----------|
+| **Klassenname** | `CustomerAccount`, `PaymentProcessor` | `ConfigReader` | ❌ Irreführend – tut nicht, was der Name sagt |
+| **Methodenname** | `calculateTotal()`, `validateInput()` | `getVersion()` | ❌ Verletzt Konvention: `get`-Methode gibt nichts zurück |
+| **Attribute** | `userName`, `itemCount` | Keine vorhanden | – |
+
+3. Identifizierte Anti-Muster
+
+    Irreführender Klassenname: ConfigReader impliziert Konfigurationszugriff, bietet aber keine solche Funktionalität.
+    Falsche Benutzung des get-Präfixes: getVersion() ist void und druckt stattdessen → Verletzung der Konvention.
+    Verletzung der Command-Query-Separation: getVersion() hat Seiteneffekte (Ausgabe) und gibt nichts zurück.
+
+4. Verbesserungsvorschläge
+Falls die Klasse nur Versionen ausgeben soll:
+public class VersionProvider {
+    public String getVersion() {
+        return "v1.0";
+    }
+}
+Falls die Klasse tatsächlich Konfigurationen lesen soll:
+public class ConfigReader {
+    public String getVersion() {
+        // z. B. aus config.properties lesen
+        return readProperty("version");
+    }
+}
+Falls Ausgabe gewünscht ist, separate Methode:
+public class VersionPrinter {
+    public void printVersion() {
+        System.out.println("v1.0");
+    }
+}
+Fazit
+
+Die Bezeichner im gegebenen Code entsprechen nicht den Prinzipien guter Benennung, wie sie in den Beispielen CustomerAccount, calculateTotal() oder userName illustriert werden. Stattdessen weisen sie semantische Diskrepanzen und Verletzungen von Konventionen auf. Dies erschwert das Verständnis und die Wartung des Codes. Eine klare und korrekte Benennung, die die tatsächliche Funktionalität widerspiegelt, ist dringend erforderlich.
