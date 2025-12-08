@@ -1,0 +1,42 @@
+Der gegebene Code wird im Folgenden anhand der vorgegebenen Beispiele für gute Bezeichner (Klassen-, Methoden- und Attributnamen) analysiert.
+1. Klassenbezeichner: Calculator
+
+Vergleich mit gutem Beispiel:
+Gute Klassennamen wie CustomerAccount oder PaymentProcessor sind spezifisch, domänenorientiert und beschreiben klar, was die Klasse repräsentiert oder welche Verantwortung sie hat.
+
+Bewertung von Calculator:  
+
+    Problem: Der Name Calculator ist zu generisch und liefert keinen Kontext darüber, was berechnet wird (z. B. Steuern, Preise, Statistiken).
+    Folge: In größeren Systemen ist unklar, wofür diese Klasse gedacht ist, was die Wartbarkeit und Lesbarkeit verringert.
+    Verbesserung: Ein präziserer Name wie OrderTotalCalculator, InvoiceCalculator oder ShoppingCartCalculator würde die Absicht klarer kommunizieren.
+
+2. Methodenbezeichner: calculateTotal()
+
+Vergleich mit gutem Beispiel:
+Beispiele wie calculateTotal() oder validateInput() sind handlungsorientiert, verwenden klare Verben und beschreiben präzise, was die Methode tut.
+
+Bewertung von calculateTotal():  
+
+    Oberflächlich gut: Der Name folgt der Namenskonvention und wirkt auf den ersten Blick in Ordnung – er verwendet ein Verb (calculate) und ein Substantiv (Total).
+    Tieferes Problem: Die Methode gibt stets 0 zurück, ohne Eingabeparameter, ohne interne Logik und ohne Zustand. Damit erfüllt sie nicht die erwartete Semantik, die der Name suggeriert.
+    Folge: Der Bezeichner ist irreführend, da er eine Berechnung impliziert, die nicht stattfindet.
+    Verbesserung:  
+        Falls es sich um einen Platzhalter handelt: Expliziter Name wie calculateTotalNotImplemented() oder ein // TODO-Kommentar.  
+        Besser noch: Entweder die Methode mit echter Logik ausstatten (ggf. mit Parametern wie calculateTotal(List<Item> items)) oder sie erst gar nicht deklarieren, bis sie benötigt wird.
+
+3. Fehlende Attribute
+
+Obwohl im gezeigten Code keine Attribute vorhanden sind, ist dies im Kontext relevant:  
+
+    Eine Klasse namens Calculator, die calculateTotal() anbietet, würde üblicherweise auf Daten operieren (z. B. lineItems, taxRate, discount).
+    Das Fehlen jeglicher Attribute verstärkt den Eindruck einer unvollständigen oder sinnentleerten Klasse („anemic class“).
+
+Fazit
+
+Obwohl der Methodenname calculateTotal() grundsätzlich den Konventionen für gute Bezeichner entspricht, wirkt er im Kontext irreführend, da keine tatsächliche Berechnung erfolgt. Der Klassenname Calculator ist zu generisch und liefert keinen domänenspezifischen Kontext. Zusammen ergibt sich ein Design, das Lesbarkeit, Wartbarkeit und semantische Klarheit beeinträchtigt.
+
+Empfehlungen:
+
+    Verwenden Sie spezifischere Klassennamen, die den Anwendungskontext widerspiegeln.
+    Stellen Sie sicher, dass Methodennamen nicht nur syntaktisch korrekt, sondern auch semantisch wahrheitsgemäß sind.
+    Vermeiden Sie leere oder sinnentleerte Klassen und Methoden im produktiven Code.

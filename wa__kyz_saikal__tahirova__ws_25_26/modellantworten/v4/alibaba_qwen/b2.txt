@@ -1,0 +1,38 @@
+Der gegebene Code wird nun unter Berücksichtigung der definierten linguistischen Anti-Muster analysiert. Gemäß der vorgegebenen Klassifikation liegt das Hauptaugenmerk auf der Beziehung zwischen Methodenname und tatsächlichem Verhalten.
+public class Calculator {
+    public int calculateTotal() {
+        return 0; 
+    }
+}
+Analyse der linguistischen Anti-Muster
+Anti-Muster B: „Name verspricht mehr als implementiert“
+
+    Begründung:
+    Der Methodenname calculateTotal() impliziert eine dynamische Berechnung eines Gesamtwerts, typischerweise basierend auf Eingabedaten (z. B. einer Liste von Positionen, Preisen oder Mengen).
+    Tatsächlich führt die Methode keine Berechnung durch, sondern gibt statisch den Wert 0 zurück – unabhängig von jeglichem Kontext, Zustand oder Parametern.
+    Folge:
+    Der Name weckt Erwartungen („es wird etwas berechnet“), die die Implementierung nicht erfüllt. Dies kann zu Fehlinterpretationen, versteckten Fehlern oder unnötigem Debugging führen.
+    Zuordnung:
+    Dies ist ein klares Beispiel für Anti-Muster B.
+
+Prüfung der anderen Anti-Muster:
+
+    Anti-Muster A („Methode tut mehr als Name sagt“):
+    Nicht zutreffend – die Methode tut weniger, nicht mehr.
+    Anti-Muster C („Name und Verhalten sind gegensätzlich“):
+    Nicht zutreffend – das Verhalten widerspricht dem Namen nicht direkt (z. B. calculateTotal() gibt -1 zurück, obwohl ein nicht-negativer Totalwert erwartet wird). Hier gibt es keine logische Opposition, sondern lediglich eine Untererfüllung.
+    Anti-Muster D–F (Inkonsistenzen bei Attributnamen):
+    Nicht anwendbar – die Klasse enthält keine Attribute.
+
+Fazit
+
+Der Code weist eindeutig das linguistische Anti-Muster B auf:  
+
+    Der Name verspricht mehr, als die Implementierung leistet.
+
+Obwohl der Methodenname syntaktisch und konventionell korrekt ist, erzeugt er eine falsche Erwartungshaltung bezüglich der Funktionalität. In produktivem Code sollte entweder die Implementierung dem Namen angepasst werden (z. B. echte Berechnungslogik hinzufügen) oder der Name präzisiert bzw. die Methode als Platzhalter gekennzeichnet werden (z. B. durch // TODO oder eine UnsupportedOperationException).
+Empfehlung für Entwickler
+
+    Vermeiden Sie „leere“ Implementierungen, die semantisch reiche Namen tragen.
+    Wenn eine Methode noch nicht implementiert ist, kennzeichnen Sie dies explizit – entweder durch eine Exception oder durch Tests/Dokumentation.
+    Stellen Sie sicher, dass der funktionale Umfang einer Methode ihrem Namen entspricht – weder mehr noch weniger.

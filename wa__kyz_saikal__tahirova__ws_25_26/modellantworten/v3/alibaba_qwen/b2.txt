@@ -1,0 +1,72 @@
+Der gegebene Java-Code wird im Folgenden systematisch unter drei Gesichtspunkten analysiert: Java-Konventionen (Oracle), Konsistenz zwischen Name, Typ und Verhalten, sowie Verständlichkeit und Bedeutung. Abschließend folgen konkrete Hinweise für Entwickler.
+1. Einhaltung der Java-Konventionen (Oracle)
+
+Klassenname:  
+
+    Calculator folgt den Oracle-Namenskonventionen: Klassennamen beginnen mit einem Großbuchstaben und verwenden PascalCase.  
+    Formal korrekt, aber inhaltlich zu generisch (siehe Punkt 3).
+
+Methodenname:  
+
+    calculateTotal() verwendet korrektes camelCase und beginnt mit einem Verb, wie in den Oracle-Richtlinien empfohlen.  
+    Formal konform.
+
+Rückgabetyp und Implementierung:  
+
+    Die Methode deklariert int als Rückgabetyp und liefert auch einen int-Wert (0).  
+    Typsicherheit und Syntax entsprechen den Konventionen.
+
+Bewertung:
+Der Code verstößt nicht gegen formale Java-Konventionen, erfüllt aber nicht die inhaltlichen Erwartungen, die mit solchen Namens- und Strukturkonventionen verbunden sind (z. B. dass eine Methode mit calculate… tatsächlich berechnet).
+2. Konsistenz zwischen Name, Typ und Verhalten
+
+    Name: calculateTotal() suggeriert eine berechnende Operation, die auf Daten (z. B. einer Liste von Positionen, Preisen, Mengen) basiert.
+    Typ: Der Rückgabetyp int ist plausibel für eine Summe (z. B. Gesamtpreis in Cent).
+    Verhalten: Die Methode gibt statisch 0 zurück, ohne Parameter, ohne Zustand, ohne Logik.
+
+Widerspruch:
+Es besteht ein eklatanter Widerspruch zwischen dem Namen und dem tatsächlichen Verhalten. Der Name impliziert dynamische Berechnung, das Verhalten ist jedoch statisch und kontextlos.
+Dies verstößt gegen das Prinzip der "Principle of Least Astonishment" – Entwickler:innen erwarten, dass eine Methode tut, was ihr Name verspricht.
+
+Fazit:
+Die Konsistenz ist nicht gegeben. Name und Verhalten sind semantisch inkonsistent.
+3. Verständlichkeit und Bedeutung
+
+    Klassenname Calculator: Zu vage. Ohne Kontext ist unklar, was berechnet wird (Preise? Statistiken? Steuern?).  
+    Methode calculateTotal():  
+        Ohne Parameter oder Instanzvariablen ist unklar, wovon sich der „Total“ ableitet.  
+        Der konstante Rückgabewert 0 lässt vermuten, dass es sich um unfertigen Code, einen Stub oder Testcode handelt – dies ist jedoch nicht dokumentiert.
+    Fehlende Dokumentation oder Kommentare: Es gibt keinen Hinweis darauf, ob dies ein Platzhalter ist oder ob 0 beabsichtigt ist (z. B. als Default für leere Bestellungen).
+
+Bewertung:
+Der Code ist oberflächlich lesbar, aber inhaltlich unklar und potenziell irreführend. Die Absicht des Entwicklers ist nicht erkennbar.
+Hinweise für Entwickler
+
+    Vermeiden Sie irreführende Namen
+    Wenn eine Methode keine Berechnung durchführt, sollte ihr Name dies nicht suggerieren. Nutzen Sie stattdessen präzise Bezeichnungen oder kennzeichnen Sie Stubs explizit (z. B. mit // TODO oder durch Tests).
+    Spezifizieren Sie den Kontext im Klassennamen
+    Statt Calculator besser: OrderTotalCalculator, InvoiceCalculator, CartSummaryCalculator – je nach Domäne.
+    Implementieren Sie sinnvolle Logik oder lassen Sie die Methode weg
+    Leere oder Dummy-Implementierungen im Produktivcode sollten vermieden werden. Falls es sich um vorläufigen Code handelt, kennzeichnen Sie dies klar:
+
+      public int calculateTotal() {
+            // TODO: Implement based on cart items
+            throw new UnsupportedOperationException("Not implemented yet");
+      }
+
+    Berücksichtigen Sie Parameter oder Zustand
+    Eine sinnvolle calculateTotal()-Methode benötigt typischerweise Eingabedaten, z. B.:
+
+    public int calculateTotal(List<Item> items) { ... }
+
+    oder arbeitet auf Instanzvariablen:
+
+      private List<Item> items;
+      public int calculateTotal() { ... }
+
+    Halten Sie Name, Typ und Verhalten konsistent
+    Der Name einer Methode ist eine Vereinbarung mit der aufrufenden Seite. Brechen Sie diese Vereinbarung nicht – weder durch leere Implementierungen noch durch semantische Unschärfen.
+
+Zusammenfassung
+
+Der Code ist formal korrekt, aber inhaltlich problematisch. Er verletzt keine syntaktischen Java-Konventionen, versagt jedoch in Bezug auf semantische Klarheit, Konsistenz und Verständlichkeit. Solche Muster können zu Missverständnissen, Fehlern und erhöhtem Wartungsaufwand führen. Entwickler sollten stets darauf achten, dass Bezeichner nicht nur syntaktisch, sondern auch semantisch wahrheitsgemäß sind.

@@ -1,0 +1,37 @@
+Der gegebene Java-Code ist syntaktisch korrekt, weist jedoch einige potenzielle Benennungs- und Struktur-Anti-Muster auf, die im Folgenden analysiert werden:
+1. Vage oder irreführende Methodenbezeichnung: calculateTotal()
+
+    Problem: Der Methodenname calculateTotal() suggeriert, dass eine Berechnung stattfindet, die auf Eingabedaten oder internen Zuständen basiert. Tatsächlich liefert die Methode jedoch stets den konstanten Wert 0.
+    Anti-Muster: Irreführende Benennung (Misleading Name) oder Magic Return Value.
+    Folgen: Verwirrung bei Entwickler:innen, die erwarten, dass die Methode sinnvolle Logik implementiert. Dies kann zu Fehlern oder unnötigem Debugging führen.
+    Verbesserungsvorschlag: 
+        Falls dies ein Platzhalter ist (z. B. für Testzwecke), sollte dies durch einen aussagekräftigeren Namen oder Kommentare deutlich gemacht werden, z. B. stubCalculateTotal() oder calculateTotalNotImplemented().
+        Falls die Methode dauerhaft konstant 0 zurückgeben soll, wäre ein Name wie getZero() oder getDefaultTotal() präziser – auch wenn dies in der Regel auf ein tieferliegendes Designproblem hindeutet.
+
+2. Fehlende Verwendung oder Abhängigkeiten (Strukturproblem)
+
+    Problem: Die Klasse Calculator hat keine Felder, Parameter oder weiteren Methoden. Sie ist im aktuellen Zustand zustandslos und funktionslos (außer der fest codierten Rückgabe).
+    Anti-Muster: Anemic Class (blutleere Klasse) – eine Klasse ohne sinnvolle Logik oder Daten.
+    Folgen: Geringe Wiederverwendbarkeit, Verletzung des Prinzips der Single Responsibility (sofern die Klasse später erweitert wird, ohne klare Struktur).
+    Verbesserungsvorschlag: 
+        Entweder die Klasse vollständig implementieren (z. B. mit Eingabeparametern oder internem Zustand), 
+        oder, falls es sich um ein vorläufiges Gerüst handelt, dies explizit kennzeichnen (z. B. durch // TODO oder eine abstrakte Basisklasse/Schnittstelle).
+
+3. Klassenname Calculator ist zu generisch
+
+    Problem: Der Name Calculator ist sehr allgemein und sagt nichts über den konkreten Anwendungsfall aus (z. B. Preisberechnung, Steuerberechnung, Punktesumme etc.).
+    Anti-Muster: Unclear Context / Generic Naming.
+    Folgen: In größeren Codebasen kann dies zu Namenskollisionen oder Verwirrung führen.
+    Verbesserungsvorschlag: Spezifischerer Name entsprechend der Domäne, z. B. OrderTotalCalculator, ScoreCalculator.
+
+Zusammenfassung der identifizierten Anti-Muster:
+| Anti-Muster                     | Betroffene Stelle       | Begründung |
+|----------------------------------|--------------------------|------------|
+| Irreführende Methodenbezeichnung | `calculateTotal()`       | Gibt konstant `0` zurück, obwohl Berechnung suggeriert wird |
+| Anemic Class                     | `Calculator`             | Keine Felder, keine echte Logik |
+| Generische Klassenbezeichnung    | `Calculator`             | Fehlender Kontext zur konkreten Funktion |
+
+
+Empfehlung
+
+Der Code wirkt wie ein unvollständiges Gerüst oder Stub. Falls dies beabsichtigt ist, sollte dies klar dokumentiert werden. Andernfalls sollte die Klasse entweder mit sinnvoller Logik und klaren Verantwortlichkeiten ausgestattet oder durch eine präzisere API ersetzt werden.
