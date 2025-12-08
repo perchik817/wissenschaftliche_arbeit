@@ -1,0 +1,74 @@
+### Analyse der Bezeichner unter Berücksichtigung guter Benennungsbeispiele
+
+Gegeben sind folgende **Beispiele für gute Bezeichner**:
+
+- **Klassen**: `CustomerAccount`, `PaymentProcessor`
+- **Methoden**: `calculateTotal()`, `validateInput()`
+- **Attribute**: `userName`, `itemCount`
+
+Diese Beispiele zeigen, dass gute Bezeichner **aussagekräftig**, **spezifisch** und **im richtigen Kontext** benannt sind. Sie folgen der Konvention, dass:
+
+- Klassen Substantive sind, die eine Entität beschreiben.
+- Methoden Verben oder Verbphrasen sind, die eine Aktion beschreiben.
+- Attribute ebenfalls substantivisch und klar benannt sind.
+
+---
+
+### Analyse des gegebenen Codes:
+
+```java
+public class PaymentProcessor {
+      
+      public void validatePayment() {
+            checkFormat(); 
+      }
+
+      private void checkFormat() {
+            /* ... */ }
+}
+```
+
+#### 1. **Klassenname: `PaymentProcessor`**
+- **Bewertung**: Gut
+- **Vergleich mit Beispiel**: Stimmt mit dem Muster `PaymentProcessor` überein.
+- **Begründung**: Beschreibt die Verantwortung der Klasse präzise.
+
+#### 2. **Öffentliche Methode: `validatePayment()`**
+- **Bewertung**: Gut
+- **Vergleich mit Beispiel**: Ähnlich wie `validateInput()`, aber noch spezifischer.
+- **Begründung**: Beschreibt klar, dass eine Zahlung validiert wird.
+
+#### 3. **Private Methode: `checkFormat()`**
+- **Bewertung**: Schlecht
+- **Vergleich mit Beispiel**: Im Gegensatz zu `validateInput()` oder `calculateTotal()` ist `checkFormat()` **ungenau**.
+- **Probleme**:
+  - „Format“ ist **zu allgemein** – es ist unklar, was für ein Format geprüft wird.
+  - Die Methode beschreibt **nicht eindeutig ihre Funktion**.
+  - Verletzt das Prinzip, dass Bezeichner **verständliche und spezifische Aktionen** beschreiben sollten.
+
+---
+
+### Fazit: Benennungs-Anti-Muster
+
+- `PaymentProcessor`: Guter Klassenname – entspricht den Beispielen.
+- `validatePayment()`: Gute Methode – entspricht den Beispielen.
+- `checkFormat()`: **Schlechte Methode** – **Anti-Muster: ungenaue Benennung**  
+  → **Verbesserungsvorschlag**: `validatePaymentDataFormat()`, `checkPaymentFormat()` oder `validatePaymentStructure()`.
+
+---
+
+### Verbesserter Code
+
+```java
+public class PaymentProcessor {
+      
+      public void validatePayment() {
+            validatePaymentDataFormat(); 
+      }
+
+      private void validatePaymentDataFormat() {
+            /* ... */ }
+}
+```
+
+Diese Version entspricht den **guten Benennungsbeispielen** und ist **verständlicher** sowie **wartbarer**.

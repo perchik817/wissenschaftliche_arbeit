@@ -1,0 +1,42 @@
+Analyse des Codes hinsichtlich linguistischer Anti-Muster
+
+Gegeben:
+
+public class PaymentProcessor {
+      
+      public void validatePayment() {
+            checkFormat(); 
+      }
+
+      private void checkFormat() {
+            /* ... */ }
+}
+
+1. validatePayment()
+
+    Name: Gibt vor, eine Zahlung zu validieren.
+    Verhalten: Ruft checkFormat() auf.
+    Implementierung: Die Methode checkFormat() ist leer (oder nicht vollständig sichtbar), enthält also keine wirkliche Validierung.
+    Anti-Muster: B – Name verspricht mehr als implementiert
+        Die Methode validatePayment() suggeriert eine umfassende Validierung, tatsächlich wird aber nur eine sehr spezifische Prüfung (Format) durchgeführt. Falls checkFormat() die einzige Validierung ist, ist der Name irreführend.
+
+2. checkFormat()
+
+    Name: „Format“ prüfen.
+    Verhalten: Unklar, da Implementierung fehlt.
+    Kontext: Wird innerhalb von validatePayment() aufgerufen.
+    Anti-Muster: A – Methode tut mehr als Name sagt oder B – Name verspricht mehr als implementiert (je nach Implementierung)
+        Falls checkFormat() weitere Dinge tut als nur das Format zu prüfen (z. B. auch Werte validiert), liegt A vor.
+        Falls checkFormat() weniger macht als „Formatprüfung“ andeutet (z. B. nur eine Teilprüfung), liegt B vor.
+        Falls checkFormat() lediglich ein Format validiert, ist der Name ungenau, aber nicht unbedingt ein linguistisches Anti-Muster, sondern eher ein Benennungs-Anti-Muster (z. B. zu allgemein).
+
+Fazit: Identifizierte linguistische Anti-Muster
+
+    B: Name verspricht mehr als implementiert
+        validatePayment() suggeriert eine umfassende Validierung, liefert aber möglicherweise nur eine Formatprüfung.
+    A: Methode tut mehr als Name sagt (möglicherweise)
+        Falls checkFormat() mehr tut als nur das Format zu prüfen, liegt dieses Anti-Muster vor.
+
+Weitere Hinweise
+
+    Keine der anderen Anti-Muster (C: gegensätzliches Verhalten, D-F: Inkonsistenzen bei Attributnamen) sind hier erkennbar, da keine Attribute vorhanden sind und keine gegensätzlichen Verhaltensweisen offensichtlich sind.
