@@ -1,0 +1,52 @@
+Der gegebene Code wird nun im Hinblick auf die genannten linguistischen Anti-Muster analysiert. Diese betreffen die Beziehung zwischen Bezeichnern (Namen) und der tatsächlichen Bedeutung oder dem Verhalten des Codes.
+1. Klassenname: Geomety
+
+    Dies ist ein Tippfehler; korrekter Name wäre Geometry.
+    Obwohl Tippfehler nicht direkt in den genannten Anti-Mustern A–F aufgeführt sind, führen sie indirekt zu Verständnisproblemen und können die Identifikation von Mustern erschweren.
+    Bewertung: Kein direktes linguistisches Anti-Muster aus A–F, aber ein qualitätsmindernder Namensfehler, der im professionellen Kontext unzulässig ist.
+
+2. Attributname: center (vom Typ boolean)
+
+Hier liegt der eigentliche Fokus der Analyse, da das Attribut einen Widerspruch zwischen Name und Typ/Verhalten aufweist.
+Analyse nach den linguistischen Anti-Mustern:
+
+    A: Methode tut mehr als Name sagt
+    → Nicht anwendbar, da es sich um ein Attribut, nicht um eine Methode handelt.
+    B: Name verspricht mehr als implementiert
+    → Nicht zutreffend im engeren Sinne. Das Attribut „verspricht“ keine Funktionalität – es ist nur deklariert.
+    C: Name und Verhalten sind gegensätzlich
+    → Nicht direkt, da es kein Verhalten (keine Logik) gibt. Allerdings:
+    Der Name center impliziert ein Objekt oder einen Ort (z. B. eine Koordinate), während der Typ boolean nur einen Wahrheitswert speichern kann.
+    → Es gibt also eine semantische Diskrepanz zwischen Namensbedeutung und datentyplicher Aussagekraft.
+    D–F: Inkonsistenzen bei Attributnamen
+    → Obwohl nur ein Attribut vorhanden ist, lässt sich ein intrinsisches linguistisches Anti-Muster erkennen, das oft unter „D: Unpassender Attributname“ subsumiert wird:  
+        Der Name ist nicht konsistent mit dem Datentyp.
+        Ein boolean-Attribut sollte einen Zustand, eine Eigenschaft oder eine Bedingung beschreiben (z. B. „ist zentriert?“).
+        center ist jedoch ein Substantiv, das ein Entität (Objekt) bezeichnet – nicht einen Zustand.
+
+    → Dies entspricht einem linguistischen Anti-Muster der Kategorie D:
+    Der Attributname ist inkonsistent mit dem Datentyp und der intendierten Bedeutung.
+
+Zusammenfassende Einordnung
+
+    Hauptproblem: Der Bezeichner center für ein boolean-Feld ist semantisch inkonsistent.
+    Zugeordnetes linguistisches Anti-Muster: D (Inkonsistenz bei Attributnamen – Name passt nicht zum Typ oder zur beabsichtigten Bedeutung).
+    Folge: Der Code ist nicht selbsterklärend; ein Leser muss raten, was center = true bedeuten soll.
+
+Empfehlung zur Behebung
+
+    Korrigieren Sie den Klassennamen: Geomety → Geometry.
+    Wählen Sie einen passenden booleschen Attributnamen, z. B.:
+        isCentered (wenn es um Ausrichtung geht),
+        hasCenter (wenn es um Existenz eines Zentrums geht).
+
+Verbesserter Code:
+public class Geometry {
+    private boolean isCentered;
+}
+
+Dieser Code ist:
+
+    frei von linguistischen Anti-Mustern,
+    konsistent in Name, Typ und beabsichtigter Bedeutung,
+    verständlich ohne zusätzliche Kommentare.

@@ -1,0 +1,49 @@
+Der gegebene Code enthält mehrere Verstöße gegen etablierte Namenskonventionen und Prinzipien guter Bezeichnerwahl in Java. Im Folgenden wird der Code anhand der vorgegebenen Beispiele für gute Bezeichner analysiert.
+1. Klassenname: Geomety
+
+Vergleich mit gutem Beispiel:
+Gute Klassenbezeichner wie CustomerAccount oder PaymentProcessor sind:
+
+    aussagekräftig,
+    grammatikalisch korrekt,
+    im Singular (sofern es sich nicht um eine Sammlung handelt),
+    in PascalCase.
+
+Analyse:  
+
+    Geomety ist ein Tippfehler; korrekt wäre Geometry.
+    Der Fehler macht den Namen unklar und unprofessionell, erschwert die Suche im Code und kann zu Verwirrung führen (z. B. bei API-Nutzern oder Teammitgliedern).
+
+Bewertung:
+❌ Verletzt die Konvention für gute Klassennamen – fehlerhaft und nicht selbsterklärend.
+2. Attributname: center (vom Typ boolean)
+
+Vergleich mit gutem Beispiel:
+Gute Attributnamen wie userName oder itemCount sind:
+
+    selbsterklärend,
+    passen zum Datentyp,
+    verwenden camelCase.
+
+Analyse:  
+
+    center ist ein Substantiv, suggeriert aber ein Objekt (z. B. einen Punkt, eine Koordinate), nicht einen Wahrheitswert.
+    Für ein boolean-Attribut ist es üblich, einen beschreibenden Zustand zu verwenden, typischerweise in Form eines Prädikats:
+        ✅ isCentered
+        ✅ centered
+        ✅ hasCenter (je nach Semantik)
+
+Bewertung:
+❌ Schlechter Bezeichner für einen booleschen Wert – irreführend und semantisch inkonsistent.
+Fazit
+
+Der Code verstößt gegen grundlegende Prinzipien guter Bezeichnerwahl:
+
+    Klassenname: Tippfehler → sollte Geometry heißen.
+    Attributname: Unpassend für boolean → sollte z. B. isCentered lauten.
+
+Korrekturvorschlag:
+public class Geometry {
+    private boolean isCentered;
+}
+Dies entspricht den Konventionen und Beispielen für gute Bezeichner: klar, korrekt und typgerecht.
