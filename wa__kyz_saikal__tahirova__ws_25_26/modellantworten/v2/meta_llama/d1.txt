@@ -1,0 +1,31 @@
+Der gegebene Code enthält einige Probleme in Bezug auf die Benennung von Attributen:
+
+1. `isPremium` als `int`:
+   - Der Name `isPremium` suggeriert, dass es sich um einen booleschen Wert handelt, der angibt, ob ein Kunde ein Premium-Kunde ist oder nicht. In Java ist es üblich, boolesche Variablen mit dem Präfix "is" oder "has" zu versehen, um eine frageartige Lesart zu ermöglichen (z. B. `isActive`, `hasChildren`).
+   - Die Verwendung des Datentyps `int` ist hier ein Anti-Muster, da der Name `isPremium` einen booleschen Wert nahelegt, nicht eine Ganzzahl.
+
+Gute Bezeichner sollten wie folgt aussehen:
+
+- Klassen: `CustomerAccount`, `PaymentProcessor`
+- Methoden: `calculateTotal()`, `validateInput()`
+- Attribute: `userName`, `itemCount`
+
+Im gegebenen Code sollte der Name `isPremium` geändert werden, um die tatsächliche Semantik der Variable besser zu vermitteln. Wenn die Variable tatsächlich einen booleschen Wert darstellen soll, sollte der Datentyp auf `boolean` geändert werden. Wenn die Variable jedoch eine andere Bedeutung hat, sollte der Name entsprechend angepasst werden.
+
+Beispiele für korrigierte Attribute:
+
+- `isPremium` als `boolean`: `private boolean isPremium;`
+- `premiumLevel` als `int`: `private int premiumLevel;`
+
+Der korrigierte Code könnte wie folgt aussehen:
+
+java
+public class Customer {
+    // Für den Fall, dass es nur um den Premium-Status geht
+    private boolean isPremium;
+
+    // Alternativ, falls es um Premium-Stufen geht
+    // private int premiumLevel;
+}
+
+Durch diese Anpassungen wird der Code lesbarer und semantisch korrekter, was die Wartbarkeit und Verständlichkeit des Codes verbessert.

@@ -1,0 +1,30 @@
+Im gegebenen Java-Code-Snippet gibt es einige Benennungs- oder Struktur-Anti-Muster, die korrigiert werden sollten, um die Lesbarkeit und Wartbarkeit des Codes zu verbessern. Lassen Sie uns den Code analysieren:
+
+1. `isPremium` als `int`:
+   - Der Bezeichner `isPremium` suggeriert, dass es sich um einen booleschen Wert handelt, der angibt, ob ein Kunde ein Premium-Kunde ist oder nicht. In Java ist es üblich, boolesche Variablen mit dem Präfix "is" oder "has" zu versehen, um eine frageartige Lesart zu ermöglichen (z. B. `isActive`, `hasChildren`).
+   - Die Verwendung des Datentyps `int` ist hier ein Anti-Muster, da der Name `isPremium` einen booleschen Wert nahelegt, nicht eine Ganzzahl. Es wäre besser, den Datentyp auf `boolean` zu ändern, wenn es sich tatsächlich nur um zwei Zustände (true/false) handelt.
+
+2. Fehlende Semantik:
+   - Wenn `isPremium` tatsächlich für die Darstellung von Premium-Stufen oder ähnlichem verwendet werden soll, dann ist der Name irreführend. Ein Name wie `premiumLevel` oder `premiumTier` wäre geeigneter, um die Semantik der Variable besser zu vermitteln.
+
+Verbesserungsvorschläge:
+
+1. Änderung des Datentyps:
+   - Ändern Sie den Datentyp von `int` in `boolean`, wenn die Variable nur zwei Zustände darstellen soll (z. B. ob ein Kunde Premium-Status hat oder nicht).
+
+2. Anpassung des Namens:
+   - Wenn die Variable tatsächlich für die Darstellung von Premium-Stufen oder ähnlichem verwendet wird, ändern Sie den Namen in etwas wie `premiumLevel` oder `premiumTier`, um die Semantik besser zu vermitteln.
+
+Beispiel für korrigierten Code:
+
+java
+public class Customer {
+    // Für den Fall, dass es nur um den Premium-Status geht
+    private boolean isPremium;
+
+    // Alternativ, falls es um Premium-Stufen geht
+    // private int premiumLevel;
+}
+
+
+Durch diese Anpassungen wird der Code lesbarer und semantisch korrekter, was die Wartbarkeit und Verständlichkeit des Codes verbessert.

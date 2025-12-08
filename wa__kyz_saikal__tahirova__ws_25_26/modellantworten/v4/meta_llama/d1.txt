@@ -1,0 +1,16 @@
+Analyse des Codes unter Berücksichtigung von linguistischen Anti-Mustern:
+
+- A: Methode tut mehr als Name sagt: 
+  - Im gegebenen Code gibt es keine Methode, daher ist dieses Anti-Muster nicht anwendbar.
+
+- B: Name verspricht mehr als implementiert:
+  - Der Name `isPremium` suggeriert, dass es sich um eine boolesche Eigenschaft handelt, die angibt, ob ein Kunde ein Premium-Kunde ist oder nicht. Der Typ `int` jedoch impliziert, dass es mehrere Zustände oder Werte geben könnte, was nicht mit dem Namen übereinstimmt. Dies könnte als ein Fall von "Name verspricht mehr als implementiert" interpretiert werden, da der Name eine einfache boolesche Eigenschaft suggeriert, aber der Typ komplexer ist.
+
+- C: Name und Verhalten sind gegensätzlich:
+  - Der Name `isPremium` deutet auf eine boolesche Eigenschaft hin, die true oder false sein sollte. Der Typ `int` jedoch ermöglicht eine Vielzahl von Werten, was dem erwarteten Verhalten einer booleschen Eigenschaft widerspricht. Dies ist ein Beispiel für "Name und Verhalten sind gegensätzlich", da der Name eine bestimmte Art von Verhalten (boolesch) suggeriert, aber der Typ ein anderes Verhalten (mehrere Werte) ermöglicht.
+
+- D-F: Inkonsistenzen bei Attributnamen:
+  - Der Name `isPremium` folgt der Konvention für boolesche Eigenschaften, aber der Typ `int` ist inkonsistent mit dieser Konvention. Dies könnte als eine Inkonsistenz bei Attributnamen betrachtet werden, da der Name und der Typ nicht übereinstimmen.
+
+Zusammenfassung:
+Der Code weist das linguistische Anti-Muster "C: Name und Verhalten sind gegensätzlich" auf, da der Name `isPremium` eine boolesche Eigenschaft suggeriert, aber der Typ `int` ein anderes Verhalten ermöglicht. Es gibt auch Anzeichen von "B: Name verspricht mehr als implementiert", da der Name eine einfache boolesche Eigenschaft suggeriert, aber der Typ komplexer ist. Um diese Anti-Muster zu beheben, sollte der Typ von `int` in `boolean` geändert werden, um den Namen und den Typ konsistent zu machen.
