@@ -62,6 +62,8 @@ INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.cf
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.cfg
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\tex\latex\tools\indentfirst.sty
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\tex\latex\tools\indentfirst.sty
+INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\tex\latex\chngcntr\chngcntr.sty
+INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\tex\latex\chngcntr\chngcntr.sty
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\tex\latex\graphics\graphicx.sty
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\tex\latex\graphics\graphicx.sty
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\tex\latex\graphics\graphics.sty
@@ -294,6 +296,7 @@ INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtt10.
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr10.tfm
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr6.tfm
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtk10.tfm
+INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathsy.enc
 INPUT wa_tahirova.aux
 INPUT .\wa_tahirova.out
 INPUT .\wa_tahirova.out
@@ -313,6 +316,8 @@ INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr8.pfb
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr8.pfb
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmri12.pfb
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmri12.pfb
+INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy10.pfb
+INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy10.pfb
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmtk10.pfb
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmtk10.pfb
 INPUT C:\Users\User\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmtt10.pfb

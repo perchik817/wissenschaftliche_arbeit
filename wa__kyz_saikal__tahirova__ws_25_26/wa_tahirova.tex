@@ -18,6 +18,9 @@
 \setlength{\parindent}{1.25em} % Отступ первой строки
 \setlength{\parskip}{0pt}      % Без дополнительного вертикального расстояния
 
+\usepackage{chngcntr}
+\counterwithin{table}{section}
+
 % --- Grafiken ---
 \usepackage{graphicx}
 \graphicspath{{./img/}} 
@@ -197,22 +200,20 @@ Linguistische Anti-Muster (Linguistic Anti-Patterns) wurden erstmals
 systematisch von Arnaoudova et al. beschrieben \cite{arnaoudova2014}. Sie
 bezeichnen wiederkehrende sprachliche Probleme in Bezeichnern, Kommentaren oder
 Signaturen, bei denen Name und tatsächliches Verhalten nicht übereinstimmen.
-Dies führt zu kognitiven Brüchen und erschwert das Programmverständnis.
-
-Die Anti-Muster lassen sich in zwei Gruppen einteilen.
+Dies führt zu kognitiven Brüchen und erschwert das Programmverständnis. Die Anti-Muster lassen sich in zwei Gruppen einteilen.
 
 Methodenbezogene Anti-Muster:
 
 \begin{enumerate}
-    \item \textbf{Kategorie A: „tut mehr als der Name sagt“}
+    \item \textit{Kategorie A - tut mehr als der Name sagt.}
           Die Methode führt zusätzliche Aktionen aus.
           Beispiel: \texttt{getUser()} validiert oder speichert Daten.
 
-    \item \textbf{Kategorie B: „sagt mehr als sie tut“}
+    \item \textit{Kategorie B - sagt mehr als sie tut.}
           Der Name verspricht Funktionalität, die nicht implementiert ist.
           Beispiel: \texttt{validate()} besitzt den Rückgabetyp \texttt{void}.
 
-    \item \textbf{Kategorie C: „tut das Gegenteil“}
+    \item \textit{Kategorie C - tut das Gegenteil.}
           Name und Verhalten widersprechen sich.
           Beispiel: \texttt{disable()} erzeugt einen \texttt{EnableState}.
 \end{enumerate}
@@ -220,13 +221,13 @@ Methodenbezogene Anti-Muster:
 Attributbezogene Anti-Muster:
 \begin{enumerate}
     \setcounter{enumi}{3}
-    \item \textbf{Kategorie D: enthält mehr als der Name sagt}
+    \item \textit{Kategorie D - enthält mehr als der Name sagt.}
           Beispiel: ein als Prädikat benannter Bezeichner, dessen Typ jedoch kein \texttt{boolean} ist.
 
-    \item \textbf{Kategorie E: Name sagt mehr als enthalten ist}
+    \item \textit{Kategorie E - Name sagt mehr als enthalten ist.}
           Beispiel: \texttt{users} als Name für ein einzelnes Objekt.
 
-    \item \textbf{Kategorie F: Name und Inhalt widersprechen sich}
+    \item \textit{Kategorie F - Name und Inhalt widersprechen sich.}
           Beispiel: Attributname und Typ bilden Antonyme.
 \end{enumerate}
 
@@ -244,14 +245,13 @@ In dieser Arbeit wird untersucht, wie zuverlässig Sprachmodelle Java-Bezeichner
 
 \subsection{Auswahl der Sprachmodelle}
 
-Für die Untersuchung wurden drei verschiedene Modelle über HAWKI\footnote{HAWKI
-    dient als Schnittstelle zu OpenAI GPT-4o, Meta LLaMA 3.1 70B Instruct, Alibaba
-    Qwen 2.5 72B Instruct Modellen} abgefragt:
+Für die Untersuchung wurden zwei verschiedene Modelle über HAWKI\footnote{HAWKI
+    dient als Schnittstelle zu OpenAI GPT-4o, Meta LLaMA 3.1 70B Instruct} und ein Modell über Qwen KI abgefragt:
 
 \begin{itemize}
     \item OpenAI GPT-4o,
     \item Meta LLaMA 3.1 70B Instruct,
-    \item Alibaba Qwen 2.5 72B Instruct.
+    \item Alibaba Qwen3-Coder.
 \end{itemize}
 
 \subsection{Erstellung der Test-Beispiele}
@@ -262,8 +262,8 @@ Basierend auf Arnaoudova et al. \cite{arnaoudova2014} wurden zwei Arten von
 Beispielen erstellt:
 
 \begin{itemize}
-    \item \textbf{10--15 Beispiele mit linguistischen Anti-Mustern} (alle Kategorien A–F),
-    \item \textbf{5--7 korrekt benannte Beispiele} ohne Anti-Muster, um unbegründete Fehlalarme zu erkennen.
+    \item 13 Beispiele mit linguistischen Anti-Mustern (alle Kategorien A–F),
+    \item 5 korrekt benannte Beispiele ohne Anti-Muster, um unbegründete Fehlalarme zu erkennen.
 \end{itemize}
 
 Jede Kategorie wurde kurz erklärt und durch ein prägnantes Beispiel
@@ -278,18 +278,23 @@ public class UserManager {
     private User currentUser;
 
     public User getUser() {
-        validateSession();   // Nebenwirkung
+        logAccess(); //Nebenwirkung
+        refreshSession(); //weitere Nebenwirkung
         return currentUser;
     }
+    
+    private void logAccess() {}
+    
+    private void refreshSession() {}
 }
 \end{lstlisting}
 
 \textit{Kategorie B3.} Name deutet Rückgabe an, aber \texttt{void}:
 
 \begin{lstlisting}
-public class Calculator {
-    public void getResult() {
-        System.out.println("42");
+public class ConfigReader {
+    public void getVersion() {
+        System.out.println("v1.0");
     }
 }
 \end{lstlisting}
@@ -298,40 +303,68 @@ public class Calculator {
 
 \begin{lstlisting}
 public class Config {
-    // Problem: disable() gibt ControlEnableState zuruck
-    public ControlEnableState disable() {
-        return new ControlEnableState(true);
+   public ControlState disable() {
+        return new ControlState(true); // true = enabled
+    }
+
+    private static class ControlState {
+        public boolean enabled;
+
+        public ControlState(boolean enabled) {
+            this.enabled = enabled;
+        }
     }
 }
 \end{lstlisting}
 
 \textit{Kategorie D2.} Prädikatname, Typ nicht Boolean:
 \begin{lstlisting}
-public class Payment {
-    private int isActive; // Typ passt nicht zum Prädikat
+public class Product {
+    public String isAvailable() {
+        return "yes";
+    }
 }
 \end{lstlisting}
 
 \textit{Kategorie E1.} Pluralname bei singular Typ:
 \begin{lstlisting}
-public class Order {
-    private Product products; // Name suggeriert Mehrzahl
+public class CustomerService {
+    private Customer customers;
 }
 \end{lstlisting}
 
 \textit{Kategorie F1.} Name und Typ im Gegensatz:
 \begin{lstlisting}
-public class Mode {
-    private boolean disabledState = true;
+public class FeatureFlag {
+    private boolean isEnabled = false;
 }
 \end{lstlisting}
 
 \subsubsection{Korrekte Beispiele für False-Positive-Tests}
 
 \begin{lstlisting}
-public class StudentRecord {
-    private int enrolledStudents;
+public class CustomerService {
+
+      private final CustomerRepository customerRepository;
+
+      public CustomerService(CustomerRepository customerRepository) {
+            this.customerRepository = customerRepository;
+      }
+
+      public Customer findCustomerById(Long customerId) {
+            if (customerId == null || customerId <= 0) {
+                  throw new IllegalArgumentException("Customer ID must be positive");
+            }
+            return customerRepository.findById(customerId);
+      }
 }
+
+public interface CustomerRepository {
+        Customer findById(Long id);
+        void save(Customer customer);
+        void deleteById(Long id);
+    }
+
 \end{lstlisting}
 
 Diese Beispiele enthalten keine Anti-Muster. Ein korrektes Modell darf hier \emph{keine} Warnung ausgeben \cite{llmdetection2025}.
@@ -343,6 +376,7 @@ Die Hinweise wurden iterativ nach Versionen überarbeitet: Version 1 (V1) → Ve
 \begin{verbatim}
     Analysieren Sie die Bezeichner im folgenden Java-Code
     und identifizieren Sie mögliche Benennungs- oder Struktur-Anti-Muster.
+    [CODE]
 \end{verbatim}
 
 \paragraph{V2 (Few-Shot)}
@@ -362,6 +396,7 @@ Die Hinweise wurden iterativ nach Versionen überarbeitet: Version 1 (V1) → Ve
     2) Konsistenz zwischen Name, Typ und Verhalten
     3) Verständlichkeit und Bedeutung
     Geben Sie Hinweise für Entwickler.
+    [CODE]
 \end{verbatim}
 
 \paragraph{V4 (Erklärung der linguistischen Anti-Muster)}
@@ -394,14 +429,14 @@ Dieses Vorgehen folgt aktuellen Forschungsergebnissen, die die Bedeutung von Hin
 
 \subsection{Durchführung der Tests}
 
-Für jedes der 10–15 fehlerhaften Beispiele und für jedes der 5–7 korrekten Beispiele wurde jede Hinweis-Version an alle drei Modelle über HAWKI gesendet. Jede Modellantwort wurde protokolliert und anonymisiert abgespeichert.
+Für jedes der 13 fehlerhaften Beispiele und für der 5 korrekten Beispiele wurde jede Hinweis-Version an alle drei Modelle über HAWKI gesendet. Jede Modellantwort wurde protokolliert und anonymisiert abgespeichert.
 
 \subsection{Bewertungskriterien}
 
 Jedes Kriterium wird mit 1-5 Punkten bewertet.
 
 \begin{enumerate}
-    \item \textbf{Anti-Muster-Erkennung.} Wurde das Problem erkannt?
+    \item \textbf{Anti-Muster-Erkennung.} Wurde das Problem erkannt (Ja/Nein)?
 
     \item \textbf{Korrekturqualität.} Ist der vorgeschlagene neue Name besser? Löst er das Anti-Muster?
 
@@ -415,10 +450,126 @@ Jedes Kriterium wird mit 1-5 Punkten bewertet.
 Zusätzlich wurden Fehlalarme („False Positives“) gesondert untersucht, da aktuelle Forschung zeigt, dass sie bei LLM-basierten Analysen häufig auftreten \cite{llmdetection2025, llmmaintainablereliable2025}.
 
 
+\newpage
+\section*{Kapitel 4}
+\section{Evaluation}
+
+Die Untersuchung nutzt insgesamt 18 Java-Beispiele: 13 Beispiele mit linguistischen Anti-Mustern der Kategorien~A--F und 5 korrekte Beispiele ohne Anti-Muster. Jedes Beispiel wurde mit vier Hinweisversionen (V1--V4) an drei Modelle getestet: OpenAI~GPT-4o, Meta~LLaMA~3.1~70B~Instruct und Alibaba~Qwen3-Coder. Damit ergeben sich 216 Modellantworten (18~Beispiele $\times$ 4~Versionen $\times$ 3~Modelle).
+
+\subsection{Ergebnisse nach Modellen}
+
+Tabelle~\ref{tab:modelleigenschaften} zeigt die wichtigsten Unterschiede zwischen den Modellen.% 
+
+\begin{table}[h]
+    \centering
+    \caption{Vergleich der Modelleigenschaften}
+
+    \label{tab:modelleigenschaften}
+
+    \begin{tabular}{|p{4.3cm}|p{2.8cm}|p{3cm}|p{2.8cm}|}
+        \hline
+        Aspekt                       & GPT-4o          & LLaMA 3.1 70B             & Qwen3-Coder     \\
+        \hline
+        Anti-Muster-Nennung (V1--V3) & Selten          & Selten                    & Selten          \\[0.2em]
+        \hline
+        Anti-Muster-Nennung (V4)     & Häufig, korrekt & Häufig, überinterpretiert & Häufig, korrekt \\[0.2em]
+        \hline
+        Fehlalarme                   & Keine           & Mehrere (alle Versionen)  & Keine           \\[0.2em]
+        \hline
+        Durchschnitt (V1--V3)        & 4{,}17          & 4{,}29                    & 3{,}75          \\[0.2em]
+        \hline
+        Durchschnitt (V4)            & 5{,}00          & 4{,}88                    & 5{,}00          \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{OpenAI GPT-4o}
+
+GPT-4o zeigt in allen Beispielen eine stabile Leistung. In den Hinweisversionen V1 bis V3 beschreibt das Modell die Probleme präzise, verwendet die Anti-Muster-Begriffe jedoch nur selten, etwa wenn es in Beispiel A1 die Nebenwirkungen von \texttt{getUser()} kritisiert, den Fall aber nicht Kategorie A zuordnet (Anti-Muster gefunden = nein, Gesamtpunktzahl 4{,}00).
+
+Mit Hinweisversion~V4 ändert sich dieses Verhalten deutlich: GPT-4o nennt die Kategorien~A--F explizit und erreicht bei allen 13 fehlerhaften Beispielen eine Bewertung von~5{,}00; in Beispiel~A1 wird Anti-Muster~A und in Beispiel~C1 werden die Kategorien~B und~C klar identifiziert.
+
+Bei den korrekten Beispielen bestätigt GPT-4o konsequent die Qualität der Bezeichner, erzeugt keine Fehlalarme und vergibt durchgängig Bewertungen von 5{,}00 Punkten.
+
+\subsubsection{Meta LLaMA 3.1 70B Instruct}
+
+Meta~LLaMA~3.1~70B~Instruct zeigt gemischte Ergebnisse. Bei fehlerhaften Beispielen liefert das Modell in den Versionen~V1 bis~V3 gute Analysen mit Gesamtnoten zwischen 3{,}75 und 4{,}75, nutzt die Anti-Muster-Begriffe jedoch erst ab Version~V4 konsequent. In dieser Version erreicht LLaMA bei mehreren Beispielen (u.\,a.~D1, D2, E1 und E2) jeweils 5{,}00 Punkte und ordnet die Probleme explizit den Kategorien~B,~C oder~D zu.
+
+Problematisch ist das Verhalten bei korrekten Beispielen. Im Beispiel~D1 behauptet LLaMA in allen Versionen, der Code müsse verbessert werden, und schlägt etwa eine Umbenennung von \texttt{isPremium} zu \texttt{hasPremiumMembership} vor, obwohl hier kein Anti-Muster vorliegt (Fehlalarme, Note zwischen 4{,}25 und 4{,}50).
+
+\subsubsection{Alibaba Qwen3-Coder}
+
+Alibaba~Qwen3-Coder verhält sich in vielen Punkten ähnlich wie GPT-4o. In den Versionen~V1 bis~V3 beschreibt das Modell Probleme korrekt, nutzt die Anti-Muster-Kategorien jedoch kaum; die Bewertungen liegen dabei konstant bei etwa 3{,}75. Typische Kommentare lauten, dass ein Name wie \texttt{checkFormat()} ungenau ist oder dass er Unstimmigkeiten beschreibt, die keiner bestimmten Anti-Muster-Kategorie zuzuordnen.
+
+Mit Version~V4 steigt die Leistung von Qwen3-Coder: in allen betrachteten Beispielen (unter anderem B1, B2, B3, F1 und F2) erreicht das Modell eine Bewertung von 5{,}00 und ordnet die Probleme den passenden Kategorien zu; in F1 werden Anti-Muster im Bereich~B und~D--F explizit identifiziert; in F2 Anti-Muster~D.
+
+Bei den korrekten Beispielen verhält sich Qwen3-Coder zuverlässig, erzeugt keine Fehlalarme und bestätigt eine korrekte Bezeichnerpraxis; die Bewertungen liegen auch durchgängig bei 5{,}00 Punkten.
+
+\subsection{Vergleich der Hinweisversionen}
+
+\paragraph{Version 1 (Zero-Shot).}
+
+Ohne Beispiele und ohne Definition der Anti-Muster liefern alle Modelle zwar sinnvolle Kommentare und erkennen semantische Probleme, nennen die Kategorien~A--F jedoch fast nie explizit. Die durchschnittlichen Bewertungen liegen bei etwa 3{,}75 bis 4{,}00 für GPT-4o, 3{,}75 bis 4{,}75 für LLaMA~3.1 und 3{,}00 bis 3{,}75 für Qwen3-Coder; Anti-Muster werden nicht erkannt.
+
+\paragraph{Version 2 (Few-Shot).}
+
+Die Beispiele für gute Bezeichner erhöhen die Korrekturqualität leicht, sodass die Bewertungen teils von 3{,}75 auf 4{,}00 steigen. Die Modelle verwenden die Anti-Muster-Begriffe jedoch weiterhin selten und benennen Probleme ohne klare Zuordnung zu Kategorien wie~A oder~C.%
+
+\paragraph{Version 3 (kontextreich).}
+
+Der Kontext zu Java-Konventionen und Konsistenz führt zu strukturierteren Analysen mit hohen Werten bei Klarheit und Konsistenz (oft 5 Punkte). Die Anti-Muster-Kategorien werden jedoch nicht systematisch verwendet, sodass Fälle meist nur implizit beschrieben werden.%
+
+\paragraph{Version 4 (mit Anti-Muster-Definitionen).}
+
+Version~V4 mit expliziter Anti-Muster-Definition verbessert die Leistung aller Modelle deutlich: GPT-4o und Qwen3-Coder erreichen bei allen 13 fehlerhaften Beispielen 5{,}00 Punkte mit korrekter Kategorienzuordnung; LLaMA~3.1 erzielt ebenfalls 5{,}00 bei fehlerhaften Fällen, zeigt aber weiterhin Fehlalarme bei korrektem Code.
+
+Die Hinweis-Gestaltung beeinflusst die Modelle stark - ohne explizite Definition erkennen sie Probleme inhaltlich, nutzen aber nicht die Anti-Muster-Begriffe; Version~V4 schließt diese Lücke weitgehend.
+
+\subsection{Analyse der Fehlalarme (False Positives)}
+
+Die Untersuchung analysierte Fehlalarme bei korrektem Code. GPT-4o und Qwen3-Coder erzeugen keine Fehlalarme und bestätigen konsequent die Qualität der Bezeichner (Bewertung 5{,}00).
+
+LLaMA~3.1~70B meldet hingegen systematisch Probleme, etwa bei D1 in allen Versionen: V1--V3 kritisieren ungerechtfertigt, V4 ordnet fälschlich Anti-Muster~B/D zu (Bewertung 4{,}25--4{,}50). V4 verstärkt bei LLaMA die Überinterpretation, verbessert aber bei GPT-4o und Qwen3-Coder die Erkennung ohne Spezifitätsverlust.
+
+\subsection{Zusammenfassung der Evaluationsergebnisse}
+
+Die Evaluation führt zu fünf zentralen Erkenntnissen:%
+\begin{itemize}
+    \item \textbf{Version~V4 ist entscheidend}. Erst die explizite Definition der Anti-Muster führt dazu, dass alle Modelle die Kategorien~A--F systematisch nutzen; die Bewertungen steigen von durchschnittlich 3{,}75--4{,}75 (V1--V3) auf 5{,}00 (V4) bei fehlerhaften Beispielen.%
+    \item \textbf{GPT-4o und Qwen3-Coder zeigen vergleichbare Leistung}. Beide erreichen mit V4 eine Erkennungsrate von 100\,\% bei fehlerhaften Beispielen ohne Fehlalarme bei korrekten Fällen, und die Vorschläge sind in allen Kriterien hervorragend.%
+    \item \textbf{LLaMA neigt zu Fehlalarmen}. Trotz guter Ergebnisse bei fehlerhaften Beispielen meldet LLaMA systematisch Probleme bei korrektem Code, und dieses Verhalten bleibt in allen Versionen bestehen.%
+    \item \textbf{Inhaltsanalyse ohne Anti-Muster-Begriffe}. Bereits V1--V3 erkennen alle Modelle inhaltliche Probleme wie Nebenwirkungen oder Widersprüche, auch ohne Anti-Muster-Begriffe.%
+    \item \textbf{Hohe Konventionskonformität}. Über alle Modelle und Versionen liegen die Werte für Konventionskonformität und Klarheit bei 4--5 Punkten; die Vorschläge folgen durchgängig Java-Standards.%
+\end{itemize}
+
+Sprachmodelle erkennen Anti-Muster gut, brauchen aber klare und gute Anweisungen. Die Fehlalarme bei LLaMA machen klar: gute Auffindung bedeutet nicht immer genaue Ergebnisse.%
 
 
-Das Bewusstsein für linguistische Anti-Muster hilft, Missverständnisse zu
-vermeiden und die Lesbarkeit, Verständlichkeit und Wartbarkeit von Software nachhaltig zu verbessern.
+\newpage
+\section*{Kapitel 5}
+\section{Diskussion und Schluss}
+
+Diese Arbeit untersuchte die Zuverlässigkeit von Sprachmodellen bei der Bewertung von Java-Bezeichnern. Vier Hinweisversionen (V1--V4) wurden an 18 Beispielen mit drei Modellen (GPT-4o, LLaMA~3.1~70B, Qwen3-Coder) getestet.%
+
+Zentrale Ergebnisse:%
+\begin{itemize}
+    \item Explizite Anti-Muster-Definition in V4 verbessert die Erkennungsrate dramatisch.%
+    \item GPT-4o und Qwen3-Coder erreichen 100\,\% Erkennung ohne Fehlalarme.%
+    \item LLaMA erzeugt systematisch Fehlalarme bei korrektem Code.%
+    \item Vorschläge sind konventionskonform und direkt einsetzbar.%
+\end{itemize}
+
+\subsection{Kritische Reflexion}
+
+Die Untersuchung ist begrenzt:%
+\begin{itemize}
+    \item Nur 18 Beispiele ohne komplexe Projektkontexte.%
+    \item Manuelle Bewertung statt automatischer Pipeline.%
+    \item Nur drei Modelle, keine Langzeit-Konsistenz geprüft.%
+\end{itemize}
+
+Trotzdem zeigen GPT-4o und Qwen3-Coder mit V4 hohe praktische Nutzbarkeit. Die Qualität hängt stark von der Hinweis-Formulierung ab. Sprachmodelle sind wertvolle Assistenten, ersetzen aber keine menschliche Überprüfung.%
+
 
 % --- Literaturverzeichnis ---
 \clearpage
