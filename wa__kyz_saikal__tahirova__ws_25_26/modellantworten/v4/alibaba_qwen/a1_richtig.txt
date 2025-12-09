@@ -1,0 +1,60 @@
+Analyse des Codes unter Berücksichtigung linguistischer Anti-Muster
+
+Gegeben sind folgende linguistische Anti-Muster:
+
+    A: Methode tut mehr als Name sagt  
+    B: Name verspricht mehr als implementiert  
+    C: Name und Verhalten sind gegensätzlich  
+    D–F: Inkonsistenzen bei Attributnamen
+
+Analyse des Codes
+1. Klasse: CustomerService
+
+    Analyse: Die Klasse ist ein Service für Kundenoperationen. Der Name ist allgemein, aber gebräuchlich.
+    Relevanz: Kein linguistisches Anti-Muster erkennbar.
+
+2. Attribut: customerRepository
+
+    Typ: CustomerRepository
+    Analyse: Der Name beschreibt korrekt, dass es sich um ein Repository für Kunden handelt.
+    Relevanz: Kein linguistisches Anti-Muster erkennbar.
+
+3. Methode: findCustomerById(Long customerId)
+
+    Name: findCustomerById
+    Implementierung: Sucht einen Kunden anhand der ID und wirft eine Ausnahme, wenn die ID ungültig ist (null oder <= 0).
+    Analyse:
+
+Prüfung auf linguistische Anti-Muster
+A: Methode tut mehr als Name sagt
+
+    Analyse: Die Methode validiert die Eingabe (customerId) und wirft eine Ausnahme, wenn die ID ungültig ist. Obwohl der Name nur „finden“ sagt, wird zusätzlich validiert.
+    Aber: Validierung gehört zur korrekten Implementierung einer Methode, wenn sie Vorbedingungen prüft. Solche Prüfungen sind üblich und nicht als „mehr als der Name sagt“ zu werten, solange sie zur korrekten Funktionalität gehören.
+    Fazit: Kein Anti-Muster A – die Validierung ist Teil der korrekten Implementierung.
+
+B: Name verspricht mehr als implementiert
+
+    Analyse: Der Name findCustomerById deutet an, dass ein Kunde anhand der ID gefunden wird. Die Methode tut genau dies.
+    Fazit: Kein Anti-Muster B – Name und Implementierung sind konsistent.
+
+C: Name und Verhalten sind gegensätzlich
+
+    Analyse: Die Methode sucht einen Kunden anhand der ID. Es gibt keine Diskrepanz zwischen Name und Verhalten.
+    Fazit: Kein Anti-Muster C – Name und Verhalten passen zusammen.
+
+D–F: Inkonsistenzen bei Attributnamen
+
+    Analyse: Es gibt nur ein Attribut: customerRepository. Es ist klar benannt und konsistent mit dem Typ CustomerRepository.
+    Fazit: Keine Anti-Muster D–F – keine Inkonsistenzen erkennbar.
+
+Zusammenfassung
+
+Der Code weist keine linguistischen Anti-Muster auf.
+
+    A: Nein – Validierung ist sinnvoller Bestandteil der Methode.
+    B: Nein – Name und Verhalten sind konsistent.
+    C: Nein – Name und Verhalten stimmen überein.
+    D–F: Nein – eindeutige, konsistente Attributbenennung.
+
+Fazit:
+Der Code erfüllt linguistische Kriterien hinsichtlich Klarheit, Konsistenz und Eindeutigkeit. Keine Anti-Muster sind vorhanden.
