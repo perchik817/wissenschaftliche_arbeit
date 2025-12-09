@@ -1,7 +1,5 @@
 package tests.fehlerhaft.a1kategorie;
 
-import tests.fehlerhaft.a1kategorie.User;
-
 public class UserManager {
       private User currentUser;
 
