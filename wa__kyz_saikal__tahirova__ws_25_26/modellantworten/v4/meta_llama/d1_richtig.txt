@@ -1,0 +1,34 @@
+Analyse des Codes
+
+    isPremium(): Diese Methode gibt einfach den Wert des Attributs isPremium zurück. Der Name sagt genau, was die Methode tut. Kein Anti-Muster
+    getPremiumLevel(): Diese Methode gibt einfach den Wert des Attributs premiumLevel zurück. Der Name sagt genau, was die Methode tut. Kein Anti-Muster
+    isPremium: Der Name sagt, dass das Attribut einen Booleschen Wert enthält, der angibt, ob der Kunde ein Premium-Kunde ist. Der Typ boolean passt zum Namen. Kein Anti-Muster
+    premiumLevel: Der Name sagt, dass das Attribut das Premium-Level des Kunden enthält. Der Typ int ist jedoch nicht sehr aussagekräftig. Es wäre besser, einen enum-Typ zu verwenden, um die möglichen Werte zu spezifizieren. Anti-Muster B: Name verspricht mehr als implementiert
+    Inkonsistenzen bei Attributnamen:
+    isPremium ist ein Boolescher Wert, während premiumLevel ein Integer-Wert ist. Es wäre besser, konsistente Namen zu verwenden, z.B. hasPremiumMembership und membershipLevel. Anti-Muster D: Inkonsistenzen bei Attributnamen
+
+Insgesamt: Der Code enthält einige Anti-Muster, insbesondere B und D. Es wäre besser, die Namen und Typen der Attribute zu überarbeiten, um die Lesbarkeit und Konsistenz zu verbessern.
+Beispiel für eine verbesserte Version:
+Java
+
+public enum MembershipLevel {
+    SILVER, GOLD, PLATINUM
+}
+
+public class Customer {
+    private boolean hasPremiumMembership;
+    private MembershipLevel membershipLevel;
+
+    public Customer(boolean hasPremiumMembership, MembershipLevel membershipLevel) {
+        this.hasPremiumMembership = hasPremiumMembership;
+        this.membershipLevel = membershipLevel;
+    }
+
+    public boolean hasPremiumMembership() {
+        return hasPremiumMembership;
+    }
+
+    public MembershipLevel getMembershipLevel() {
+        return membershipLevel;
+    }
+}
