@@ -6,4 +6,8 @@ import tests.fehlerhaft.a1kategorie.User;
 
 public class UserService {
       private List<User> users;
+      
+      public List<User> getAllUsers() {
+            return users;
+      }
 }
