@@ -92,10 +92,10 @@
 
     \begin{tabular}{rl}
         Vorgelegt von: & Kyz Saikal Tahirova \\
-        Matrikel-Nr.:  & 66110               \\
+        % Matrikel-Nr.:  & 66110               \\
         Studiengang:   & Informatik          \\
         Betreuer:      & Prof.\ Dr.\ Laue    \\
-        Abgabetermin:  & xx.xx.2025          \\
+        Abgabetermin:  & 15.12.2025          \\
     \end{tabular}
 \end{titlepage}
 
@@ -145,7 +145,7 @@ Die Arbeit ist in mehrere Kapitel gegliedert:
 
 \begin{enumerate}
     \item \textbf{Kapitel 1 (Einleitung).} Vorstellung des Themas, Zielsetzung, Relevanz von Sprachmodellen in der Softwareentwicklung sowie die Forschungsfrage.
-    \item \textbf{Kapitel 2 (Theoretische Hintergrund).} Überblick über Java-Bezeichner, Namenskonventionen und linguistische Anti-Muster.
+    \item \textbf{Kapitel 2 (Theoretischer Hintergrund).} Überblick über Java-Bezeichner, Namenskonventionen und linguistische Anti-Muster.
     \item \textbf{Kapitel 3 (Methodik und Durchführung).} Aufbau der Untersuchung, Entwicklung der Hinweis-Varianten sowie Beschreibung der verwendeten Java-Beispiele. \textit{Eine automatische Pipeline wird nur theoretisch erwähnt.}
     \item \textbf{Kapitel 4 (Evaluation).} Auswertung der Ergebnisse und systematische Bewertung der Antworten der Sprachmodelle.
     \item \textbf{Kapitel 5 (Diskussion und Schluss).} Grenzen der Methode, Verbesserungsideen, Ausblick auf weitere Forschung.
@@ -160,7 +160,7 @@ automatisch abzubilden.
 
 \newpage
 \section*{Kapitel 2}
-\section{Theoretische Hintergrund}
+\section{Theoretischer Hintergrund}
 Dieser Abschnitt bietet einen Überblick über Java-Bezeichner, etablierte
 Namenskonventionen sowie linguistische Anti-Muster, die als Grundlage für die
 spätere Analyse dienen. Die Relevanz dieser Konzepte ergibt sich aus
@@ -200,7 +200,7 @@ Linguistische Anti-Muster (Linguistic Anti-Patterns) wurden erstmals
 systematisch von Arnaoudova et al. beschrieben \cite{arnaoudova2014}. Sie
 bezeichnen wiederkehrende sprachliche Probleme in Bezeichnern, Kommentaren oder
 Signaturen, bei denen Name und tatsächliches Verhalten nicht übereinstimmen.
-Dies führt zu kognitiven Brüchen und erschwert das Programmverständnis. Die Anti-Muster lassen sich in zwei Gruppen einteilen.
+Dies führt zu kognitiven Brüchen und erschwert das Programmverständnis. Die linguistischen Anti-Muster lassen sich in zwei Hauptgruppen einteilen.
 
 Methodenbezogene Anti-Muster:
 
@@ -429,7 +429,7 @@ Dieses Vorgehen folgt aktuellen Forschungsergebnissen, die die Bedeutung von Hin
 
 \subsection{Durchführung der Tests}
 
-Für jedes der 13 fehlerhaften Beispiele und für der 5 korrekten Beispiele wurde jede Hinweis-Version an alle drei Modelle über HAWKI gesendet. Jede Modellantwort wurde protokolliert und anonymisiert abgespeichert.
+Für jedes der 13 fehlerhaften Beispiele und für die 5 korrekten Beispiele wurde jede Hinweis-Version an alle drei Modelle über HAWKI gesendet. Jede Modellantwort wurde protokolliert und anonymisiert gespeichert.
 
 \subsection{Bewertungskriterien}
 
@@ -549,7 +549,7 @@ Sprachmodelle erkennen Anti-Muster gut, brauchen aber klare und gute Anweisungen
 \section*{Kapitel 5}
 \section{Diskussion und Schluss}
 
-Diese Arbeit untersuchte die Zuverlässigkeit von Sprachmodellen bei der Bewertung von Java-Bezeichnern. Vier Hinweisversionen (V1--V4) wurden an 18 Beispielen mit drei Modellen (GPT-4o, LLaMA~3.1~70B, Qwen3-Coder) getestet.%
+Diese Arbeit untersucht die Zuverlässigkeit von Sprachmodellen bei der Bewertung von Java-Bezeichnern. Vier Hinweisversionen (V1--V4) wurden an 18 Beispielen mit drei Modellen (GPT-4o, LLaMA~3.1~70B, Qwen3-Coder) getestet.%
 
 Zentrale Ergebnisse:%
 \begin{itemize}
