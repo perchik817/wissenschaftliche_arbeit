@@ -1,69 +1,68 @@
-### Analyse des Codes unter Berücksichtigung von:
+ Analyse des Codes unter Berücksichtigung von:
 
-1. **Java-Konventionen (Oracle)**  
-2. **Konsistenz zwischen Name, Typ und Verhalten**  
-3. **Verständlichkeit und Bedeutung**
+1. Java-Konventionen (Oracle)  
+2. Konsistenz zwischen Name, Typ und Verhalten  
+3. Verständlichkeit und Bedeutung
 
----
 
-#### 1. **Java-Konventionen (Oracle)**
 
-- **Klassenname**: `PaymentProcessor`
-  - **Erfüllt**: Ja. Beginnt mit Großbuchstaben und folgt der PascalCase-Konvention. Der Name ist ein Substantiv, was der Konvention entspricht.
-- **Methodenname**: `validatePayment()`
-  - **Erfüllt**: Ja. Beginnt mit Kleinbuchstaben, verwendet camelCase und ist eine Verbphrase, was der Konvention entspricht.
-- **Methodenname**: `checkFormat()`
-  - **Erfüllt**: Ja. Folgt syntaktisch der Konvention (camelCase, Verb-Substantiv-Form), aber inhaltlich ist der Name ungenau.
+ 1. Java-Konventionen (Oracle)
 
-**Fazit zu Konventionen**: Der Code entspricht den syntaktischen Konventionen, aber inhaltliche Aspekte wie Aussagekraft sind kritisch.
+- Klassenname: `PaymentProcessor`
+  - Erfüllt: Ja. Beginnt mit Großbuchstaben und folgt der PascalCase-Konvention. Der Name ist ein Substantiv, was der Konvention entspricht.
+- Methodenname: `validatePayment()`
+  - Erfüllt: Ja. Beginnt mit Kleinbuchstaben, verwendet camelCase und ist eine Verbphrase, was der Konvention entspricht.
+- Methodenname: `checkFormat()`
+  - Erfüllt: Ja. Folgt syntaktisch der Konvention (camelCase, Verb-Substantiv-Form), aber inhaltlich ist der Name ungenau.
 
----
+Fazit zu Konventionen: Der Code entspricht den syntaktischen Konventionen, aber inhaltliche Aspekte wie Aussagekraft sind kritisch.
 
-#### 2. **Konsistenz zwischen Name, Typ und Verhalten**
 
-- `PaymentProcessor`:
-  - **Name**: Entspricht dem Verhalten der Klasse, da sie Zahlungen verarbeitet.
-  - **Typ**: Klasse mit Verantwortung für Zahlungsverarbeitung.
-  - **Verhalten**: `validatePayment()` ist eine Methode, die zur Verarbeitung gehört.
-  - **Konsistenz**: Gegeben.
 
-- `validatePayment()`:
-  - **Name**: Gibt an, dass eine Zahlung validiert wird.
-  - **Typ**: `void`, also keine Rückgabe.
-  - **Verhalten**: Delegiert an `checkFormat()`.
-  - **Konsistenz**: Gegeben, aber abhängig von der Implementierung der aufgerufenen Methode.
-
-- `checkFormat()`:
-  - **Name**: „Format“ ist zu ungenau.
-  - **Typ**: `void`, keine Rückgabe.
-  - **Verhalten**: Unklar, da keine Implementierung sichtbar ist.
-  - **Konsistenz**: **Nicht gegeben**, da der Name nicht präzise beschreibt, was validiert wird.
-
----
-
-#### 3. **Verständlichkeit und Bedeutung**
+ 2. Konsistenz zwischen Name, Typ und Verhalten
 
 - `PaymentProcessor`:
-  - **Verständlichkeit**: Sehr gut. Der Name ist selbsterklärend.
+  - Name: Entspricht dem Verhalten der Klasse, da sie Zahlungen verarbeitet.
+  - Typ: Klasse mit Verantwortung für Zahlungsverarbeitung.
+  - Verhalten: `validatePayment()` ist eine Methode, die zur Verarbeitung gehört.
+  - Konsistenz: Gegeben.
+
 - `validatePayment()`:
-  - **Verständlichkeit**: Gut. Die Methode suggeriert eine Validierung.
+  - Name: Gibt an, dass eine Zahlung validiert wird.
+  - Typ: `void`, also keine Rückgabe.
+  - Verhalten: Delegiert an `checkFormat()`.
+  - Konsistenz: Gegeben, aber abhängig von der Implementierung der aufgerufenen Methode.
+
 - `checkFormat()`:
-  - **Verständlichkeit**: Schlecht. Der Begriff „Format“ ist zu allgemein. Es ist unklar, ob es sich um Formatierung, Struktur, Datentypen oder Validierung von Eingaben handelt.
+  - Name: „Format“ ist zu ungenau.
+  - Typ: `void`, keine Rückgabe.
+  - Verhalten: Unklar, da keine Implementierung sichtbar ist.
+  - Konsistenz: Nicht gegeben, da der Name nicht präzise beschreibt, was validiert wird.
 
----
 
-### Hinweise für Entwickler
 
-- **Benennungsklarheit**: Achten Sie darauf, dass Methoden- und Variablennamen **spezifisch und aussagekräftig** sind. Vermeiden Sie Begriffe wie „Format“, „check“, „data“ oder „obj“, wenn sie keine konkrete Bedeutung haben.
-- **Konsistenz im Kontext**: Die Methode `checkFormat()` passt nicht zur Aussagekraft der anderen Bezeichner. Eine bessere Benennung könnte `validatePaymentDataFormat()` oder `checkPaymentStructure()` lauten.
-- **Verantwortlichkeiten trennen**: Wenn `checkFormat()` nur eine von mehreren möglichen Validierungen ist, könnte eine Erweiterung der Klasse sinnvoll sein, z. B. durch eine Sammlung von Validierungen oder eine Strategie-Klasse.
-- **Dokumentation**: Wenn ein Name nicht allein ausreicht, um die Funktionalität zu erklären, ist eine JavaDoc-Kommentierung notwendig. In diesem Fall sollte die Methode `checkFormat()` dokumentiert werden, um die Unklarheit zu beseitigen.
+ 3. Verständlichkeit und Bedeutung
 
----
+- `PaymentProcessor`:
+  - Verständlichkeit: Sehr gut. Der Name ist selbsterklärend.
+- `validatePayment()`:
+  - Verständlichkeit: Gut. Die Methode suggeriert eine Validierung.
+- `checkFormat()`:
+  - Verständlichkeit: Schlecht. Der Begriff „Format“ ist zu allgemein. Es ist unklar, ob es sich um Formatierung, Struktur, Datentypen oder Validierung von Eingaben handelt.
 
-### Verbesserter Code
 
-```java
+
+Hinweise für Entwickler
+
+- Benennungsklarheit: Achten Sie darauf, dass Methoden- und Variablennamen spezifisch und aussagekräftig sind. Vermeiden Sie Begriffe wie „Format“, „check“, „data“ oder „obj“, wenn sie keine konkrete Bedeutung haben.
+- Konsistenz im Kontext: Die Methode `checkFormat()` passt nicht zur Aussagekraft der anderen Bezeichner. Eine bessere Benennung könnte `validatePaymentDataFormat()` oder `checkPaymentStructure()` lauten.
+- Verantwortlichkeiten trennen: Wenn `checkFormat()` nur eine von mehreren möglichen Validierungen ist, könnte eine Erweiterung der Klasse sinnvoll sein, z. B. durch eine Sammlung von Validierungen oder eine Strategie-Klasse.
+- Dokumentation: Wenn ein Name nicht allein ausreicht, um die Funktionalität zu erklären, ist eine JavaDoc-Kommentierung notwendig. In diesem Fall sollte die Methode `checkFormat()` dokumentiert werden, um die Unklarheit zu beseitigen.
+
+
+
+Verbesserter Code
+
 public class PaymentProcessor {
       
       public void validatePayment() {
@@ -71,8 +70,7 @@ public class PaymentProcessor {
       }
 
       private void validatePaymentDataFormat() {
-            /* ... */ }
+            / ... / }
 }
-```
 
-Diese Version verbessert **Verständlichkeit**, **Konsistenz** und **Aussagekraft** der Bezeichner und entspricht somit den Anforderungen der Java-Konventionen.
+Diese Version verbessert Verständlichkeit, Konsistenz und Aussagekraft der Bezeichner und entspricht somit den Anforderungen der Java-Konventionen.

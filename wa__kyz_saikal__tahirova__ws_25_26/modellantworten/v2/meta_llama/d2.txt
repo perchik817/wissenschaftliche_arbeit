@@ -4,14 +4,14 @@ Der Code enthält eine Klasse `Product` mit einer Methode `isAvailable()`, die e
 
 Beurteilung der Bezeichner:
 
-* Klasse: `Product` ist ein guter Bezeichner für eine Klasse, da er klar und präzise ist und den Zweck der Klasse widerspiegelt.
-* Methode: `isAvailable()` ist ein Bezeichner, der normalerweise für eine boolesche Methode verwendet wird, die angibt, ob ein Produkt verfügbar ist oder nicht. Allerdings gibt diese Methode einen `String`-Wert zurück, was inkonsistent mit dem Namen ist. Ein besserer Bezeichner für diese Methode wäre `getAvailabilityStatus()` oder `getAvailabilityMessage()`.
-* Attribute: Es gibt keine Attribute in diesem Code-Beispiel.
+ Klasse: `Product` ist ein guter Bezeichner für eine Klasse, da er klar und präzise ist und den Zweck der Klasse widerspiegelt.
+ Methode: `isAvailable()` ist ein Bezeichner, der normalerweise für eine boolesche Methode verwendet wird, die angibt, ob ein Produkt verfügbar ist oder nicht. Allerdings gibt diese Methode einen `String`-Wert zurück, was inkonsistent mit dem Namen ist. Ein besserer Bezeichner für diese Methode wäre `getAvailabilityStatus()` oder `getAvailabilityMessage()`.
+ Attribute: Es gibt keine Attribute in diesem Code-Beispiel.
 
 Hinweise für Entwickler:
 
-* Ändern Sie den Namen der Methode, um ihn konsistent mit dem Rückgabetyp zu machen. Wenn die Methode einen `String`-Wert zurückgibt, der die Verfügbarkeit des Produkts beschreibt, könnte der Name in `getAvailabilityStatus()` geändert werden.
-* Stellen Sie sicher, dass die Methode das tut, was ihr Name suggeriert. Wenn die Methode die Verfügbarkeit des Produkts prüfen soll, sollte sie die notwendigen Schritte unternehmen, um diese Informationen zu ermitteln, anstatt immer denselben Wert zurückzugeben.
+ Ändern Sie den Namen der Methode, um ihn konsistent mit dem Rückgabetyp zu machen. Wenn die Methode einen `String`-Wert zurückgibt, der die Verfügbarkeit des Produkts beschreibt, könnte der Name in `getAvailabilityStatus()` geändert werden.
+ Stellen Sie sicher, dass die Methode das tut, was ihr Name suggeriert. Wenn die Methode die Verfügbarkeit des Produkts prüfen soll, sollte sie die notwendigen Schritte unternehmen, um diese Informationen zu ermitteln, anstatt immer denselben Wert zurückzugeben.
 
 Beispiel für korrigierten Code:
 

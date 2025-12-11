@@ -1,24 +1,24 @@
 Der gegebene Java-Code definiert eine Klasse namens `CustomerService` mit einem privaten Attribut `customers` vom Typ `Customer`. Hier ist eine Analyse des Codes unter Berücksichtigung von linguistischen Anti-Mustern:
 
-* A: Methode tut mehr als Name sagt: Es gibt keine Methoden in diesem Code, daher kann dieses Anti-Muster nicht angewendet werden.
-* B: Name verspricht mehr als implementiert: Der Name `CustomerService` suggeriert, dass die Klasse eine Vielzahl von Diensten für Kunden anbietet, aber es gibt keine Implementierung, die dies unterstützt. Dies könnte ein Beispiel für dieses Anti-Muster sein.
-* C: Name und Verhalten sind gegensätzlich: Es gibt keine Methoden oder Verhalten in diesem Code, daher kann dieses Anti-Muster nicht angewendet werden.
-* D: Inkonsistenzen bei Attributnamen: Der Attributname `customers` ist plural, aber der Typ `Customer` ist singular. Dies ist ein Beispiel für ein linguistisches Anti-Muster, da der Name und der Typ nicht konsistent sind.
-* E: Inkonsistenzen bei Attributnamen (Plural/Singular): Siehe oben, der Attributname `customers` ist plural, aber der Typ `Customer` ist singular.
-* F: Inkonsistenzen bei Attributnamen (Typ/Name): Siehe oben, der Attributname `customers` suggeriert eine Sammlung von Kunden, aber der Typ `Customer` ist ein einzelnes Kundenobjekt.
+ A: Methode tut mehr als Name sagt: Es gibt keine Methoden in diesem Code, daher kann dieses Anti-Muster nicht angewendet werden.
+ B: Name verspricht mehr als implementiert: Der Name `CustomerService` suggeriert, dass die Klasse eine Vielzahl von Diensten für Kunden anbietet, aber es gibt keine Implementierung, die dies unterstützt. Dies könnte ein Beispiel für dieses Anti-Muster sein.
+ C: Name und Verhalten sind gegensätzlich: Es gibt keine Methoden oder Verhalten in diesem Code, daher kann dieses Anti-Muster nicht angewendet werden.
+ D: Inkonsistenzen bei Attributnamen: Der Attributname `customers` ist plural, aber der Typ `Customer` ist singular. Dies ist ein Beispiel für ein linguistisches Anti-Muster, da der Name und der Typ nicht konsistent sind.
+ E: Inkonsistenzen bei Attributnamen (Plural/Singular): Siehe oben, der Attributname `customers` ist plural, aber der Typ `Customer` ist singular.
+ F: Inkonsistenzen bei Attributnamen (Typ/Name): Siehe oben, der Attributname `customers` suggeriert eine Sammlung von Kunden, aber der Typ `Customer` ist ein einzelnes Kundenobjekt.
 
 Insgesamt zeigt der Code zwei linguistische Anti-Muster:
 
-* B: Name verspricht mehr als implementiert (der Name `CustomerService` suggeriert mehr Funktionen als implementiert)
-* D/E/F: Inkonsistenzen bei Attributnamen (der Attributname `customers` ist plural, aber der Typ `Customer` ist singular)
+ B: Name verspricht mehr als implementiert (der Name `CustomerService` suggeriert mehr Funktionen als implementiert)
+ D/E/F: Inkonsistenzen bei Attributnamen (der Attributname `customers` ist plural, aber der Typ `Customer` ist singular)
 
 Um diese Anti-Muster zu beheben, sollten die folgenden Änderungen vorgenommen werden:
 
-* Der Attributname sollte geändert werden, um ihn konsistent mit dem Typ zu machen (z.B. `customer` oder `customerList`).
-* Die Klasse sollte Methoden implementieren, um die Funktionen zu unterstützen, die der Name `CustomerService` suggeriert (z.B. `addCustomer`, `removeCustomer`, `getCustomer` usw.).
+ Der Attributname sollte geändert werden, um ihn konsistent mit dem Typ zu machen (z.B. `customer` oder `customerList`).
+ Die Klasse sollte Methoden implementieren, um die Funktionen zu unterstützen, die der Name `CustomerService` suggeriert (z.B. `addCustomer`, `removeCustomer`, `getCustomer` usw.).
 
 Beispiel für verbesserten Code:
-java
+
 public class CustomerService {
     private List<Customer> customerList;
 

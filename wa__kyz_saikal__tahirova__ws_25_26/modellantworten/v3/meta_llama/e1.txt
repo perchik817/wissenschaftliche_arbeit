@@ -1,23 +1,23 @@
 Der gegebene Java-Code definiert eine Klasse namens `CustomerService` mit einem privaten Attribut `customers` vom Typ `Customer`. Hier ist eine Analyse des Codes unter Berücksichtigung von Java-Konventionen, Konsistenz zwischen Name, Typ und Verhalten sowie Verständlichkeit und Bedeutung:
 
 1. Java-Konventionen (Oracle):
- * Der Klassenname `CustomerService` folgt den Java-Konventionen, da er in CamelCase geschrieben ist und ein Nomen ist.
- * Der Attributname `customers` ist jedoch nicht konsistent mit dem Typ `Customer`, da der Name plural ist, aber der Typ singular.
+  Der Klassenname `CustomerService` folgt den Java-Konventionen, da er in CamelCase geschrieben ist und ein Nomen ist.
+  Der Attributname `customers` ist jedoch nicht konsistent mit dem Typ `Customer`, da der Name plural ist, aber der Typ singular.
 
 2. Konsistenz zwischen Name, Typ und Verhalten:
- * Der Name `customers` suggeriert, dass es sich um eine Sammlung von Kunden handelt, aber der Typ `Customer` ist singular. Dies ist inkonsistent.
- * Es gibt keine Methoden, die das Verhalten der Klasse beschreiben. Eine Klasse namens `CustomerService` sollte Methoden enthalten, um mit Kunden zu arbeiten.
+  Der Name `customers` suggeriert, dass es sich um eine Sammlung von Kunden handelt, aber der Typ `Customer` ist singular. Dies ist inkonsistent.
+  Es gibt keine Methoden, die das Verhalten der Klasse beschreiben. Eine Klasse namens `CustomerService` sollte Methoden enthalten, um mit Kunden zu arbeiten.
 
 3. Verständlichkeit und Bedeutung:
- * Der Name `CustomerService` ist verständlich und beschreibt die Funktion der Klasse.
- * Der Attributname `customers` ist jedoch verwirrend, da er nicht klar ist, ob es sich um ein einzelnes Kundenobjekt oder eine Sammlung von Kunden handelt.
+  Der Name `CustomerService` ist verständlich und beschreibt die Funktion der Klasse.
+  Der Attributname `customers` ist jedoch verwirrend, da er nicht klar ist, ob es sich um ein einzelnes Kundenobjekt oder eine Sammlung von Kunden handelt.
 
 Hinweise für Entwickler:
 
-* Ändern Sie den Attributnamen in `customer`, wenn es sich um ein einzelnes Kundenobjekt handelt, oder verwenden Sie eine Sammlung wie `List<Customer>` oder `Customer[]`, wenn es sich um mehrere Kunden handelt.
-* Fügen Sie Methoden hinzu, um mit den Kunden zu arbeiten, wie z.B. `addCustomer`, `removeCustomer`, `getCustomer` usw.
-* Stellen Sie sicher, dass die Namen von Attributen und Methoden konsistent mit ihrem Typ und Verhalten sind.
-* Verwenden Sie Java-Konventionen, um die Lesbarkeit und Verständlichkeit des Codes zu verbessern.
+ Ändern Sie den Attributnamen in `customer`, wenn es sich um ein einzelnes Kundenobjekt handelt, oder verwenden Sie eine Sammlung wie `List<Customer>` oder `Customer[]`, wenn es sich um mehrere Kunden handelt.
+ Fügen Sie Methoden hinzu, um mit den Kunden zu arbeiten, wie z.B. `addCustomer`, `removeCustomer`, `getCustomer` usw.
+ Stellen Sie sicher, dass die Namen von Attributen und Methoden konsistent mit ihrem Typ und Verhalten sind.
+ Verwenden Sie Java-Konventionen, um die Lesbarkeit und Verständlichkeit des Codes zu verbessern.
 
 Beispiel für verbesserten Code:
 java

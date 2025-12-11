@@ -1,18 +1,18 @@
 Analyse des Codes unter Berücksichtigung von linguistischen Anti-Mustern:
 
-* A: Methode tut mehr als Name sagt:
- + Im gegebenen Code gibt es keine Anzeichen dafür, dass die Methode `isAvailable` mehr tut, als ihr Name suggeriert. Die Methode gibt einfach einen String-Wert zurück, der die Verfügbarkeit des Produkts beschreibt.
-* B: Name verspricht mehr als implementiert:
- + Der Name `isAvailable` suggeriert, dass die Methode die tatsächliche Verfügbarkeit des Produkts prüft und einen entsprechenden Wert zurückgibt. Allerdings gibt die Methode immer denselben Wert `"yes"` zurück, unabhängig von den tatsächlichen Verfügbarkeitsinformationen des Produkts. Dies könnte als ein Fall von "Name verspricht mehr als implementiert" interpretiert werden, da der Name eine umfassendere Funktionalität suggeriert, als die Methode tatsächlich bietet.
-* C: Name und Verhalten sind gegensätzlich:
- + Der Name `isAvailable` suggeriert, dass die Methode einen booleschen Wert zurückgibt, der angibt, ob ein Produkt verfügbar ist oder nicht. Allerdings gibt die Methode einen String-Wert zurück, was dem erwarteten Verhalten einer booleschen Methode widerspricht. Dies ist ein Beispiel für "Name und Verhalten sind gegensätzlich", da der Name eine bestimmte Art von Verhalten (boolesch) suggeriert, aber die Methode ein anderes Verhalten (String-Rückgabe) zeigt.
-* D-F: Inkonsistenzen bei Attributnamen:
- + Es gibt keine Attribute in diesem Code-Beispiel, daher sind diese Punkte nicht anwendbar.
+ A: Methode tut mehr als Name sagt:
+  Im gegebenen Code gibt es keine Anzeichen dafür, dass die Methode `isAvailable` mehr tut, als ihr Name suggeriert. Die Methode gibt einfach einen String-Wert zurück, der die Verfügbarkeit des Produkts beschreibt.
+ B: Name verspricht mehr als implementiert:
+  Der Name `isAvailable` suggeriert, dass die Methode die tatsächliche Verfügbarkeit des Produkts prüft und einen entsprechenden Wert zurückgibt. Allerdings gibt die Methode immer denselben Wert `"yes"` zurück, unabhängig von den tatsächlichen Verfügbarkeitsinformationen des Produkts. Dies könnte als ein Fall von "Name verspricht mehr als implementiert" interpretiert werden, da der Name eine umfassendere Funktionalität suggeriert, als die Methode tatsächlich bietet.
+ C: Name und Verhalten sind gegensätzlich:
+  Der Name `isAvailable` suggeriert, dass die Methode einen booleschen Wert zurückgibt, der angibt, ob ein Produkt verfügbar ist oder nicht. Allerdings gibt die Methode einen String-Wert zurück, was dem erwarteten Verhalten einer booleschen Methode widerspricht. Dies ist ein Beispiel für "Name und Verhalten sind gegensätzlich", da der Name eine bestimmte Art von Verhalten (boolesch) suggeriert, aber die Methode ein anderes Verhalten (String-Rückgabe) zeigt.
+ D-F: Inkonsistenzen bei Attributnamen:
+  Es gibt keine Attribute in diesem Code-Beispiel, daher sind diese Punkte nicht anwendbar.
 
 Zusammenfassung:
 Der Code weist das linguistische Anti-Muster "C: Name und Verhalten sind gegensätzlich" auf, da der Name `isAvailable` eine boolesche Methode suggeriert, aber die Methode tatsächlich einen String-Wert zurückgibt. Es gibt auch Anzeichen von "B: Name verspricht mehr als implementiert", da der Name eine umfassendere Funktionalität suggeriert, als die Methode tatsächlich bietet.
 
 Hinweise für Entwickler:
-* Ändern Sie den Namen der Methode, um ihn konsistent mit dem Rückgabetyp zu machen. Wenn die Methode einen String-Wert zurückgibt, der die Verfügbarkeit des Produkts beschreibt, könnte der Name in `getAvailabilityStatus` geändert werden.
-* Ändern Sie den Rückgabetyp der Methode, um ihn konsistent mit dem Namen zu machen. Wenn die Methode boolesche Informationen über die Verfügbarkeit des Produkts zurückgeben soll, sollte der Rückgabetyp in `boolean` geändert werden.
-* Stellen Sie sicher, dass die Methode das tut, was ihr Name suggeriert. Wenn die Methode die Verfügbarkeit des Produkts prüfen soll, sollte sie die notwendigen Schritte unternehmen, um diese Informationen zu ermitteln, anstatt immer denselben Wert zurückzugeben.
+ Ändern Sie den Namen der Methode, um ihn konsistent mit dem Rückgabetyp zu machen. Wenn die Methode einen String-Wert zurückgibt, der die Verfügbarkeit des Produkts beschreibt, könnte der Name in `getAvailabilityStatus` geändert werden.
+ Ändern Sie den Rückgabetyp der Methode, um ihn konsistent mit dem Namen zu machen. Wenn die Methode boolesche Informationen über die Verfügbarkeit des Produkts zurückgeben soll, sollte der Rückgabetyp in `boolean` geändert werden.
+ Stellen Sie sicher, dass die Methode das tut, was ihr Name suggeriert. Wenn die Methode die Verfügbarkeit des Produkts prüfen soll, sollte sie die notwendigen Schritte unternehmen, um diese Informationen zu ermitteln, anstatt immer denselben Wert zurückzugeben.

@@ -1,23 +1,23 @@
 Der gegebene Java-Code definiert eine Klasse namens `UserService` mit einem privaten Attribut `user` vom Typ `List<User>`. Hier ist eine Analyse des Codes unter Berücksichtigung von Java-Konventionen, Konsistenz zwischen Name, Typ und Verhalten sowie Verständlichkeit und Bedeutung:
 
 1. Java-Konventionen (Oracle):
- * Der Klassenname `UserService` entspricht den Java-Konventionen, da er in Pascal-Notation (erster Buchstabe groß) geschrieben ist.
- * Der Attributname `user` sollte jedoch im Plural geschrieben werden, da es sich um eine Liste von Benutzern handelt. Ein besserer Name wäre `users`.
+  Der Klassenname `UserService` entspricht den Java-Konventionen, da er in Pascal-Notation (erster Buchstabe groß) geschrieben ist.
+  Der Attributname `user` sollte jedoch im Plural geschrieben werden, da es sich um eine Liste von Benutzern handelt. Ein besserer Name wäre `users`.
 
 2. Konsistenz zwischen Name, Typ und Verhalten:
- * Der Name `user` suggeriert, dass es sich um ein einzelnes Benutzerobjekt handelt, aber der Typ `List<User>` zeigt, dass es sich um eine Liste von Benutzern handelt. Dies ist inkonsistent.
- * Ein besserer Name wäre `users`, da er die Tatsache, dass es sich um eine Liste von Benutzern handelt, besser widerspiegelt.
+  Der Name `user` suggeriert, dass es sich um ein einzelnes Benutzerobjekt handelt, aber der Typ `List<User>` zeigt, dass es sich um eine Liste von Benutzern handelt. Dies ist inkonsistent.
+  Ein besserer Name wäre `users`, da er die Tatsache, dass es sich um eine Liste von Benutzern handelt, besser widerspiegelt.
 
 3. Verständlichkeit und Bedeutung:
- * Der Name `user` ist nicht sehr beschreibend und könnte zu Verwirrung führen, insbesondere wenn der Code von anderen Entwicklern gelesen wird.
- * Ein besserer Name wäre `users`, da er die Bedeutung des Attributs besser widerspiegelt und es einfacher macht, den Code zu verstehen.
+  Der Name `user` ist nicht sehr beschreibend und könnte zu Verwirrung führen, insbesondere wenn der Code von anderen Entwicklern gelesen wird.
+  Ein besserer Name wäre `users`, da er die Bedeutung des Attributs besser widerspiegelt und es einfacher macht, den Code zu verstehen.
 
 Hinweise für Entwickler:
 
-* Verwenden Sie beschreibende Namen für Attribute, um die Bedeutung und den Zweck des Attributs zu verdeutlichen.
-* Stellen Sie sicher, dass der Name des Attributs konsistent mit dem Typ und dem Verhalten des Attributs ist.
-* Verwenden Sie die Java-Konventionen, um die Lesbarkeit und Verständlichkeit des Codes zu verbessern.
-* Überprüfen Sie den Code regelmäßig, um sicherzustellen, dass die Namen und Typen konsistent und verständlich sind.
+ Verwenden Sie beschreibende Namen für Attribute, um die Bedeutung und den Zweck des Attributs zu verdeutlichen.
+ Stellen Sie sicher, dass der Name des Attributs konsistent mit dem Typ und dem Verhalten des Attributs ist.
+ Verwenden Sie die Java-Konventionen, um die Lesbarkeit und Verständlichkeit des Codes zu verbessern.
+ Überprüfen Sie den Code regelmäßig, um sicherzustellen, dass die Namen und Typen konsistent und verständlich sind.
 
 Eine verbesserte Version des Codes wäre:
 

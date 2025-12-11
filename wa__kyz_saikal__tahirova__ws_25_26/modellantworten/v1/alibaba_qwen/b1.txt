@@ -1,42 +1,38 @@
-### Analyse der Bezeichner und Identifikation von Benennungs- oder Struktur-Anti-Mustern
+ Analyse der Bezeichner und Identifikation von Benennungs- oder Struktur-Anti-Mustern
 
-#### 1. **Klassenname: `PaymentProcessor`**
-- **Bewertung**: Positiv
-- **Begründung**: Der Klassenname ist aussagekräftig und folgt der Konvention, ein Substantiv zu verwenden. Er beschreibt klar die Verantwortlichkeit der Klasse – die Verarbeitung von Zahlungen.
+ 1. Klassenname: `PaymentProcessor`
+- Bewertung: Positiv
+- Begründung: Der Klassenname ist aussagekräftig und folgt der Konvention, ein Substantiv zu verwenden. Er beschreibt klar die Verantwortlichkeit der Klasse – die Verarbeitung von Zahlungen.
 
-#### 2. **Methodenname: `validatePayment()`**
-- **Bewertung**: Positiv
-- **Begründung**: Die Methode ist klar benannt und beschreibt, dass eine Zahlung validiert wird. Sie folgt der üblichen Java-Konvention für Methodennamen (camelCase) und ist verständlich.
+ 2. Methodenname: `validatePayment()`
+- Bewertung: Positiv
+- Begründung: Die Methode ist klar benannt und beschreibt, dass eine Zahlung validiert wird. Sie folgt der üblichen Java-Konvention für Methodennamen (camelCase) und ist verständlich.
 
-#### 3. **Methodenname: `checkFormat()`**
-- **Bewertung**: **Kritisch (möglicher Anti-Pattern)**
-- **Begründung**:
-  - Der Name `checkFormat` ist **ungenau** und **nicht aussagekräftig**. „Format“ ist eine sehr allgemeine Bezeichnung – es bleibt unklar, welches Format geprüft wird (z. B. Zahlungsdaten, IBAN, Datum, JSON-Struktur).
+ 3. Methodenname: `checkFormat()`
+- Bewertung: Kritisch (möglicher Anti-Pattern)
+- Begründung:
+  - Der Name `checkFormat` ist ungenau und nicht aussagekräftig. „Format“ ist eine sehr allgemeine Bezeichnung – es bleibt unklar, welches Format geprüft wird (z. B. Zahlungsdaten, IBAN, Datum, JSON-Struktur).
   - Die Methode ist `private`, wird aber ausschließlich von `validatePayment()` aufgerufen. Ihre Benennung legt eine spezifischere Verantwortung nahe, die im Kontext der Klasse nicht klar wird.
   - Ein besserer Name könnte z. B. `validatePaymentDataFormat()` oder `checkPaymentDataValidity()` lauten.
 
-#### 4. **Struktur des Codes**
-- **Bewertung**: Einfach, aber möglicherweise unvollständig oder übergeneralisiert
-- **Begründung**:
-  - Die Methode `validatePayment()` ruft nur eine andere Methode auf, die ihrerseits leer ist. Dies könnte ein **Indiz für eine unzureichende Struktur** sein, z. B. wenn die Validierung später erweitert werden soll.
+ 4. Struktur des Codes
+- Bewertung: Einfach, aber möglicherweise unvollständig oder übergeneralisiert
+- Begründung:
+  - Die Methode `validatePayment()` ruft nur eine andere Methode auf, die ihrerseits leer ist. Dies könnte ein Indiz für eine unzureichende Struktur sein, z. B. wenn die Validierung später erweitert werden soll.
   - Falls `checkFormat()` die einzige Validierung ist, ist der Name `validatePayment()` irreführend, da er eine umfassendere Prüfung vermuten lässt.
-  - Es könnte sinnvoll sein, eine **Erweiterbarkeit** durch Entwurfsmuster (z. B. Strategy oder Chain of Responsibility) zu ermöglichen, falls weitere Validierungen hinzukommen sollen.
+  - Es könnte sinnvoll sein, eine Erweiterbarkeit durch Entwurfsmuster (z. B. Strategy oder Chain of Responsibility) zu ermöglichen, falls weitere Validierungen hinzukommen sollen.
 
----
 
-### Fazit: Identifizierte Anti-Muster
+ Fazit: Identifizierte Anti-Muster
 
 | Anti-Muster | Beschreibung |
 |-------------|--------------|
-| **Ungenaue Benennung** | Die Methode `checkFormat()` ist zu ungenau und sagt nichts über die Art der Prüfung aus. |
-| **Unklare Verantwortlichkeiten** | `validatePayment()` delegiert lediglich, ohne selbst eine offensichtliche Validierung durchzuführen. |
-| **Fehlende Erweiterbarkeit** | Die Struktur deutet auf starre Implementierung hin, die bei Erweiterung Schwierigkeiten bereiten könnte. |
+| Ungenaue Benennung | Die Methode `checkFormat()` ist zu ungenau und sagt nichts über die Art der Prüfung aus. |
+| Unklare Verantwortlichkeiten | `validatePayment()` delegiert lediglich, ohne selbst eine offensichtliche Validierung durchzuführen. |
+| Fehlende Erweiterbarkeit | Die Struktur deutet auf starre Implementierung hin, die bei Erweiterung Schwierigkeiten bereiten könnte. |
 
----
+ Verbesserungsvorschlag
 
-### Verbesserungsvorschlag
-
-```java
 public class PaymentProcessor {
 
     public void validatePayment() {
@@ -45,9 +41,8 @@ public class PaymentProcessor {
     }
 
     private void validatePaymentDataFormat() {
-        /* ... */
+        / ... /
     }
 }
-```
 
-Diese Version ist **klarer**, **erweiterbar** und **benennt die Verantwortlichkeiten genauer**.
+Diese Version ist klarer, erweiterbar und benennt die Verantwortlichkeiten genauer.

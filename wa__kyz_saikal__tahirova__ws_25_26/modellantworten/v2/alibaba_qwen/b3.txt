@@ -35,9 +35,9 @@ c) Keine Attribute vorhanden
 
 | Kriterium | Beispiel für guten Bezeichner | Gegebenes Element | Bewertung |
 |-----------|-------------------------------|-------------------|-----------|
-| **Klassenname** | `CustomerAccount`, `PaymentProcessor` | `ConfigReader` | ❌ Irreführend – tut nicht, was der Name sagt |
-| **Methodenname** | `calculateTotal()`, `validateInput()` | `getVersion()` | ❌ Verletzt Konvention: `get`-Methode gibt nichts zurück |
-| **Attribute** | `userName`, `itemCount` | Keine vorhanden | – |
+| Klassenname | `CustomerAccount`, `PaymentProcessor` | `ConfigReader` | ❌ Irreführend – tut nicht, was der Name sagt |
+| Methodenname | `calculateTotal()`, `validateInput()` | `getVersion()` | ❌ Verletzt Konvention: `get`-Methode gibt nichts zurück |
+| Attribute | `userName`, `itemCount` | Keine vorhanden | – |
 
 3. Identifizierte Anti-Muster
 
