@@ -431,6 +431,13 @@ Dieses Vorgehen folgt aktuellen Forschungsergebnissen, die die Bedeutung von Hin
 
 Für jedes der 13 fehlerhaften Beispiele und für die 5 korrekten Beispiele wurde jede Hinweis-Version an alle drei Modelle über HAWKI gesendet. Jede Modellantwort wurde protokolliert und gespeichert.
 
+Alle Sprachmodelleantworten wurden in Textdateien gespeichert und nach Prompt-Version und Modell organisiert. Für jede Version V1--V4 existiert
+ein Ordner (v1--v4), der jeweils Unterordner für die drei Modelle (\texttt{openai\_gpt, meta\_llama, alibaba\_qwen}) enthält. Die Dateien sind nach
+den in Abschnitt~3.2 beschriebenen Beispielen benannt (z.\,B.\ \texttt{a1.txt, d1\_richtig.txt}). Zusätzlich fasst die Datei \texttt{modellantworten\_tabelle.xlsx} die Bewertungen der Antworten tabellarisch zusammen.
+
+Sämtliche Dateien sind im GitHub-Repository unter \url{https://github.fh-zwickau.de/kyt25p22/chatlogs_auswertungstabellen.git} öffentlich zugänglich und ermöglichen die Nachvollziehbarkeit der Experimente.
+
+
 \subsection{Bewertungskriterien}
 
 Jedes Kriterium wird mit 1-5 Punkten bewertet.
