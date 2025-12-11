@@ -112,7 +112,7 @@
 \section{Einleitung}
 
 Sprachmodelle werden in der Softwareentwicklung immer häufiger eingesetzt, um
-Entwickler bei Analyse- und Review-Aufgaben zu unterstützen. Ein wichtiger
+Entwickler bei Analyse- und Review-Aufgaben zu unterstützen \cite{softwarejudges2025,causalperspective2026}. Ein wichtiger
 Anwendungsbereich ist die Bewertung von Bezeichnern im Quellcode. Klare und
 verständliche Namen vereinfachen die Wartung, während verschwommene Bezeichner
 zu Fehlern und erhöhtem Aufwand führen
@@ -134,7 +134,7 @@ korrekten Bezeichnern, um die Erkennung tatsächlicher Verstöße und das
 Auftreten unbegründeter Warnungen („False Positives“) zu bewerten. Frühere
 Arbeiten zeigen bereits, dass LLM-generierter Code zu semantischen
 Fehlbenennungen und strukturellen Qualitätsproblemen neigt
-\cite{llmsmells2025,llmmethodnames2025,aitomaticprogramming}.
+\cite{llmsmells2025,llmmethodnames2025,automaticprogramming2025}.
 
 Die zentrale Forschungsfrage lautet:
 \begin{quote}
@@ -234,7 +234,7 @@ Attributbezogene Anti-Muster:
 \subsection{Große Sprachmodelle (LLMs)}
 
 Sprachmodelle werden zunehmend zur Bewertung von Quellcode verwendet
-\cite{aitomaticprogramming}. Studien zeigen jedoch, dass LLMs zwar Muster
+\cite{automaticprogramming2025}. Studien zeigen jedoch, dass LLMs zwar Muster
 erkennen können, aber gleichzeitig zu einer oberflächlichen Analyse neigen, insbesondere wenn nur Identifikatoren geändert oder semantisch irrelevante Änderungen vorgenommen werden \cite{llmmaintainablereliable2025}. Darüber hinaus zeigen mehrere Studien eine hohe Rate an Fehlalarmen („False Positives”) und ungenauen Bewertungen \cite{llmsmells2025, llmdetection2025}.
 
 In dieser Arbeit wird untersucht, wie zuverlässig Sprachmodelle Java-Bezeichner bewerten können und in welchen Fällen weiterhin menschliches Eingreifen erforderlich ist.
@@ -326,7 +326,7 @@ public class Product {
 }
 \end{lstlisting}
 
-\textit{Kategorie E1.} Pluralname bei singular Typ:
+\textit{Kategorie E1.} Pluralname bei Typ im Singular:
 \begin{lstlisting}
 public class CustomerService {
     private Customer customers;
@@ -370,7 +370,7 @@ public interface CustomerRepository {
 Diese Beispiele enthalten keine Anti-Muster. Ein korrektes Modell darf hier \emph{keine} Warnung ausgeben \cite{llmdetection2025}.
 
 \subsection{Hinweis-Strategien und Iteration}
-Die Hinweise wurden iterativ nach Versionen überarbeitet: Version 1 (V1) → Version 2 (V2) → Version 3 (V3) → Version 4 (V4). Das Ziel jeder Iteration war die Qualitätssteigerung der Hinweise (automatischer Überblick) und die Reduzierung der Anzahl von Fehlalarmen. V4 enthält auch eine kurze Definition linguistischer Anti-Muster, damit Modelle diese Kategorien zielorientiert erkennen können.
+Die Hinweise wurden iterativ nach Versionen überarbeitet: Version 1 (V1) → Version 2 (V2) → Version 3 (V3) → Version 4 (V4). Das Ziel jeder Iteration war die Qualitätssteigerung der Hinweise (automatischer Überblick) und die Reduzierung der Anzahl von Fehlalarmen. V4 enthält auch eine kurze Definition linguistischer Anti-Muster, damit Modelle diese Kategorien zielorientiert erkennen können. Die Beschreibung der Kategorien A–F fällt im Prompt bewusst knapp aus und fasst D–F nur zusammen als „Inkonsistenzen bei Attributnamen“. Eine sinnvolle Verbesserungsmöglichkeit für zukünftige Arbeiten wäre, jede Kategorie A–F im Hinweis mit einer eigenen klaren Definition und einem kurzen Beispiel zu erklären, damit LLM alle Arten von Anti-Mustern besser unterscheiden kann.
 
 \paragraph{V1 (Zero-Shot)}
 \begin{verbatim}
@@ -425,11 +425,11 @@ Der Hinweis wurde iterativ verbessert:
     \item Ergänzung der Definitionen von Anti-Mustern (Version 4).
 \end{enumerate}
 
-Dieses Vorgehen folgt aktuellen Forschungsergebnissen, die die Bedeutung von Hinweis-Gestaltung und Iteration bei der Codeanalyse hervorheben \cite{llmmethodnames2025, aitomaticprogramming}.
+Dieses Vorgehen folgt aktuellen Forschungsergebnissen, die die Bedeutung von Hinweis-Gestaltung und Iteration bei der Codeanalyse hervorheben \cite{llmmethodnames2025, automaticprogramming2025}.
 
 \subsection{Durchführung der Tests}
 
-Für jedes der 13 fehlerhaften Beispiele und für die 5 korrekten Beispiele wurde jede Hinweis-Version an alle drei Modelle über HAWKI gesendet. Jede Modellantwort wurde protokolliert und anonymisiert gespeichert.
+Für jedes der 13 fehlerhaften Beispiele und für die 5 korrekten Beispiele wurde jede Hinweis-Version an alle drei Modelle über HAWKI gesendet. Jede Modellantwort wurde protokolliert und gespeichert.
 
 \subsection{Bewertungskriterien}
 
@@ -442,7 +442,7 @@ Jedes Kriterium wird mit 1-5 Punkten bewertet.
 
     \item \textbf{Konventions-Konformität.} Folgt der neue Code Java-Standards?
 
-    \item \textbf{Semantische Klarheit.} Sind die neuen Namen verständlich?
+    \item \textbf{Semantische Klarheit.} Sind die neuen Namen verständlich, und vermeiden die neu vorgeschlagenen Namen linguistische Anti-Muster?
 
     \item \textbf{Konsistenz.} Passt alles zusammen?
 \end{enumerate}
@@ -542,8 +542,7 @@ Die Evaluation führt zu fünf zentralen Erkenntnissen:%
     \item \textbf{Hohe Konventionskonformität}. Über alle Modelle und Versionen liegen die Werte für Konventionskonformität und Klarheit bei 4--5 Punkten; die Vorschläge folgen durchgängig Java-Standards.%
 \end{itemize}
 
-Sprachmodelle erkennen Anti-Muster gut, brauchen aber klare und gute Anweisungen. Die Fehlalarme bei LLaMA machen klar: gute Auffindung bedeutet nicht immer genaue Ergebnisse.%
-
+Sprachmodelle erkennen Anti-Muster gut, brauchen aber klare und präzise Anweisungen. Zusätzlich wurde überprüft, ob die von den Modellen vorgeschlagenen neuen Namen selbst keine linguistischen Anti-Muster enthalten. In den meisten Fällen lösen die Vorschläge von GPT-4o und Qwen3-Coder das Ausgangsproblem und führen nicht zu neuen Widersprüchen zwischen Name, Typ und Verhalten, während LLaMA 3.1 in einigen Fällen neue semantische Ungenauigkeiten oder inkonsistente Attributnamen generiert. Die Fehlalarme bei LLaMA zeigen deutlich: gute Auffindung bedeutet nicht automatisch korrekte Ergebnisse.
 
 \newpage
 \section*{Kapitel 5}
@@ -568,7 +567,9 @@ Die Untersuchung ist begrenzt:%
     \item Nur drei Modelle, keine Langzeit-Konsistenz geprüft.%
 \end{itemize}
 
-Trotzdem zeigen GPT-4o und Qwen3-Coder mit V4 hohe praktische Nutzbarkeit. Die Qualität hängt stark von der Hinweis-Formulierung ab. Sprachmodelle sind wertvolle Assistenten, ersetzen aber keine menschliche Überprüfung.%
+Außerdem erklärt der verwendete Hinweis in Version V4 die Kategorien D–F nur sehr grob. In zukünftigen Studien sollten detailliertere Beschreibungen der Hinweise für die einzelnen Kategorien A–F untersucht werden, um die Erkennung verschiedener Anti-Muster weiter zu verbessern.
+
+Trotzdem zeigen GPT-4o und Qwen3-Coder mit V4 hohe praktische Nutzbarkeit. Die Qualität hängt stark von der Hinweis-Formulierung ab. Sprachmodelle sind wertvolle Assistenten, ersetzen aber keine menschliche Überprüfung.
 
 
 % --- Literaturverzeichnis ---
@@ -576,58 +577,74 @@ Trotzdem zeigen GPT-4o und Qwen3-Coder mit V4 hohe praktische Nutzbarkeit. Die Q
 \begin{thebibliography}{99}
 
     \bibitem{arnaoudova2014}
-    Arnaoudova, V.; Di Penta, M.; Antoniol, G. (2014):
-    \textit{Linguistic Anti-Patterns: What They Are and How Developers Perceive Them.}
-    Empirical Software Engineering.
-    Verfügbar unter: \url{https://www.veneraarnaoudova.ca/wp-content/uploads/2014/10/2014-EMSE-Arnaodova-et-al-Perception-LAs.pdf},
-    abgerufen am 14.10.2025.
+    Arnaoudova, V., Di Penta, M., \& Antoniol, G. (2016).
+    Linguistic Antipatterns: What They Are and How Developers Perceive Them.
+    \textit{Empirical Software Engineering}, 21(1), 104–158.
+    DOI: \url{https://doi.org/10.1007/s10664-014-9350-8}.
 
     \bibitem{oracle}
-    Oracle Corporation:
-    \textit{Naming Conventions.}
-    Verfügbar unter: \url{https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html},
-    abgerufen am 14.10.2025.
+    Oracle Corporation. (o.J.).
+    \textit{Naming Conventions}.
+    Verfügbar unter:
+    \url{https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html}
+    (abgerufen am 14.10.2025).
 
-    \bibitem{aitomaticprogramming}
-    Lyu, M. R.; Rajan, B.; Roychoudhury, A.; Tan, S. H.; Thummalapenta, P.:
-    \textit{Automatic Programming: Large Language Models and Beyond.}
-    Verfügbar unter: \url{https://dl.acm.org/doi/pdf/10.1145/3708519},
-    abgerufen am 15.11.2025.
+    \bibitem{automaticprogramming2025}
+    Lyu, M. R., Ray, B., Roychoudhury, A., Tan, S. H., \& Thongtanunam, P. (2025).
+    Automatic Programming: Large Language Models and Beyond.
+    \textit{ACM Transactions on Software Engineering and Methodology}, 34(5), Article 140, 33 Seiten.
+    DOI: \url{https://doi.org/10.1145/3708519}.
 
     \bibitem{identifiernamesinfluencecodequality}
-    Butler, S.; Wermelinger, M.; Yu, Y.; Sharp, H. (2010):
-    \textit{Exploring the Influence of Identifier Names on Code Quality: An Empirical Study.}
-    In: Proceedings of the 14th European Conference on Software Maintenance and Reengineering (CSMR), 15--18 March 2010, Madrid, Spain.
-    Verfügbar unter: \url{https://www.researchgate.net/publication/42799923_Exploring_the_Influence_of_Identifier_Names_on_Code_Quality_An_Empirical_Study},
-    abgerufen am 26.11.2025.
+    Butler, S., Wermelinger, M., Yu, Y., \& Sharp, H. (2010).
+    Exploring the Influence of Identifier Names on Code Quality: An Empirical Study.
+    In: \textit{14th European Conference on Software Maintenance and Reengineering (CSMR)},
+    15–18 March 2010, Madrid, Spain, pp. 156–165.
+    IEEE.
+    DOI: \url{https://doi.org/10.1109/CSMR.2010.27}.
 
     \bibitem{llmsmells2025}
-    Ghosh Paul, D.; Zhu, H.; Bayley, I. (2025):
-    \textit{Investigating the Smells of LLM Generated Code.}
-    School of Engineering, Computing and Mathematics, Oxford Brookes University, October 2025.
-    Verfügbar unter: \url{https://www.researchgate.net/publication/396223444_Investigating_The_Smells_of_LLM_Generated_Code},
-    abgerufen am 26.11.2025.
+    Ghosh Paul, D., Zhu, H., \& Bayley, I. (2025).
+    Investigating the Smells of LLM Generated Code.
+    \textit{arXiv preprint}.
+    DOI: \url{https://doi.org/10.48550/arXiv.2510.03029}.
 
     \bibitem{llmmaintainablereliable2025}
-    Santa Molison, A.; Moraes, M.; Melo, G.; Santos, F.; Assunção, W. K. G. (2025):
-    \textit{Is LLM-Generated Code More Maintainable \& Reliable than Human-Written Code?}
-    Toronto Metropolitan University; Colorado State University; North Carolina State University, July 2025.
-    Verfügbar unter: \url{https://www.researchgate.net/publication/393853113_Is_LLM-Generated_Code_More_Maintainable_Reliable_than_Human-Written_Code},
-    abgerufen am 26.11.2025.
+    Santa Molison, A., Moraes, M., Melo, G., Santos, F., \& Assunção, W. K. G. (2025).
+    Is LLM-Generated Code More Maintainable \& Reliable than Human-Written Code?
+    \textit{arXiv preprint}.
+    DOI: \url{https://doi.org/10.48550/arXiv.2508.00700}.
+
+    \bibitem{llmlargevulnbenchmark2025}
+    Gnieciak, D., \& Szandala, T. (2025).
+    Large Language Models Versus Static Code Analysis Tools: A Systematic Benchmark for Vulnerability Detection.
+    \textit{arXiv preprint}.
+    DOI: \url{https://doi.org/10.48550/arXiv.2508.04448}.
 
     \bibitem{llmmethodnames2025}
-    Akram, W.; Jiang, Y.; Zhang, Y.; Khan, H. A.; Liu, H. (2025):
-    \textit{LLM-Based Method Name Suggestion with Automatically Generated Context-Rich Prompts.}
-    Beijing Institute of Technology; Peking University.
-    Verfügbar unter: \url{https://www.researchgate.net/publication/392855381_LLM-Based_Method_Name_Suggestion_with_Automatically_Generated_Context-Rich_Prompts},
-    abgerufen am 27.11.2025.
+    Akram, W., Jiang, Y., Zhang, Y., Khan, H. A., \& Liu, H. (2025).
+    LLM-Based Method Name Suggestion with Automatically Generated Context-Rich Prompts.
+    \textit{Proceedings of the ACM on Software Engineering}, 2(FSE), Article FSE036, 22 Seiten.
+    DOI: \url{https://doi.org/10.1145/3715753}.
 
     \bibitem{llmdetection2025}
-    Andrade, R.; Torres, J.; Ortiz-Garcés, I. (2025):
-    \textit{Enhancing Security in Software Design Patterns and Antipatterns: A Framework for LLM-Based Detection.}
-    In: Electronics, 14(3) (2025), Artikel Nr. 586.
+    Andrade, R., Torres, J., \& Ortiz-Garcés, I. (2025).
+    Enhancing Security in Software Design Patterns and Antipatterns: A Framework for LLM-Based Detection.
+    \textit{Electronics}, 14(3), 586.
     DOI: \url{https://doi.org/10.3390/electronics14030586}.
-    Submission received: 16.11.2024; revised: 21.01.2025; accepted: 28.01.2025; published: 01.02.2025.
+
+    \bibitem{softwarejudges2025}
+    He, J., Shi, J., Zhuo, T. Y., Lo, D., et al. (2025).
+    From Code to Courtroom: LLMs as the New Software Judges.
+    \textit{arXiv preprint}.
+    DOI: \url{https://doi.org/10.48550/arXiv.2503.02246}.
+
+    \bibitem{causalperspective2026}
+    Velasco, A., Rodriguez-Cardenas, D., Khati, D., Palacio, D. N., Alif, L. R., \& Poshyvanyk, D. (2026).
+    A Causal Perspective on Measuring, Explaining and Mitigating Smells in LLM-Generated Code.
+    In: \textit{48th IEEE/ACM International Conference on Software Engineering (ICSE ’26)},
+    12–18 April 2026, Rio de Janeiro, Brazil, ACM, 12 Seiten.
+    DOI: \url{https://doi.org/10.1145/3744916.3773164}.
 
 \end{thebibliography}
 

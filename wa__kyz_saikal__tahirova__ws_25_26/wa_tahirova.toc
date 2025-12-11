@@ -12,7 +12,7 @@
 \contentsline {subsubsection}{\numberline {3.2.2}Beispiel-Code}{7}{subsubsection.3.2.2}%
 \contentsline {subsubsection}{\numberline {3.2.3}Korrekte Beispiele für False-Positive-Tests}{9}{subsubsection.3.2.3}%
 \contentsline {subsection}{\numberline {3.3}Hinweis-Strategien und Iteration}{9}{subsection.3.3}%
-\contentsline {paragraph}{V1 (Zero-Shot)}{9}{section*.5}%
+\contentsline {paragraph}{V1 (Zero-Shot)}{10}{section*.5}%
 \contentsline {paragraph}{V2 (Few-Shot)}{10}{section*.6}%
 \contentsline {paragraph}{V3 (Kontextreicher Hinweis)}{10}{section*.7}%
 \contentsline {paragraph}{V4 (Erklärung der linguistischen Anti-Muster)}{10}{section*.8}%
